@@ -91,7 +91,7 @@ export default class ProfileScreen extends Component {
                         <Text style={{ marginTop: 20, textTransform: 'capitalize', fontWeight: 'bold' }}>{this.state.name}</Text>
                         <Text style={{ textTransform: 'uppercase', textAlign: 'center', marginTop: 5 }} adjustsFontSizeToFit={true} numberOfLines={1}><Text style={{ fontWeight: 'bold' }}>URID:</Text> *****{this.state.userToken.slice(0, 10)}******</Text>
                     </View>
-                    <TouchableOpacity onPress={() => this.showConfirmationAlert()} style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: '#000', borderRadius: 10 }}>
+                    <TouchableOpacity onPress={() => this.showConfirmationAlert()} style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: 'rgb(36,78,154)', borderRadius: 10 }}>
                         <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>Logout</Text>
                     </TouchableOpacity>
                 </View>

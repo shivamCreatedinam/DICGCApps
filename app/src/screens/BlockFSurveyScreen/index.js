@@ -1332,7 +1332,6 @@ const BlockFSurveyScreen = () => {
             });
     }
 
-
     const finishSurvey = async () => {
         const userId = await AsyncStorage.getItem(AsyncStorageContaints.tempServerTokenId);
         let SERVER = 'https://createdinam.in/SURVEY-3/public/api/finish-survey';

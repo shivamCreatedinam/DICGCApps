@@ -264,7 +264,7 @@ const AddSurveyScreen = () => {
         return (
             <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 10, alignSelf: 'flex-start', marginTop: StatusBar.currentHeight, paddingHorizontal: 20, backgroundColor: '#fff', elevation: 5, width: '100%' }}>
                 <TouchableOpacity onPress={() => askToCloseApp()} style={{ marginRight: 10, padding: 5 }}>
-                    <Image style={{ width: 20, height: 20, resizeMode: 'contain' }} source={require('../../../assets/app_logo.png')} />
+                    <Image style={{ width: 20, height: 20, resizeMode: 'contain' }} source={require('../../../assets/backCopy.png')} />
                 </TouchableOpacity>
                 <Image
                     source={require('../../../assets/app_logo.png')}
@@ -552,7 +552,7 @@ const AddSurveyScreen = () => {
                     </TouchableOpacity>
                 </View>
             </Modal>
-            <Text style={{ fontWeight: 'bold', paddingLeft: 20, paddingTop: 10 }}>A. Respondent’s Details</Text>
+            <Text style={{ fontWeight: 'bold', paddingLeft: 20, paddingTop: 10 }}> Block I. Respondent’s Details</Text>
             {isLoading === false ?
                 <ScrollView>
                     <View style={{ padding: 10 }}>
@@ -688,7 +688,7 @@ const AddSurveyScreen = () => {
 
                         <View style={{ padding: 10, }} />
                         <TouchableOpacity disabled={isSubmitSurvey} onPress={() => {
-                            validationCheck()
+                            saveSurveryAndMoveToNext()
                         }} style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: '#000', borderRadius: 10 }}>
                             {isAudioUploading !== true ? <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>Next Block B</Text> : <ActivityIndicator color={'#fff'} style={{ alignItems: 'center', alignSelf: 'center' }} />}
                         </TouchableOpacity>

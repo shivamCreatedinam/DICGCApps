@@ -212,8 +212,8 @@ export default class PermissionScreenMain extends Component {
                     </TouchableOpacity>
                 </View>
                 <View>
-                    <TouchableOpacity onPress={() => this.checkAllPermission()} style={{ paddingHorizontal: 20, paddingVertical: 15, elevation: 5, borderRadius: 10, backgroundColor: '#000' }}>
-                        <Text style={{ color: '#fff', textAlign: 'center', fontWeight: 'bold', textTransform: 'uppercase' }}>Continue </Text>
+                    <TouchableOpacity onPress={() => this.checkAllPermission()} style={{ paddingHorizontal: 20, paddingVertical: 20, elevation: 5, borderRadius: 10, backgroundColor: 'rgb(36,78,154)' }}>
+                        <Text style={{ color: '#fff', textAlign: 'center', fontWeight: 'bold', textTransform: 'uppercase', }}>Continue </Text>
                     </TouchableOpacity>
                 </View>
             </View>

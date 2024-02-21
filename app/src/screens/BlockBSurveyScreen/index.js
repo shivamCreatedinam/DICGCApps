@@ -271,74 +271,67 @@ const BlockBSurveyScreen = () => {
     });
 
     const AccountType = [
-        { id: 1, lable: 'Savings Account' },
-        { id: 2, lable: 'PMJDY Account' },
-        { id: 3, lable: 'Current Account' },
-        { id: 4, lable: 'FD/RD Account Credit (Loan) Account' }
+        { id: 1, lable: 'Newspapers' },
+        { id: 2, lable: 'Reserve Bank of India website and social media handles' },
+        { id: 3, lable: 'DICGC website and social media handles' },
+        { id: 4, lable: 'Bank' },
+        { id: 5, lable: 'All the earlier options' },
+        { id: 6, lable: 'No Idea' },
     ];
 
     const frequentlyBank = [
-        { id: 1, lable: 'At least once in a month.' },
-        { id: 2, lable: 'At least once in 3 months' },
-        { id: 3, lable: 'At least once in a half year' },
-        { id: 4, lable: 'At least once in a year' },
-        { id: 5, lable: 'Not used in a year' },
-        { id: 6, lable: 'Not used for more than a year' },
-        { id: 7, lable: 'Not used for more than two years' }
+        { id: 1, lable: 'Private Insurance Company' },
+        { id: 2, lable: 'Public Insurance Company' },
+        { id: 3, lable: '100% Subsidiary of Reserve Bank of India (RBI)' },
+        { id: 4, lable: 'No Idea' },
     ];
 
     const reasons = [
-        { id: 1, lable: 'No source of deposit to bank account.' },
-        { id: 2, lable: 'Receive and pay only in cash.' },
-        { id: 3, lable: 'Fee and Charges.' },
-        { id: 4, lable: 'Family Members have an account.' },
-        { id: 5, lable: 'Have more than one account.' },
+        { id: 1, lable: 'Upto ₹1 lakh' },
+        { id: 2, lable: 'Upto ₹5 lakh in one branch' },
+        { id: 3, lable: 'Upto ₹5 lakh in one bank' },
+        { id: 4, lable: 'Entire amount' },
+        { id: 5, lable: 'No Idea' },
 
     ];
 
     const mostTransact = [
-        { id: 1, lable: 'Branch.' },
-        { id: 2, lable: 'ATM.' },
-        { id: 3, lable: 'BC Outlet.' },
-        { id: 4, lable: 'Digital.' },
+        { id: 1, lable: 'Depositors.' },
+        { id: 2, lable: 'Banks having the deposit account' },
+        { id: 3, lable: 'Government' },
+        { id: 4, lable: 'No Idea' },
 
     ];
 
     const subsidyTimes = [
-        { id: 1, lable: 'Up to 4 times' },
-        { id: 2, lable: '4 to 8 times' },
-        { id: 3, lable: '9 to 12 times' },
-        { id: 4, lable: 'More than 12 times' },
-        { id: 5, lable: 'No' },
+        { id: 1, lable: 'Only Deposits of SB A/c' },
+        { id: 2, lable: 'Deposits of SB A/c plus interest' },
+        { id: 3, lable: 'Current account' },
+        { id: 4, lable: 'Only Deposits of Fixed/ Recurring Deposit A/cs' },
+        { id: 5, lable: 'Deposits of Fixed/ Recurring A/cs plus interest' },
+        { id: 5, lable: 'No Idea' },
     ];
 
     const Incomedata = [
-        { id: 1, lable: 'Cash' },
-        { id: 2, lable: 'Direct Credit to Bank Account ' },
-        { id: 3, lable: 'QR-Based/Inward UPI' },
-        { id: 4, lable: 'Debit Card Swipe' },
-        { id: 5, lable: 'Credit Card Swipe' },
+        { id: 1, lable: 'Newspapers' },
+        { id: 2, lable: 'Banks' },
+        { id: 3, lable: 'Social media' },
+        { id: 4, lable: 'Website' },
+        { id: 5, lable: 'All the earlier Options.' },
+        { id: 6, lable: 'Others (specify)' },
     ];
 
     const cashReceipt = [
-        { id: 1, lable: 'Easy' },
-        { id: 2, lable: 'No Cost involved' },
-        { id: 3, lable: 'QR-Based/Inward UPI' },
-        { id: 4, lable: 'Pay only in Cash' },
-        { id: 5, lable: 'Any other reason' },
+        { id: 1, lable: 'Automatic credit' },
+        { id: 2, lable: 'Approach brokers' },
+        { id: 3, lable: 'No Idea' }
     ];
 
     const saveMoney = [
-        { id: 1, lable: 'Bank Account' },
-        { id: 2, lable: 'NBFC' },
-        { id: 3, lable: 'Chit Fund' },
-        { id: 4, lable: 'Monthly Kitty' },
-        { id: 5, lable: 'Daily Deposit in Credit Society' },
-        { id: 6, lable: 'Mutual Fund' },
-        { id: 7, lable: 'With Relatives' },
-        { id: 8, lable: 'Any other' },
-        { id: 9, lable: 'Not able to save' },
-        { id: 10, lable: 'Do not wish to save' },
+        { id: 1, lable: 'Automatic credit' },
+        { id: 2, lable: 'Approach brokers' },
+        { id: 3, lable: 'Approach bank with updated KYC details and submit willingness form to bank/ DICGC along with alternate account details' },
+        { id: 4, lable: 'No Idea' }
     ];
 
     // gender setDifferently
@@ -348,6 +341,18 @@ const BlockBSurveyScreen = () => {
         },
         {
             label: 'No'
+        }
+    ];
+
+    const dataOne = [
+        {
+            label: 'Yes'
+        },
+        {
+            label: 'No'
+        },
+        {
+            label: 'No Idea'
         }
     ];
 
@@ -424,7 +429,7 @@ const BlockBSurveyScreen = () => {
                 </TouchableOpacity>
                 <Image
                     source={require('../../../assets/app_logo.png')}
-                    style={{ width: 40, height: 40, borderRadius: 20 }}
+                    style={{ width: 40, height: 40, borderRadius: 20, resizeMode: 'cover' }}
                 />
                 <View style={{ marginLeft: 10, flex: 1 }}>
                     <Text style={{ fontWeight: 'bold' }}>{userName} - {user.name}</Text>
@@ -997,11 +1002,11 @@ const BlockBSurveyScreen = () => {
         }
     }
 
-    const saveSurveryAndMoveToNext = async () => {
-        setSubmitSurvey(false);
-        AsyncStorage.setItem(AsyncStorageContaints.surveyNextBlock, 'C');
-        navigation.replace('BlockCSurveyScreen');
-    }
+    // const saveSurveryAndMoveToNext = async () => {
+    //     setSubmitSurvey(false);
+    //     AsyncStorage.setItem(AsyncStorageContaints.surveyNextBlock, 'C');
+    //     navigation.replace('BlockCSurveyScreen');
+    // }
 
     const onSelectedItemsChange = (selectedItems) => {
         setSelectedAreas(selectedItems);
@@ -1096,6 +1101,44 @@ const BlockBSurveyScreen = () => {
         setAccountTypeValue(selectedItems);
     }
 
+    const finishSurvey = async () => {
+        const userId = await AsyncStorage.getItem(AsyncStorageContaints.tempServerTokenId);
+        let SERVER = 'https://createdinam.in/SURVEY-3/public/api/finish-survey';
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer " + userSendToken);
+        var formdata = new FormData();
+        formdata.append("surveytoken", name);
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: formdata,
+            redirect: 'follow',
+        };
+
+        fetch(SERVER, requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                console.log('finishSurvey', result)
+                if (result?.status === true) {
+                    saveSurveryAndMoveToNext();
+                } else {
+                    // navigation.replace('BlockBSurveyScreen');
+                    showMessage({
+                        message: "Something went wrong!",
+                        description: result?.message,
+                        type: "danger",
+                    });
+                }
+            });
+    }
+
+    const saveSurveryAndMoveToNext = async () => {
+        AsyncStorage.setItem(AsyncStorageContaints.surveyNextBlock, '');
+        navigation.replace('DashboardScreen');
+        setSubmitSurvey(true);
+        saveSurveyCount();
+    }
+
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#F8F8FF' }}>
@@ -1117,140 +1160,76 @@ const BlockBSurveyScreen = () => {
             <TouchableOpacity onPress={() => stopRecording()}>
                 <Text>Stop Recording</Text>
             </TouchableOpacity> */}
-            <Text style={{ fontWeight: 'bold', paddingLeft: 20, paddingTop: 10 }}>B. ACCESS and USAGE OF FINANCIAL SERVICES – BANK ACCOUNT {gender?.label}</Text>
+            <Text style={{ fontWeight: 'bold', paddingLeft: 20, paddingTop: 10 }}>Block II: Respondent’s feedback</Text>
             {isLoading === false ?
                 <ScrollView>
                     <View style={{ padding: 10 }}>
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{bank?.label} 1. Do you have a bank account? </Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q. No 1 Do you have a bank account? (Yes/ No) </Text>
                             <RadioButtonRN
                                 data={data}
                                 selectedBtn={(e) => setBank(e)}
                             />
                         </View>
-                        {bank?.label === 'No' &&
-                            <View style={{ flex: 1 }}>
-                                <View style={{ padding: 10, }} />
-                                <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>2 (a). In case you are not able to open a bank account, please, indicate the reason(s)</Text>
-                                    <MultiSelect
-                                        hideTags
-                                        items={Nodata}
-                                        uniqueKey="id"
-                                        ref={multiSelectRef}
-                                        onSelectedItemsChange={(items) =>
-                                            onSelectedDigitalpreferredChange(items)
-                                        }
-                                        selectedItems={selectedDigitalpreferred}
-                                        selectText="Select open a bank account"
-                                        onChangeInput={(text) => console.log(text)}
-                                        // altFontFamily="ProximaNova-Light"
-                                        tagRemoveIconColor="#000"
-                                        tagBorderColor="#000"
-                                        tagTextColor="#000"
-                                        selectedItemTextColor="#000"
-                                        selectedItemIconColor="#000"
-                                        itemTextColor="#000"
-                                        displayKey="lable"
-                                        searchInputStyle={{ color: '#000', paddingLeft: 10 }}
-                                        submitButtonColor="#000"
-                                        submitButtonText="Submit"
-                                        itemBackground="#000"
-                                        styleTextDropdownSelected={{ color: '#000', paddingLeft: 8, fontSize: 16 }}
-                                    />
-                                    <View style={{ padding: 8, flexDirection: 'row', flexWrap: 'wrap' }}>
-                                        {SelectedDigitalpreferredLabels.map((label, index) => (
-                                            <View style={{ margin: 5 }}>
-                                                <Text key={index} style={{ color: '#000', borderColor: '#DFDFDF', borderWidth: 0.8, padding: 10 }}>{label} {console.log(SelectedDigitalpreferredLabels)}</Text>
-                                            </View>
-                                        ))}
-                                    </View>
-                                </View>
-                                <View style={{ padding: 10, }} />
-                                {SelectedDigitalpreferredLabels.includes("Don’t have documents") &&
-                                    <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                        <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>2 (b). If it is due to a lack of documents, what is it?</Text>
-                                        <MultiSelect
-                                            hideTags
-                                            items={lackdocumentsdata}
-                                            uniqueKey="id"
-                                            ref={multiSelectRef}
-                                            onSelectedItemsChange={(items) =>
-                                                onSelectedlackdocumentsChange(items)
-                                            }
-                                            selectedItems={selectedlackdocuments}
-                                            selectText="Select lack of documents"
-                                            onChangeInput={(text) => console.log(text)}
-                                            altFontFamily="ProximaNova-Light"
-                                            tagRemoveIconColor="#000"
-                                            tagBorderColor="#000"
-                                            tagTextColor="#000"
-                                            selectedItemTextColor="#000"
-                                            selectedItemIconColor="#000"
-                                            itemTextColor="#000"
-                                            displayKey="lable"
-                                            searchInputStyle={{ color: '#000', paddingLeft: 10 }}
-                                            submitButtonColor="#000"
-                                            submitButtonText="Submit"
-                                            itemBackground="#000"
-                                            styleTextDropdownSelected={{ color: '#000', paddingLeft: 8, fontSize: 16 }}
-                                        />
-                                        <View style={{ padding: 8, flexDirection: 'row', flexWrap: 'wrap' }}>
-                                            {SelectedlackdocumentsLabels.map((label, index) => (
-                                                <View style={{ margin: 5 }}>
-                                                    <Text key={index} style={{ color: '#000', borderColor: '#DFDFDF', borderWidth: 0.8, padding: 10 }}>{label}</Text>
-                                                </View>
-                                            ))}
-                                        </View>
-                                    </View>}
-                                <View style={{ padding: 10, }} />
-                                <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>2 (C). If you don’t want a bank account, what could be the reasons?</Text>
-                                    <MultiSelect
-                                        hideTags
-                                        items={bankAccountsdata}
-                                        uniqueKey="id"
-                                        ref={multiSelectRef}
-                                        onSelectedItemsChange={(items) =>
-                                            onSelectedbankAccountsChange(items)
-                                        }
-                                        selectedItems={selectedbankAccounts}
-                                        selectText="Select bank account reasons"
-                                        onChangeInput={(text) => console.log(text)}
-                                        altFontFamily="ProximaNova-Light"
-                                        tagRemoveIconColor="#000"
-                                        tagBorderColor="#000"
-                                        tagTextColor="#000"
-                                        selectedItemTextColor="#000"
-                                        selectedItemIconColor="#000"
-                                        itemTextColor="#000"
-                                        displayKey="lable"
-                                        searchInputStyle={{ color: '#000', paddingLeft: 10 }}
-                                        submitButtonColor="#000"
-                                        submitButtonText="Submit"
-                                        itemBackground="#000"
-                                        styleTextDropdownSelected={{ color: '#000', paddingLeft: 8, fontSize: 16 }}
-                                    />
-                                    <View style={{ padding: 8, flexDirection: 'row', flexWrap: 'wrap' }}>
-                                        {SelectedbankAccountsLabels.map((label, index) => (
-                                            <View style={{ margin: 5 }}>
-                                                <Text key={index} style={{ color: '#000', borderColor: '#DFDFDF', borderWidth: 0.8, padding: 10 }}>{label}</Text>
-                                            </View>
-                                        ))}
-                                    </View>
-                                </View>
-                            </View>}
-                        <View style={{ padding: 10, }} />
-                        <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>3. Do you know about deposit insurance up to Rs 5 lakh?</Text>
-                            <RadioButtonRN
-                                data={data}
-                                selectedBtn={(e) => setSetDepositInsurance(e)}
-                            />
+
+                        <View style={{ flex: 1 }}>
+                            <View style={{ padding: 10, }} />
+                            <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
+                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.2 If you deposit money in a bank, do you think it is safe?</Text>
+                                <RadioButtonRN
+                                    data={dataOne}
+                                    selectedBtn={(e) => setBank(e)}
+                                />
+                            </View>
+                            <View style={{ padding: 10, }} />
+                            <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
+                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.3 Have you heard about Deposit Insurance? *</Text>
+                                <RadioButtonRN
+                                    data={dataOne}
+                                    selectedBtn={(e) => setBank(e)}
+                                />
+                            </View>
+                            <View style={{ padding: 10, }} />
+                            <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
+                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.4 Are you aware of the constitution/ nature of DICGC (Deposit Insurance and Credit Guarantee Corporation?)</Text>
+                                <RadioButtonRN
+                                    data={dataOne}
+                                    selectedBtn={(e) => setBank(e)}
+                                />
+                            </View>
                         </View>
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>4. Do you know that a zero-balance bank account can be opened (PM Jan-Dhan Account or BSBDA) without any charges?</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.5 If yes for Q.4, which of the following is DICGC?</Text>
+                            <Dropdown
+                                style={[styles.dropdown, AccountFrequencyFocus && { borderColor: 'blue' }]}
+                                placeholderStyle={styles.placeholderStyle}
+                                selectedTextStyle={styles.selectedTextStyle}
+                                inputSearchStyle={styles.inputSearchStyle}
+                                // iconStyle={styles.iconStyle}
+                                // data={AccountType}
+                                data={frequentlyBank}
+                                // search
+                                maxHeight={300}
+                                labelField="lable"
+                                valueField="id"
+                                placeholder={!AccountFrequencyFocus ? 'Select DICGC' : AccountFrequency}
+                                // searchPlaceholder="Search..."
+                                value={AccountFrequency}
+                                onFocus={() => setAccountTypeFocus(true)}
+                                onBlur={() => setAccountTypeFocus(false)}
+                                onChange={item => {
+                                    console.log(JSON.stringify(item))
+                                    setAccountFrequency(item.id);
+                                    setAccountFrequencyFocus(false);
+                                }}
+                            />
+                        </View>
+                        <View style={{ padding: 10, }} />
+                        <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.6 As per your information, depositors of which financial institutions are insured by DICGC?</Text>
+                        <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Category of Financial Institution</Text>
+                        <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No. A Banks</Text>
                             <RadioButtonRN
                                 data={data}
                                 selectedBtn={(e) => setZeroBalance(e)}
@@ -1258,175 +1237,147 @@ const BlockBSurveyScreen = () => {
                         </View>
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>5. Do you know that subsidies/benefits (Direct Benefit Transfer) under different Government schemes can be received by respective eligible beneficiaries in their Jan-Dhan accounts?</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No. B Non-banking Financial Companies (NBFC)</Text>
                             <RadioButtonRN
                                 data={data}
-                                selectedBtn={(e) => setDirectBenefit(e)}
+                                selectedBtn={(e) => setZeroBalance(e)}
                             />
                         </View>
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>6. Have you ever visited a bank branch or BC outlet to open a savings bank account</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No. C Co-operative credit societies</Text>
                             <RadioButtonRN
                                 data={data}
                                 selectedBtn={(e) => setVisitBranch(e)}
                             />
                         </View>
                         <View style={{ padding: 10, }} />
-                        {visitBranch?.label === 'Yes' ?
-                            <View style={{ flex: 1 }}>
+                        <View style={{ flex: 1 }}>
+                            <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
+                                <View style={{ padding: 10, }} />
                                 <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                    <Text>7. How do you find the environment in the branch/ BC Outlet?</Text>
+                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No. 7 Do the different branches of a bank have separate coverage?</Text>
+                                    <RadioButtonRN
+                                        data={dataOne}
+                                        selectedBtn={(e) => setEnvironmentBranch(e)}
+                                    />
                                     <View style={{ padding: 10, }} />
-                                    <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                        <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>7 (a). Helpful and Easy-to-Understand Processes</Text>
-                                        <Text>Branch</Text>
-                                        <RadioButtonRN
-                                            data={data}
-                                            selectedBtn={(e) => setEnvironmentBranch(e)}
-                                        />
-                                        <View style={{ padding: 10, }} />
-                                        <Text>BC Outlet</Text>
-                                        <RadioButtonRN
-                                            data={data}
-                                            selectedBtn={(e) => setEnvironmentOutlet(e)}
-                                        />
-                                    </View>
-                                    <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                        <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>7 (b). Supportive and Welcome Attitude of Staff</Text>
-                                        <Text>Branch</Text>
-                                        <RadioButtonRN
-                                            data={data}
-                                            selectedBtn={(e) => setSupportiveBranch(e)}
-                                        />
-                                        <View style={{ padding: 10, }} />
-                                        <Text>BC Outlet</Text>
-                                        <RadioButtonRN
-                                            data={data}
-                                            selectedBtn={(e) => setSupportiveOutlet(e)}
-                                        />
-                                    </View>
-                                    <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                        <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>7 (c). Basic Amenities (seating/water/ washroom/ information)</Text>
-                                        <Text>Branch</Text>
-                                        <RadioButtonRN
-                                            data={data}
-                                            selectedBtn={(e) => setAmenitiesBranch(e)}
-                                        />
-                                        <View style={{ padding: 10, }} />
-                                        <Text>BC Outlet</Text>
-                                        <RadioButtonRN
-                                            data={data}
-                                            selectedBtn={(e) => setAmenitiesOutlet(e)}
-                                        />
-                                    </View>
-                                    <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                        <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>7 (d). Long Wait Time (more than one hour)/ Long Queues</Text>
-                                        <Text>Branch</Text>
-                                        <RadioButtonRN
-                                            data={data}
-                                            selectedBtn={(e) => setLongBranch(e)}
-                                        />
-                                        <View style={{ padding: 10, }} />
-                                        <Text>BC Outlet</Text>
-                                        <RadioButtonRN
-                                            data={data}
-                                            selectedBtn={(e) => setLongOutlet(e)}
-                                        />
-                                    </View>
+                                    <Text>Q.No. 8 Is it mandatory for banks to be registered with DICGC?</Text>
+                                    <RadioButtonRN
+                                        data={dataOne}
+                                        selectedBtn={(e) => setEnvironmentOutlet(e)}
+                                    />
                                 </View>
-                            </View> :
-                            <View />}
+                                <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
+                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No. 9 Do you know the meaning of same right and same capacity?*</Text>
+                                    <RadioButtonRN
+                                        data={dataOne}
+                                        selectedBtn={(e) => setSupportiveBranch(e)}
+                                    />
+                                    <View style={{ padding: 10, }} />
+                                </View>
+                                <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
+                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.10 How much is the deposit insurance coverage?</Text>
+                                    <Dropdown
+                                        style={[styles.dropdown, AccountFrequencyFocus && { borderColor: 'blue' }]}
+                                        placeholderStyle={styles.placeholderStyle}
+                                        selectedTextStyle={styles.selectedTextStyle}
+                                        inputSearchStyle={styles.inputSearchStyle}
+                                        // iconStyle={styles.iconStyle}
+                                        // data={AccountType}
+                                        data={reasons}
+                                        // search
+                                        maxHeight={300}
+                                        labelField="lable"
+                                        valueField="id"
+                                        placeholder={!AccountFrequencyFocus ? 'Select deposit insurance coverage' : AccountFrequency}
+                                        // searchPlaceholder="Search..."
+                                        value={AccountFrequency}
+                                        onFocus={() => setAccountTypeFocus(true)}
+                                        onBlur={() => setAccountTypeFocus(false)}
+                                        onChange={item => {
+                                            console.log(JSON.stringify(item))
+                                            setAccountFrequency(item.id);
+                                            setAccountFrequencyFocus(false);
+                                        }}
+                                    />
+                                    <View style={{ padding: 10, }} />
+                                    <Text style={{ marginBottom: 5 }}>Q.No.11 Who pays the premium to DICGC for providing Deposit Insurance Coverage?</Text>
+                                    <Dropdown
+                                        style={[styles.dropdown, AccountFrequencyFocus && { borderColor: 'blue' }]}
+                                        placeholderStyle={styles.placeholderStyle}
+                                        selectedTextStyle={styles.selectedTextStyle}
+                                        inputSearchStyle={styles.inputSearchStyle}
+                                        // iconStyle={styles.iconStyle}
+                                        // data={AccountType}
+                                        data={mostTransact}
+                                        // search
+                                        maxHeight={300}
+                                        labelField="lable"
+                                        valueField="id"
+                                        placeholder={!AccountFrequencyFocus ? 'Select Deposit Insurance Coverage' : AccountFrequency}
+                                        // searchPlaceholder="Search..."
+                                        value={AccountFrequency}
+                                        onFocus={() => setAccountTypeFocus(true)}
+                                        onBlur={() => setAccountTypeFocus(false)}
+                                        onChange={item => {
+                                            console.log(JSON.stringify(item))
+                                            setAccountFrequency(item.id);
+                                            setAccountFrequencyFocus(false);
+                                        }}
+                                    />
+                                </View>
+                                <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
+                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.12 Which types of deposits are insured by DICGC? (Choose all applicable answers)</Text>
+                                    <Dropdown
+                                        style={[styles.dropdown, AccountFrequencyFocus && { borderColor: 'blue' }]}
+                                        placeholderStyle={styles.placeholderStyle}
+                                        selectedTextStyle={styles.selectedTextStyle}
+                                        inputSearchStyle={styles.inputSearchStyle}
+                                        // iconStyle={styles.iconStyle}
+                                        // data={AccountType}
+                                        data={subsidyTimes}
+                                        // search
+                                        maxHeight={300}
+                                        labelField="lable"
+                                        valueField="id"
+                                        placeholder={!AccountFrequencyFocus ? 'Select insured by DICGC' : AccountFrequency}
+                                        // searchPlaceholder="Search..."
+                                        value={AccountFrequency}
+                                        onFocus={() => setAccountTypeFocus(true)}
+                                        onBlur={() => setAccountTypeFocus(false)}
+                                        onChange={item => {
+                                            console.log(JSON.stringify(item))
+                                            setAccountFrequency(item.id);
+                                            setAccountFrequencyFocus(false);
+                                        }}
+                                    />
+                                    <View style={{ padding: 10, }} />
+                                    <Text>Q.No.13 Have you heard of the term ‘All Inclusive Directions (AID)’?</Text>
+                                    <RadioButtonRN
+                                        data={data}
+                                        selectedBtn={(e) => setLongOutlet(e)}
+                                    />
+                                </View>
+                            </View>
+                        </View>
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>8. Do you know that a bank account can be opened without visiting a branch or BC Outlet?</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.14 Have you heard of the term ‘Liquidation’ of a bank?</Text>
                             <RadioButtonRN
                                 data={data}
                                 selectedBtn={(e) => setWithoutVisiting(e)}
                             />
                         </View>
                         <View style={{ padding: 10, }} />
-                        {bank?.label === 'Yes' ? <View>
+                        <View>
+                            <View style={{ padding: 10, }} />
                             <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>9. Have you opened an account without visiting a branch or BC through online channel?</Text>
+                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.15 How are you likely to get to know whether your bank is placed under AID or is liquidated?</Text>
                                 <View>
-                                    <RadioButtonRN
-                                        data={data}
-                                        selectedBtn={(e) => setAccountOpened(e)}
-                                    />
-                                </View>
-                                <View style={{ padding: 10, }} />
-                                <View>
-                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>10. How many bank accounts do you have?</Text>
-                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Type of account</Text>
                                     <MultiSelect
                                         hideTags
                                         items={AccountType}
-                                        uniqueKey="id"
-                                        ref={multiSelectRef}
-                                        onSelectedItemsChange={(items) =>
-                                            onSelectedBankAccounts(items)
-                                        }
-                                        selectedItems={AccountTypeValue}
-                                        selectText="Select Income Stream"
-                                        onChangeInput={(text) => console.log(text)}
-                                        altFontFamily="ProximaNova-Light"
-                                        tagRemoveIconColor="#000"
-                                        tagBorderColor="#000"
-                                        tagTextColor="#000"
-                                        selectedItemTextColor="#000"
-                                        selectedItemIconColor="#000"
-                                        itemTextColor="#000"
-                                        displayKey="lable"
-                                        searchInputStyle={{ color: '#000', paddingLeft: 10 }}
-                                        submitButtonColor="#000"
-                                        submitButtonText="Submit"
-                                        itemBackground="#000"
-                                        styleTextDropdownSelected={{ color: '#000', paddingLeft: 8, fontSize: 16 }}
-                                    />
-                                    {/* <View>
-                                    {selectedAccountLabels.map((label, index) => (
-                                        <View style={{ padding: 8, flexDirection: 'row', flexWrap: 'wrap' }}>
-                                            <Text key={index} style={{ color: '#000', borderColor: '#DFDFDF', borderWidth: 0.8, padding: 10 }}>{label}</Text>
-                                        </View>
-                                    ))}
-                                </View> */}
-
-                                    {/* <View>
-                                        {selectedAccountLabels.map((label, index) => (
-                                            // <TextInput onChangeText={(e) => commentInputOnChange(index, e)} maxLength={2} style={{ backgroundColor: '#fff', paddingLeft: 15, elevation: 5, borderRadius: 5, marginTop: 10 }} keyboardType={'number-pad'} placeholder={label} />
-                                            <TextInput onChangeText={(value) => commentInputOnChange(index, Number(value))} maxLength={2} style={{ backgroundColor: '#fff', paddingLeft: 15, elevation: 5, borderRadius: 5, marginTop: 10 }} keyboardType={'number-pad'} placeholder={label} />
-                                            
-                                        ))}
-
-                                    </View> */}
-                                    <View>
-                                        {selectedAccountLabels.map((label, index) => (
-                                            <View key={index} style={{ padding: 8, }}>
-                                                <Text style={{ color: '#000', borderColor: '#DFDFDF', borderWidth: 0.8, padding: 10 }}>{label}</Text>
-                                                <TextInput
-                                                    onChangeText={(value) => commentInputOnChange(index, value)}
-                                                    maxLength={2}
-                                                    style={{ backgroundColor: '#fff', paddingLeft: 15, borderRadius: 5, marginTop: 10, borderColor: errorMessages[index] !== '' ? 'red' : '#DFDFDF', borderWidth: 1.8 }}
-                                                    keyboardType={'number-pad'}
-                                                    placeholder={label}
-                                                />
-                                                {errorMessages[index] !== '' && <Text style={{ color: 'red', paddingTop: 5, paddingLeft: 5 }}>{errorMessages[index]}</Text>}
-                                            </View>
-                                        ))}
-                                    </View>
-                                    <View style={{ padding: 10, }} />
-
-                                    {/* {AccountTypeValue !== null ? <TextInput onChangeText={(e) => setAccountNumber(e)} maxLength={2} style={{ backgroundColor: '#fff', paddingLeft: 15, elevation: 5, borderRadius: 5 }} keyboardType={'number-pad'} placeholder='Numbers' /> : null} */}
-                                </View>
-                            </View>
-                            <View style={{ padding: 10, }} />
-                            <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>11. For what purpose, do you use the bank account.</Text>
-                                <View>
-                                    <MultiSelect
-                                        hideTags
-                                        items={whatPurposesdata}
                                         uniqueKey="id"
                                         ref={multiSelectRef}
                                         onSelectedItemsChange={(items) =>
@@ -1460,7 +1411,7 @@ const BlockBSurveyScreen = () => {
                             </View>
                             <View style={{ padding: 10, }} />
                             <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                <Text style={{ marginBottom: 5, fontWeight: 'bold', flex: 1 }}>12. How frequently you use bank account?</Text>
+                                <Text style={{ marginBottom: 5, fontWeight: 'bold', flex: 1 }}>Q.No.16 What happens to your deposit amount if your bank is placed under AID?</Text>
                                 <Dropdown
                                     style={[styles.dropdown, AccountFrequencyFocus && { borderColor: 'blue' }]}
                                     placeholderStyle={styles.placeholderStyle}
@@ -1487,43 +1438,7 @@ const BlockBSurveyScreen = () => {
                             </View>
                             <View style={{ padding: 10, }} />
                             <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>13. If you are not using your bank account, please indicate reasons?</Text>
-                                <MultiSelect
-                                    hideTags
-                                    items={reasons}
-                                    uniqueKey="id"
-                                    ref={multiSelectRef}
-                                    onSelectedItemsChange={(items) =>
-                                        onSelectedOccupationsChange(items)
-                                    }
-                                    selectedItems={selectedOccupations}
-                                    selectText="Select Reasons"
-                                    onChangeInput={(text) => console.log(text)}
-                                    altFontFamily="ProximaNova-Light"
-                                    tagRemoveIconColor="#000"
-                                    tagBorderColor="#000"
-                                    tagTextColor="#000"
-                                    selectedItemTextColor="#000"
-                                    selectedItemIconColor="#000"
-                                    itemTextColor="#000"
-                                    displayKey="lable"
-                                    searchInputStyle={{ color: '#000', paddingLeft: 10 }}
-                                    submitButtonColor="#000"
-                                    submitButtonText="Submit"
-                                    itemBackground="#000"
-                                    styleTextDropdownSelected={{ color: '#000', paddingLeft: 8, fontSize: 16 }}
-                                />
-                                <View>
-                                    {selectedLabels.map((label, index) => (
-                                        <View style={{ padding: 8, flexDirection: 'row', flexWrap: 'wrap' }}>
-                                            <Text key={index} style={{ color: '#000', borderColor: '#DFDFDF', borderWidth: 0.8, padding: 10 }}>{label}</Text>
-                                        </View>
-                                    ))}
-                                </View>
-                            </View>
-                            <View style={{ padding: 10, }} />
-                            <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                <Text style={{ marginBottom: 5, fontWeight: 'bold', flex: 1 }}>14. How do you mostly transact (receive and pay money) in your bank account?</Text>
+                                <Text style={{ marginBottom: 5, fontWeight: 'bold', flex: 1 }}>Q.No.17 What happens to your deposit amount if your bank is liquidated by Reserve Bank of India?</Text>
                                 <Dropdown
                                     style={[styles.dropdown, istransactionFocus && { borderColor: 'blue' }]}
                                     placeholderStyle={styles.placeholderStyle}
@@ -1550,7 +1465,7 @@ const BlockBSurveyScreen = () => {
                             </View>
                             <View style={{ padding: 10, }} />
                             <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                <Text style={{ marginBottom: 5, fontWeight: 'bold', flex: 1 }}>15. If you receive a subsidy/govt benefit in your account, how many times do you get it in a year?</Text>
+                                <Text style={{ marginBottom: 5, fontWeight: 'bold', flex: 1 }}>Q.No.18 How will you receive your insured amount when the bank is placed under AID?</Text>
                                 <Dropdown
                                     style={[styles.dropdown, subsidyFocus && { borderColor: 'blue' }]}
                                     placeholderStyle={styles.placeholderStyle}
@@ -1558,7 +1473,7 @@ const BlockBSurveyScreen = () => {
                                     inputSearchStyle={styles.inputSearchStyle}
                                     // iconStyle={styles.iconStyle}
                                     // data={AccountType}
-                                    data={subsidyTimes}
+                                    data={saveMoney}
                                     // search
                                     maxHeight={300}
                                     labelField="lable"
@@ -1575,132 +1490,68 @@ const BlockBSurveyScreen = () => {
                                     }}
                                 />
                             </View>
-                        </View> : null}
-                        <View style={{ padding: 10, }} />
-                        <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>16. How do you receive most of your income stream (salary/wages/revenue)?</Text>
-                            <MultiSelect
-                                hideTags
-                                items={Incomedata}
-                                uniqueKey="id"
-                                ref={multiSelectRef}
-                                onSelectedItemsChange={(items) =>
-                                    onSelectedIncomesChange(items)
-                                }
-                                selectedItems={selectedIncomes}
-                                selectText="Select Income Stream"
-                                onChangeInput={(text) => console.log(text)}
-                                altFontFamily="ProximaNova-Light"
-                                tagRemoveIconColor="#000"
-                                tagBorderColor="#000"
-                                tagTextColor="#000"
-                                selectedItemTextColor="#000"
-                                selectedItemIconColor="#000"
-                                itemTextColor="#000"
-                                displayKey="lable"
-                                searchInputStyle={{ color: '#000', paddingLeft: 10 }}
-                                submitButtonColor="#000"
-                                submitButtonText="Submit"
-                                itemBackground="#000"
-                                styleTextDropdownSelected={{ color: '#000', paddingLeft: 8, fontSize: 16 }}
-                            />
-                            <View>
-                                {selectedIncomeLabels.map((label, index) => (
-                                    <View style={{ padding: 8, flexDirection: 'row', flexWrap: 'wrap' }}>
-                                        <Text key={index} style={{ color: '#000', borderColor: '#DFDFDF', borderWidth: 0.8, padding: 10 }}>{label}</Text>
-                                        {console.log("labelllll", label)}
-                                    </View>
-                                ))}
-                            </View>
-                        </View>
-                        {selectedIncomeLabels.includes("Cash") && (
-                            <>
-                                <View style={{ padding: 10, }} />
-                                <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>17. In case you prefer cash receipts, please indicate the reason?</Text>
-
-
-                                    <MultiSelect
-                                        hideTags
-                                        items={cashReceipt}
-                                        uniqueKey="id"
-                                        ref={multiSelectRef}
-                                        onSelectedItemsChange={(items) =>
-                                            onSelectedCashReceipt(items)
-                                        }
-                                        selectedItems={selectCashReceipt}
-                                        selectText="Select reason"
-                                        onChangeInput={(text) => console.log(text)}
-                                        altFontFamily="ProximaNova-Light"
-                                        tagRemoveIconColor="#000"
-                                        tagBorderColor="#000"
-                                        tagTextColor="#000"
-                                        selectedItemTextColor="#000"
-                                        selectedItemIconColor="#000"
-                                        itemTextColor="#000"
-                                        displayKey="lable"
-                                        searchInputStyle={{ color: '#000', paddingLeft: 10 }}
-                                        submitButtonColor="#000"
-                                        submitButtonText="Submit"
-                                        itemBackground="#000"
-                                        styleTextDropdownSelected={{ color: '#000', paddingLeft: 8, fontSize: 16 }}
-                                    />
-                                    <View>
-                                        {selectedCashReceiptLabels.map((label, index) => (
-                                            <View style={{ padding: 8, flexDirection: 'row', flexWrap: 'wrap' }}>
-                                                <Text key={index} style={{ color: '#000', borderColor: '#DFDFDF', borderWidth: 0.8, padding: 10 }}>{label}</Text>
-                                            </View>
-                                        ))}
-                                    </View>
-                                </View>
-                            </>
-                        )}
-
-
-                        <View style={{ padding: 10, }} />
-                        <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>18. How do you save money?</Text>
-                            <MultiSelect
-                                hideTags
-                                items={saveMoney}
-                                uniqueKey="id"
-                                ref={multiSelectRef}
-                                onSelectedItemsChange={(items) =>
-                                    onSelectedSaveMoney(items)
-                                }
-                                selectedItems={SelectedSaveMoney}
-                                selectText="Select reason"
-                                onChangeInput={(text) => console.log(text)}
-                                altFontFamily="ProximaNova-Light"
-                                tagRemoveIconColor="#000"
-                                tagBorderColor="#000"
-                                tagTextColor="#000"
-                                selectedItemTextColor="#000"
-                                selectedItemIconColor="#000"
-                                itemTextColor="#000"
-                                displayKey="lable"
-                                searchInputStyle={{ color: '#000', paddingLeft: 10 }}
-                                submitButtonColor="#000"
-                                submitButtonText="Submit"
-                                itemBackground="#000"
-                                styleTextDropdownSelected={{ color: '#000', paddingLeft: 8, fontSize: 16 }}
-                            />
-                            <View>
-                                {selectedSaveMoneyLabels.map((label, index) => (
-                                    <View style={{ padding: 8, flexDirection: 'row', flexWrap: 'wrap' }}>
-                                        <Text key={index} style={{ color: '#000', borderColor: '#DFDFDF', borderWidth: 0.8, padding: 10 }}>{label}</Text>
-                                    </View>
-                                ))}
-                            </View>
                         </View>
                         <View style={{ padding: 10, }} />
+                        <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.19 How will you receive your insured amount when the bank is liquidated? (Provided KYC details are in place)</Text>
+                            <Dropdown
+                                style={[styles.dropdown, subsidyFocus && { borderColor: 'blue' }]}
+                                placeholderStyle={styles.placeholderStyle}
+                                selectedTextStyle={styles.selectedTextStyle}
+                                inputSearchStyle={styles.inputSearchStyle}
+                                // iconStyle={styles.iconStyle}
+                                // data={AccountType}
+                                data={cashReceipt}
+                                // search
+                                maxHeight={300}
+                                labelField="lable"
+                                valueField="id"
+                                placeholder={!subsidyFocus ? 'Select insured amount' : subsidy}
+                                // searchPlaceholder="Search..."
+                                value={subsidy}
+                                onFocus={() => setSubsidyFocus(true)}
+                                onBlur={() => setSubsidyFocus(false)}
+                                onChange={item => {
+                                    console.log(JSON.stringify(item))
+                                    setSubsidy(item.id);
+                                    setSubsidyFocus(false);
+                                }}
+                            />
+                        </View>
+                        <View style={{ padding: 10, }} />
+                        <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.20 How would you like to know more about DICGC? (Choose all applicable answers)</Text>
+                            <Dropdown
+                                style={[styles.dropdown, subsidyFocus && { borderColor: 'blue' }]}
+                                placeholderStyle={styles.placeholderStyle}
+                                selectedTextStyle={styles.selectedTextStyle}
+                                inputSearchStyle={styles.inputSearchStyle}
+                                // iconStyle={styles.iconStyle}
+                                // data={AccountType}
+                                data={Incomedata}
+                                // search
+                                maxHeight={300}
+                                labelField="lable"
+                                valueField="id"
+                                placeholder={!subsidyFocus ? 'Select about DICGC' : subsidy}
+                                // searchPlaceholder="Search..."
+                                value={subsidy}
+                                onFocus={() => setSubsidyFocus(true)}
+                                onBlur={() => setSubsidyFocus(false)}
+                                onChange={item => {
+                                    console.log(JSON.stringify(item))
+                                    setSubsidy(item.id);
+                                    setSubsidyFocus(false);
+                                }}
+                            />
+                        </View>
                         <TouchableOpacity
                             // disabled={isSubmitSurvey}
                             onPress={() =>
-                                validate()
+                                finishSurvey()
                                 // stopRecording()
-                            } style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: '#000', borderRadius: 10 }}>
-                            {isSubmitSurvey === true ? <ActivityIndicator style={{ alignItems: 'center' }} color={'#fff'} /> : <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>Next Block C</Text>}
+                            } style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: 'rgb(36,78,154)', borderRadius: 10 }}>
+                            {isSubmitSurvey === true ? <ActivityIndicator style={{ alignItems: 'center' }} color={'#fff'} /> : <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>Complete Survey</Text>}
                         </TouchableOpacity>
                     </View>
                 </ScrollView> : <ActivityIndicator style={{ alignItems: 'center', marginTop: Dimensions.get('screen').width }} color={'#000'} />

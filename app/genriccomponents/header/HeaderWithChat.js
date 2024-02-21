@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from "prop-types";
 import { statusBarHeight, widthScale } from '../../utility/Utils'
-import { View, Text, StyleSheet, Image, TouchableOpacity, StatusBar, NativeModules } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { View, Text, StyleSheet, Image, TouchableOpacity, StatusBar, NativeModules } from 'react-native';
 import res from '../../../res'
 
 const HeaderWithChat = props => {
@@ -48,7 +47,7 @@ const HeaderWithChat = props => {
                     <TouchableOpacity
                         onPress={chatBotCloseModal}
                         style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Icon name='close' size={20} color={res.colors.white} />
+                        {/* <Icon name='close' size={20} color={res.colors.white} /> */}
                     </TouchableOpacity>
                         
                 }
