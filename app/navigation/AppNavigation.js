@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import { NavigationContainer } from '@react-navigation/native'; 
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import SplashScreen from '../src/screens/splash/SplashScreen'; 
+import SplashScreen from '../src/screens/splash/SplashScreen';
 import SigninScreen from '../src/screens/signin/SigninScreen';
 import DashboardScreen from '../src/screens/dashboard/DashboardScreen';
 // import OnboardingScreen from '../src/screens/OnBoarding/index';
@@ -12,11 +12,11 @@ import ProfileScreen from '../src/screens/ProfileScreen';
 import AddSurveyScreen from '../src/screens/AddSurveyScreen';
 import PermissionScreenMain from '../src/screens/PremissionScreen';
 import BlockBSurveyScreen from '../src/screens/BlockBSurveyScreen';
-import BlockCSurveyScreen from '../src/screens/BlockCSurveyScreen';
-import BlockDSurveyScreen from '../src/screens/BlockDSurveyScreen';
-import BlockESurveyScreen from '../src/screens/BlockESurveyScreen';
-import BlockFSurveyScreen from '../src/screens/BlockFSurveyScreen';
 import DraftSurveyScreen from '../src/screens/DraftSurveyScreen';
+// import BlockCSurveyScreen from '../src/screens/BlockCSurveyScreen';
+// import BlockDSurveyScreen from '../src/screens/BlockDSurveyScreen';
+// import BlockESurveyScreen from '../src/screens/BlockESurveyScreen';
+// import BlockFSurveyScreen from '../src/screens/BlockFSurveyScreen';
 
 const Stack = createStackNavigator();
 
@@ -109,7 +109,6 @@ function AppNavigation() {
         const currentRouteName = navigationRef.current.getCurrentRoute().name;
         const trackScreenView = async () => {
           // Your implementation of analytics goes here!
-
           // await analytics().logScreenView({
           //   screen_name: currentRouteName,
           //   screen_class: currentRouteName,
@@ -128,14 +127,14 @@ function AppNavigation() {
         initialRouteName={'PermissionScreenMain'}
         screenOptions={{ headerShown: false }}>
         {/* <Stack.Screen name={'ChatScreen'} component={ChatScreen} /> */}
-        <Stack.Screen name={'ProfileScreen'} component={ProfileScreen} /> 
+        <Stack.Screen name={'ProfileScreen'} component={ProfileScreen} />
         <Stack.Screen name={'DashboardScreen'} component={DashboardScreen} />
         <Stack.Screen name={'SigninScreen'} component={SigninScreen} />
         <Stack.Screen name={'SplashScreen'} component={SplashScreen} />
         <Stack.Screen name={'PermissionScreenMain'} component={PermissionScreenMain} />
         <Stack.Screen name={'AddSurveyScreen'} component={AddSurveyScreen} />
         <Stack.Screen name={'BlockBSurveyScreen'} component={BlockBSurveyScreen} />
-     
+        <Stack.Screen name={'DraftSurveyScreen'} component={DraftSurveyScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

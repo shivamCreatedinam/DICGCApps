@@ -45,7 +45,7 @@ export default class DraftSurveyScreen extends Component {
             console.log("error", userId)
             this.getDraftSurvey();
         } catch (error) {
-            console.log("error", error)
+            console.log("error", error);
         }
     }
 
@@ -140,8 +140,7 @@ export default class DraftSurveyScreen extends Component {
                 console.log('finishSurvey', result)
                 if (result?.status === true) {
                     this.saveSurveryAndMoveToNext();
-                } else {
-                    // navigation.replace('BlockBSurveyScreen');
+                } else { 
                     showMessage({
                         message: "Something went wrong!",
                         description: result?.message,
@@ -165,7 +164,6 @@ export default class DraftSurveyScreen extends Component {
                 description: "Create new survey!",
                 type: "danger",
             });
-            // this.props.navigation.replace('AddSurveyScreen');
         } else if (this.state.DraftSection === 'B') {
             console.log("inside B")
             this.props.navigation.replace('BlockCSurveyScreen');

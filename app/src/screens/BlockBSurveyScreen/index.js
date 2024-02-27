@@ -71,7 +71,7 @@ const BlockBSurveyScreen = () => {
     // blockB    
     const [isAccountTypeFocus, setAccountTypeFocus] = React.useState(false);
     const [AccountTypeValue, setAccountTypeValue] = React.useState([]);
-    const [AccountFrequency, setAccountFrequency] = React.useState(null);
+    const [DepositInsuranceCoverage, setDepositInsuranceCoverage] = React.useState(null);
     const [AccountFrequencyFocus, setAccountFrequencyFocus] = React.useState(null);
     const [transaction, sTransaction] = React.useState(null);
     const [istransactionFocus, setIsTransactionFocus] = React.useState(false);
@@ -201,6 +201,33 @@ const BlockBSurveyScreen = () => {
     // const [selectedAccountLabels, setSelectedAccountLabels] = useState([]);
     const [accountValues, setAccountValues] = React.useState([]);
     const [errorMessages, setErrorMessages] = React.useState([]);
+
+    // new 
+    const [DepositMoney, setDepositMoney] = React.useState(null);
+    const [HeardDepositInsurance, setHeardDepositInsurance] = React.useState(null);
+    const [ConstitutionDICGC, setConstitutionDICGC] = React.useState(null);
+    const [FinancialInstitutionBanks, setFinancialInstitutionBanks] = React.useState(null);
+    const [FinancialCategoryCompanies, setFinancialCategoryCompanies] = React.useState(null);
+    const [CreditSocieties, setCreditSocieties] = React.useState(null);
+    const [DifferentBranches, setDifferentBranches] = React.useState(null);
+    const [MandatoryRegistered, setMandatoryRegistered] = React.useState(null);
+    const [MeaningCapacity, setMeaningCapacity] = React.useState(null);
+    const [ProvidingDepositInsurance, setProvidingDepositInsurance] = React.useState(null);
+    const [FollowingIsDICGC, setFollowingIsDICGC] = React.useState(null);
+    const [TypesOfDeposits, setTypesOfDeposits] = React.useState(null);
+    const [PlacedUnderAID, setPlacedUnderAID] = React.useState(null);
+    const [subsidy1Focus, setSubsidy1Focus] = React.useState(false);
+    const [subsidy2Focus, setSubsidy2Focus] = React.useState(false);
+    const [subsidy3Focus, setSubsidy3Focus] = React.useState(false);
+    const [subsidy4Focus, setSubsidy4Focus] = React.useState(false);
+    const [subsidy5Focus, setSubsidy5Focus] = React.useState(false);
+    const [subsidy6Focus, setSubsidy6Focus] = React.useState(false);
+    const [sub1sidy, set1Subsidy] = React.useState(null);
+    const [sub2sidy, set2Subsidy] = React.useState(null);
+    const [sub3sidy, set3Subsidy] = React.useState(null);
+    const [sub4sidy, set4Subsidy] = React.useState(null);
+    const [sub5sidy, set5Subsidy] = React.useState(null);
+    const [sub6sidy, set6Subsidy] = React.useState(null);
     // const commentInputOnChange = (index, value) => {
     //     const updatedValues = [...accountValues];
     //     updatedValues[index] = { id: index, value };
@@ -390,11 +417,6 @@ const BlockBSurveyScreen = () => {
         }
     }
 
-    // AudioRecord.on('data', data => {
-    //     // base64-encoded audio data chunks
-    //     console.log('AudioRecord_>', JSON.stringify(data));
-    // });
-
     const askToCloseApp = () => {
         Alert.alert(
             "Close Survey",
@@ -453,9 +475,9 @@ const BlockBSurveyScreen = () => {
     const stopRecording = async () => {
         try {
             // or to get the wav file path
-            console.warn('startRecording')
+            console.log('startRecording')
             const audioFile = await AudioRecord.stop();
-            console.warn(audioFile)
+            console.log(audioFile)
             setAudioPath(audioFile);
             uploadAudioFinal(audioFile);
             submitSurveyXml();
@@ -472,211 +494,166 @@ const BlockBSurveyScreen = () => {
                 type: "danger",
             });
         }
-        else if (bank?.label === 'No' && selectedDigitalpreferred?.length === 0) {
+        else if (false) {
             showMessage({
-                message: "Please Select Open A Bank a/c Reason",
-                description: "Please Select Open A Bank a/c Reason!",
+                message: "Please Select deposit money in a bank",
+                description: "Please Select deposit money in a bank!",
                 type: "danger",
             });
         }
-        else if (bank?.label === 'No' && selectedlackdocuments?.length === 0) {
+        else if (false) {
             showMessage({
-                message: "Please Select Lack Of Documnets",
-                description: "Please Select Lack Of Documnets!",
+                message: "Please Select heard about Deposit Insurance",
+                description: "Please Select heard about Deposit Insurance!",
                 type: "danger",
             });
         }
-        else if (bank?.label === 'No' && selectedbankAccounts?.length === 0) {
+        else if (false) {
             showMessage({
-                message: "Please Select Bank Account Reasons",
-                description: "Please Select Bank Account Reasons!",
+                message: "Please Select aware of the constitution/ nature",
+                description: "Please Select aware of the constitution/ nature!",
                 type: "danger",
             });
         }
-        else if (DepositInsurance === null) {
+        else if (false) {
             showMessage({
-                message: "Please Select Deposit Insurance",
-                description: "Please Select Deposit Insurance!",
+                message: "Please Select following is DICGC?",
+                description: "Please Select following is DICGC?!",
                 type: "danger",
             });
         }
-        else if (ZeroBalance === null) {
+        else if (false) {
             showMessage({
-                message: "Please Select Zero balance Account",
-                description: "Please Select Zero balance Account!",
+                message: "Please Select financial institutions",
+                description: "Please Select financial institutions!",
                 type: "danger",
             });
         }
-        else if (DirectBenefit === null) {
+        else if (false) {
             showMessage({
-                message: "Please Select About Subsidies/ benefits",
-                description: "Please Select About Subsidies/ benefits!",
+                message: "Please Select Banks Financial Institution",
+                description: "Please Select Banks Financial Institution!",
                 type: "danger",
             });
         }
-        else if (DirectBenefit === null) {
+        else if (false) {
             showMessage({
-                message: "Please Select About Subsidies/ benefits",
-                description: "Please Select About Subsidies/ benefits!",
+                message: "Please Select Non-banking Financial Companies (NBFC)",
+                description: "Please Select Non-banking Financial Companies (NBFC)!",
                 type: "danger",
             });
         }
-        else if (visitBranch === null) {
+        else if (false) {
             showMessage({
-                message: "Please Select Branch Visit",
-                description: "Please Select Branch Visit!",
+                message: "Please Select Co-operative credit societies",
+                description: "Please Select Co-operative credit societies!",
                 type: "danger",
             });
         }
-        else if (visitBranch?.label === 'Yes' && EnvironmentBranch === null) {
+        else if (false) {
             showMessage({
-                message: "Please Select Branch Processes",
-                description: "Please Select Branch Processes!",
+                message: "Please Select different branches of a bank",
+                description: "Please Select different branches of a bank!",
                 type: "danger",
             });
         }
-        else if (visitBranch?.label === 'Yes' && EnvironmentOutlet === null) {
+        else if (false) {
             showMessage({
-                message: "Please Select Outlet Processes",
-                description: "Please Select Outlet Processes!",
+                message: "Please Select mandatory for banks",
+                description: "Please Select mandatory for banks!",
                 type: "danger",
             });
         }
-        else if (visitBranch?.label === 'Yes' && SupportiveBranch === null) {
+        else if (false) {
             showMessage({
-                message: "Please Select Branch Attitude",
-                description: "Please Select Branch Attitude!",
+                message: "Please Select right and capacity?",
+                description: "Please Select right and capacity?!",
                 type: "danger",
             });
         }
-        else if (visitBranch?.label === 'Yes' && SupportiveBranch === null) {
+        else if (false) {
             showMessage({
-                message: "Please Select Outlet Attitude",
-                description: "Please Select Outlet Attitude!",
+                message: "Please Select insurance coverage",
+                description: "Please Select insurance coverage!",
                 type: "danger",
             });
         }
-        else if (visitBranch?.label === 'Yes' && SupportiveOutlet === null) {
+        else if (false) {
             showMessage({
-                message: "Please Select Outlet Attitude",
-                description: "Please Select Outlet Attitude!",
+                message: "Please Select premium to DICGC",
+                description: "Please Select premium to DICGC!",
                 type: "danger",
             });
         }
-        else if (visitBranch?.label === 'Yes' && AmenitiesBranch === null) {
+        else if (false) {
             showMessage({
-                message: "Please Select Branch Amenities",
-                description: "Please Select Branch Amenities!",
+                message: "Please Select deposits are insured by DICGC",
+                description: "Please Select deposits are insured by DICGC!",
                 type: "danger",
             });
         }
-        else if (visitBranch?.label === 'Yes' && AmenitiesOutlet === null) {
+        else if (false) {
             showMessage({
-                message: "Please Select Outlet Amenities",
-                description: "Please Select Outlet Amenities!",
+                message: "Please Select All Inclusive Directions (AID)’",
+                description: "Please Select All Inclusive Directions (AID)’!",
                 type: "danger",
             });
         }
-        else if (visitBranch?.label === 'Yes' && LongBranch === null) {
+        else if (false) {
             showMessage({
-                message: "Please Select Branch Wait Time",
-                description: "Please Select Branch Wait Time!",
+                message: "Please Select Liquidation’ of a bank",
+                description: "Please Select Liquidation’ of a bank!",
                 type: "danger",
             });
         }
-        else if (visitBranch?.label === 'Yes' && LongOutlet === null) {
+        else if (false) {
             showMessage({
-                message: "Please Select Outlet Wait Time",
-                description: "Please Select Outlet Wait Time!",
+                message: "Please Select placed under AID ",
+                description: "Please Select placed under AID !",
                 type: "danger",
             });
         }
-        else if (WithoutVisiting === null) {
+        else if (false) {
             showMessage({
-                message: "Please Select Account Opening",
-                description: "Please Select Account Opening!",
+                message: "Please Select your deposit amount ",
+                description: "Please Selectyour deposit amount !",
                 type: "danger",
             });
         }
-        else if (bank?.label === 'Yes' && AccountOpened === null) {
+        else if (false) {
             showMessage({
-                message: "Please Select Account Opening via Online",
-                description: "Please Select Account Opening via Online!",
+                message: "Please Select  liquidated by Reserve Bank of India",
+                description: "Please Select  liquidated by Reserve Bank of India!",
                 type: "danger",
             });
         }
-        else if (bank?.label === 'Yes' && AccountTypeValue?.length === 0) {
+        else if (false) {
             showMessage({
-                message: "Please Select Type Of Account",
-                description: "Please Select Type Of Account!",
+                message: "Please Select bank is placed under AID",
+                description: "Please Select bank is placed under AID!",
                 type: "danger",
             });
         }
-        else if (bank?.label === 'Yes' && AccountTypeValue && AccountNumber === null) {
+        else if (false) {
             showMessage({
-                message: "Please Select Account Number",
-                description: "Please Select Account Number!",
+                message: "Please Select receive your insured amount",
+                description: "Please Select receive your insured amount!",
                 type: "danger",
             });
-        }
-        else if (bank?.label === 'Yes' && selectedwhatPurposes?.length === 0) {
+        } else if (false) {
             showMessage({
-                message: "Please Select purpose",
-                description: "Please Select purpose!",
-                type: "danger",
-            });
-        }
-        else if (bank?.label === 'Yes' && AccountFrequency === null) {
-            showMessage({
-                message: "Please Select Frequency",
-                description: "Please Select Frequency!",
-                type: "danger",
-            });
-        }
-        else if (bank?.label === 'Yes' && selectedOccupations?.length === 0) {
-            showMessage({
-                message: "Please Select Reasons",
-                description: "Please Select Reasons!",
-                type: "danger",
-            });
-        }
-        else if (bank?.label === 'Yes' && transaction === null) {
-            showMessage({
-                message: "Please Select Transact Mode",
-                description: "Please Select Transact Mode!",
-                type: "danger",
-            });
-        }
-        // else if (bank?.label === 'Yes' && subsidy !== null || bank?.label === 'No' && subsidy !== null) {
-        //     showMessage({
-        //         message: "Please Select Subsidy Recieved Frequency",
-        //         description: "Please Select Subsidy Recieved Frequency!",
-        //         type: "danger",
-        //     });
-        // }
-        else if (selectedIncomes?.length === 0) {
-            showMessage({
-                message: "Please Select Reason For Not Using Account",
-                description: "Please Select Reason For Not Using Account!",
-                type: "danger",
-            });
-        }
-        else if (selectedIncomeLabels.includes("Cash") && selectCashReceipt?.length === 0) {
-            showMessage({
-                message: "Please Select Cash Receipt",
-                description: "Please Select Cash Receipt!",
-                type: "danger",
-            });
-        }
-        else if (SelectedSaveMoney?.length === 0) {
-            showMessage({
-                message: "Please Select Save Money Method",
-                description: "Please Select Save Money Method!",
+                message: "Please Select know more about DICGC",
+                description: "Please Select know more about DICGC!",
                 type: "danger",
             });
         }
         else {
-            stopRecording();
+            // stopRecording();
+            showMessage({
+                message: "Congratulations",
+                description: "Congratulations!",
+                type: "success",
+            });
         }
 
     }
@@ -864,7 +841,7 @@ const BlockBSurveyScreen = () => {
                     "sub_q_title": "",
                     "sub_q_type": "",
                     "account_no": "",
-                    'response': AccountFrequency === null ? '' : AccountFrequency
+                    'response': FollowingIsDICGC === null ? '' : FollowingIsDICGC
                 },
                 {
                     "section_no": "B",
@@ -1154,12 +1131,6 @@ const BlockBSurveyScreen = () => {
                     </TouchableOpacity>
                 </View>
             </Modal>
-            {/* <TouchableOpacity onPress={() => startRecording()}>
-                <Text>Start Recording</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => stopRecording()}>
-                <Text>Stop Recording</Text>
-            </TouchableOpacity> */}
             <Text style={{ fontWeight: 'bold', paddingLeft: 20, paddingTop: 10 }}>Block II: Respondent’s feedback</Text>
             {isLoading === false ?
                 <ScrollView>
@@ -1171,14 +1142,13 @@ const BlockBSurveyScreen = () => {
                                 selectedBtn={(e) => setBank(e)}
                             />
                         </View>
-
                         <View style={{ flex: 1 }}>
                             <View style={{ padding: 10, }} />
                             <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
                                 <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.2 If you deposit money in a bank, do you think it is safe?</Text>
                                 <RadioButtonRN
                                     data={dataOne}
-                                    selectedBtn={(e) => setBank(e)}
+                                    selectedBtn={(e) => setDepositMoney(e)}
                                 />
                             </View>
                             <View style={{ padding: 10, }} />
@@ -1186,7 +1156,7 @@ const BlockBSurveyScreen = () => {
                                 <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.3 Have you heard about Deposit Insurance? *</Text>
                                 <RadioButtonRN
                                     data={dataOne}
-                                    selectedBtn={(e) => setBank(e)}
+                                    selectedBtn={(e) => setHeardDepositInsurance(e)}
                                 />
                             </View>
                             <View style={{ padding: 10, }} />
@@ -1194,7 +1164,7 @@ const BlockBSurveyScreen = () => {
                                 <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.4 Are you aware of the constitution/ nature of DICGC (Deposit Insurance and Credit Guarantee Corporation?)</Text>
                                 <RadioButtonRN
                                     data={dataOne}
-                                    selectedBtn={(e) => setBank(e)}
+                                    selectedBtn={(e) => setConstitutionDICGC(e)}
                                 />
                             </View>
                         </View>
@@ -1213,14 +1183,14 @@ const BlockBSurveyScreen = () => {
                                 maxHeight={300}
                                 labelField="lable"
                                 valueField="id"
-                                placeholder={!AccountFrequencyFocus ? 'Select DICGC' : AccountFrequency}
+                                placeholder={!AccountFrequencyFocus ? 'Select DICGC' : FollowingIsDICGC}
                                 // searchPlaceholder="Search..."
-                                value={AccountFrequency}
+                                value={FollowingIsDICGC}
                                 onFocus={() => setAccountTypeFocus(true)}
                                 onBlur={() => setAccountTypeFocus(false)}
                                 onChange={item => {
                                     console.log(JSON.stringify(item))
-                                    setAccountFrequency(item.id);
+                                    setFollowingIsDICGC(item.id);
                                     setAccountFrequencyFocus(false);
                                 }}
                             />
@@ -1232,7 +1202,7 @@ const BlockBSurveyScreen = () => {
                             <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No. A Banks</Text>
                             <RadioButtonRN
                                 data={data}
-                                selectedBtn={(e) => setZeroBalance(e)}
+                                selectedBtn={(e) => setFinancialInstitutionBanks(e)}
                             />
                         </View>
                         <View style={{ padding: 10, }} />
@@ -1240,7 +1210,7 @@ const BlockBSurveyScreen = () => {
                             <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No. B Non-banking Financial Companies (NBFC)</Text>
                             <RadioButtonRN
                                 data={data}
-                                selectedBtn={(e) => setZeroBalance(e)}
+                                selectedBtn={(e) => setFinancialCategoryCompanies(e)}
                             />
                         </View>
                         <View style={{ padding: 10, }} />
@@ -1248,7 +1218,7 @@ const BlockBSurveyScreen = () => {
                             <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No. C Co-operative credit societies</Text>
                             <RadioButtonRN
                                 data={data}
-                                selectedBtn={(e) => setVisitBranch(e)}
+                                selectedBtn={(e) => setCreditSocieties(e)}
                             />
                         </View>
                         <View style={{ padding: 10, }} />
@@ -1259,20 +1229,20 @@ const BlockBSurveyScreen = () => {
                                     <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No. 7 Do the different branches of a bank have separate coverage?</Text>
                                     <RadioButtonRN
                                         data={dataOne}
-                                        selectedBtn={(e) => setEnvironmentBranch(e)}
+                                        selectedBtn={(e) => setDifferentBranches(e)}
                                     />
                                     <View style={{ padding: 10, }} />
                                     <Text>Q.No. 8 Is it mandatory for banks to be registered with DICGC?</Text>
                                     <RadioButtonRN
                                         data={dataOne}
-                                        selectedBtn={(e) => setEnvironmentOutlet(e)}
+                                        selectedBtn={(e) => setMandatoryRegistered(e)}
                                     />
                                 </View>
                                 <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
                                     <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No. 9 Do you know the meaning of same right and same capacity?*</Text>
                                     <RadioButtonRN
                                         data={dataOne}
-                                        selectedBtn={(e) => setSupportiveBranch(e)}
+                                        selectedBtn={(e) => setMeaningCapacity(e)}
                                     />
                                     <View style={{ padding: 10, }} />
                                 </View>
@@ -1290,14 +1260,14 @@ const BlockBSurveyScreen = () => {
                                         maxHeight={300}
                                         labelField="lable"
                                         valueField="id"
-                                        placeholder={!AccountFrequencyFocus ? 'Select deposit insurance coverage' : AccountFrequency}
+                                        placeholder={!AccountFrequencyFocus ? 'Select deposit insurance coverage' : DepositInsuranceCoverage}
                                         // searchPlaceholder="Search..."
-                                        value={AccountFrequency}
+                                        value={DepositInsuranceCoverage}
                                         onFocus={() => setAccountTypeFocus(true)}
                                         onBlur={() => setAccountTypeFocus(false)}
                                         onChange={item => {
                                             console.log(JSON.stringify(item))
-                                            setAccountFrequency(item.id);
+                                            setDepositInsuranceCoverage(item.id);
                                             setAccountFrequencyFocus(false);
                                         }}
                                     />
@@ -1315,14 +1285,14 @@ const BlockBSurveyScreen = () => {
                                         maxHeight={300}
                                         labelField="lable"
                                         valueField="id"
-                                        placeholder={!AccountFrequencyFocus ? 'Select Deposit Insurance Coverage' : AccountFrequency}
+                                        placeholder={!AccountFrequencyFocus ? 'Select Providing Deposit Insurance' : ProvidingDepositInsurance}
                                         // searchPlaceholder="Search..."
-                                        value={AccountFrequency}
+                                        value={ProvidingDepositInsurance}
                                         onFocus={() => setAccountTypeFocus(true)}
                                         onBlur={() => setAccountTypeFocus(false)}
                                         onChange={item => {
                                             console.log(JSON.stringify(item))
-                                            setAccountFrequency(item.id);
+                                            setProvidingDepositInsurance(item.id);
                                             setAccountFrequencyFocus(false);
                                         }}
                                     />
@@ -1341,14 +1311,14 @@ const BlockBSurveyScreen = () => {
                                         maxHeight={300}
                                         labelField="lable"
                                         valueField="id"
-                                        placeholder={!AccountFrequencyFocus ? 'Select insured by DICGC' : AccountFrequency}
+                                        placeholder={!AccountFrequencyFocus ? 'Select insured by DICGC' : TypesOfDeposits}
                                         // searchPlaceholder="Search..."
-                                        value={AccountFrequency}
+                                        value={TypesOfDeposits}
                                         onFocus={() => setAccountTypeFocus(true)}
                                         onBlur={() => setAccountTypeFocus(false)}
                                         onChange={item => {
                                             console.log(JSON.stringify(item))
-                                            setAccountFrequency(item.id);
+                                            setTypesOfDeposits(item.id);
                                             setAccountFrequencyFocus(false);
                                         }}
                                     />
@@ -1384,7 +1354,7 @@ const BlockBSurveyScreen = () => {
                                             onSelectedwhatPurposesChange(items)
                                         }
                                         selectedItems={selectedwhatPurposes}
-                                        selectText="Select open a bank account"
+                                        selectText="Select placed under AID "
                                         onChangeInput={(text) => console.log(text)}
                                         altFontFamily="ProximaNova-Light"
                                         tagRemoveIconColor="#000"
@@ -1424,14 +1394,14 @@ const BlockBSurveyScreen = () => {
                                     maxHeight={300}
                                     labelField="lable"
                                     valueField="id"
-                                    placeholder={!AccountFrequencyFocus ? 'Select Type of account' : AccountFrequency}
+                                    placeholder={!AccountFrequencyFocus ? 'Select bank is placed under AID' : PlacedUnderAID}
                                     // searchPlaceholder="Search..."
-                                    value={AccountFrequency}
+                                    value={PlacedUnderAID}
                                     onFocus={() => setAccountTypeFocus(true)}
                                     onBlur={() => setAccountTypeFocus(false)}
                                     onChange={item => {
                                         console.log(JSON.stringify(item))
-                                        setAccountFrequency(item.id);
+                                        setPlacedUnderAID(item.id);
                                         setAccountFrequencyFocus(false);
                                     }}
                                 />
@@ -1451,7 +1421,7 @@ const BlockBSurveyScreen = () => {
                                     maxHeight={300}
                                     labelField="lable"
                                     valueField="id"
-                                    placeholder={!istransactionFocus ? 'Select Type of account' : transaction}
+                                    placeholder={!istransactionFocus ? 'Select liquidated by Reserve Bank' : transaction}
                                     // searchPlaceholder="Search..."
                                     value={transaction}
                                     onFocus={() => setIsTransactionFocus(true)}
@@ -1467,7 +1437,7 @@ const BlockBSurveyScreen = () => {
                             <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
                                 <Text style={{ marginBottom: 5, fontWeight: 'bold', flex: 1 }}>Q.No.18 How will you receive your insured amount when the bank is placed under AID?</Text>
                                 <Dropdown
-                                    style={[styles.dropdown, subsidyFocus && { borderColor: 'blue' }]}
+                                    style={[styles.dropdown, subsidy1Focus && { borderColor: 'blue' }]}
                                     placeholderStyle={styles.placeholderStyle}
                                     selectedTextStyle={styles.selectedTextStyle}
                                     inputSearchStyle={styles.inputSearchStyle}
@@ -1478,15 +1448,15 @@ const BlockBSurveyScreen = () => {
                                     maxHeight={300}
                                     labelField="lable"
                                     valueField="id"
-                                    placeholder={!subsidyFocus ? 'Select Type of account' : subsidy}
+                                    placeholder={!subsidy1Focus ? 'Select receive your insured amount' : sub1sidy}
                                     // searchPlaceholder="Search..."
-                                    value={subsidy}
-                                    onFocus={() => setSubsidyFocus(true)}
-                                    onBlur={() => setSubsidyFocus(false)}
+                                    value={sub1sidy}
+                                    onFocus={() => setSubsidy1Focus(true)}
+                                    onBlur={() => setSubsidy1Focus(false)}
                                     onChange={item => {
                                         console.log(JSON.stringify(item))
-                                        setSubsidy(item.id);
-                                        setSubsidyFocus(false);
+                                        set1Subsidy(item.id);
+                                        setSubsidy1Focus(false);
                                     }}
                                 />
                             </View>
@@ -1495,7 +1465,7 @@ const BlockBSurveyScreen = () => {
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.19 How will you receive your insured amount when the bank is liquidated? (Provided KYC details are in place)</Text>
                             <Dropdown
-                                style={[styles.dropdown, subsidyFocus && { borderColor: 'blue' }]}
+                                style={[styles.dropdown, subsidy2Focus && { borderColor: 'blue' }]}
                                 placeholderStyle={styles.placeholderStyle}
                                 selectedTextStyle={styles.selectedTextStyle}
                                 inputSearchStyle={styles.inputSearchStyle}
@@ -1506,15 +1476,15 @@ const BlockBSurveyScreen = () => {
                                 maxHeight={300}
                                 labelField="lable"
                                 valueField="id"
-                                placeholder={!subsidyFocus ? 'Select insured amount' : subsidy}
+                                placeholder={!subsidy2Focus ? 'Select receive your insured liquidated' : sub2sidy}
                                 // searchPlaceholder="Search..."
-                                value={subsidy}
-                                onFocus={() => setSubsidyFocus(true)}
-                                onBlur={() => setSubsidyFocus(false)}
+                                value={sub2sidy}
+                                onFocus={() => setSubsidy2Focus(true)}
+                                onBlur={() => setSubsidy2Focus(false)}
                                 onChange={item => {
                                     console.log(JSON.stringify(item))
-                                    setSubsidy(item.id);
-                                    setSubsidyFocus(false);
+                                    set2Subsidy(item.id);
+                                    setSubsidy2Focus(false);
                                 }}
                             />
                         </View>
@@ -1522,7 +1492,7 @@ const BlockBSurveyScreen = () => {
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.20 How would you like to know more about DICGC? (Choose all applicable answers)</Text>
                             <Dropdown
-                                style={[styles.dropdown, subsidyFocus && { borderColor: 'blue' }]}
+                                style={[styles.dropdown, subsidy3Focus && { borderColor: 'blue' }]}
                                 placeholderStyle={styles.placeholderStyle}
                                 selectedTextStyle={styles.selectedTextStyle}
                                 inputSearchStyle={styles.inputSearchStyle}
@@ -1533,26 +1503,25 @@ const BlockBSurveyScreen = () => {
                                 maxHeight={300}
                                 labelField="lable"
                                 valueField="id"
-                                placeholder={!subsidyFocus ? 'Select about DICGC' : subsidy}
+                                placeholder={!subsidy3Focus ? 'Select more about DICGC' : sub3sidy}
                                 // searchPlaceholder="Search..."
-                                value={subsidy}
-                                onFocus={() => setSubsidyFocus(true)}
-                                onBlur={() => setSubsidyFocus(false)}
+                                value={sub3sidy}
+                                onFocus={() => setSubsidy3Focus(true)}
+                                onBlur={() => setSubsidy3Focus(false)}
                                 onChange={item => {
                                     console.log(JSON.stringify(item))
-                                    setSubsidy(item.id);
-                                    setSubsidyFocus(false);
+                                    set3Subsidy(item.id);
+                                    setSubsidy3Focus(false);
                                 }}
                             />
                         </View>
+                        <View style={{ padding: 10, }} />
                         <TouchableOpacity
                             // disabled={isSubmitSurvey}
-                            onPress={() =>
-                                finishSurvey()
-                                // stopRecording()
-                            } style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: 'rgb(36,78,154)', borderRadius: 10 }}>
+                            onPress={() => validate()} style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: 'rgb(36,78,154)', borderRadius: 10 }}>
                             {isSubmitSurvey === true ? <ActivityIndicator style={{ alignItems: 'center' }} color={'#fff'} /> : <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>Complete Survey</Text>}
                         </TouchableOpacity>
+                        <View style={{ padding: 10, }} />
                     </View>
                 </ScrollView> : <ActivityIndicator style={{ alignItems: 'center', marginTop: Dimensions.get('screen').width }} color={'#000'} />
             }

@@ -244,9 +244,9 @@ const BlockESurveyScreen = () => {
     const stopRecording = async () => {
         try {
             // or to get the wav file path
-            console.warn('startRecording')
+            console.log('startRecording')
             const audioFile = await AudioRecord.stop();
-            console.warn(audioFile)
+            console.log(audioFile)
             setAudioPath(audioFile);
             uploadAudioFinal(audioFile);
             submitSurvey(audioFile);

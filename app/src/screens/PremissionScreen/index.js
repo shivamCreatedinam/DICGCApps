@@ -105,7 +105,7 @@ export default class PermissionScreenMain extends Component {
                 this.setState({ cameraPermission: false });
             }
         } catch (err) {
-            console.warn(err)
+            console.log(err)
         }
     }
 
@@ -127,7 +127,7 @@ export default class PermissionScreenMain extends Component {
                 this.setState({ filePermission: false });
             }
         } catch (err) {
-            console.warn(err)
+            console.log(err)
         }
     }
 
@@ -162,7 +162,7 @@ export default class PermissionScreenMain extends Component {
                     return;
                 }
             } catch (err) {
-                console.warn(err);
+                console.log(err);
                 return;
             }
         }
@@ -172,7 +172,7 @@ export default class PermissionScreenMain extends Component {
         if (this.state.cameraPermission === true && this.state.locationPermission === true && this.state.notificationPermission === true) {
             AsyncStorage.setItem('@permissioncheck', 'true');
             this.props.navigation.replace('SigninScreen');
-            console.warn('saved')
+            console.log('saved')
         } else {
             showMessage({
                 message: 'Required Permissions!',

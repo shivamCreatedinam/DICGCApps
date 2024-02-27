@@ -55,9 +55,9 @@ const AddSurveyScreen = () => {
     const [age, setAgeNumber] = React.useState(0);
     const [adult, setAdults] = React.useState(0);
     const [children, setChildren] = React.useState(0);
-    const [selectedEducation, setSelectedEducation] = React.useState([]);
-    const [selectedOccupations, setSelectedOccupations] = React.useState([]);
-    const [selectedIncomes, setSelectedIncomes] = React.useState([]);
+    const [selectedEducation, setSelectedEducation] = React.useState('');
+    const [selectedOccupations, setSelectedOccupations] = React.useState('');
+    const [selectedIncomes, setSelectedIncomes] = React.useState('');
     const [differentlyAble, setDifferently] = React.useState('');
     const [smartPhone, setSmartphone] = React.useState('');
     const [anyGroup, setAnyGroup] = React.useState('');
@@ -293,7 +293,7 @@ const AddSurveyScreen = () => {
         try {
             // or to get the wav file path
             const audioFile = await AudioRecord.stop();
-            console.warn('stopRecording', audioFile);
+            console.log('stopRecording', audioFile);
             setAudioPath(audioFile);
             uploadAudioFinal(audioFile);
             submitSurvey();
@@ -304,145 +304,96 @@ const AddSurveyScreen = () => {
 
     const validationCheck = () => {
         const pattern = /^[A-Za-z]+(?:\s[A-Za-z]+)*$/
-        const AgeRegex = /^(?:1[01][0-9]|120|1[7-9]|[2-9][0-9])$/;
+        const mobileRegex = /^[0]?[789]\d{9}$/;
+        let pincode_ = /^(\d{4}|\d{6})$/;
         // if (pattern.test(surveryName)) {
-        if (gender !== '') {
-            if (AgeRegex.test(age)) {
-                if (selectedOccupations.length !== 0) {
-                    if (selectedEducation.length !== 0) {
-                        if (selectedIncomes.length !== 0) {
-                            if (value !== null) {
-                                if (valueDistrict !== null) {
-                                    if (areasSelected.length !== 0) {
-                                        if (differentlyAble !== '') {
-                                            if (adult !== '') {
-                                                if (children !== '') {
-                                                    if (anyGroup !== '') {
-                                                        if (smartPhone !== '') {
-                                                            stopRecording();
-                                                        } else {
-                                                            showMessage({
-                                                                message: "Please Select SmartPhone Own!",
-                                                                description: "Please Select SmartPhone Own!",
-                                                                type: "danger",
-                                                            });
-                                                        }
-                                                    } else {
-                                                        showMessage({
-                                                            message: "Please Select Any Group Part!",
-                                                            description: "Please Select Any Group Part SHG/JLG!",
-                                                            type: "danger",
-                                                        });
-                                                    }
-                                                } else {
-                                                    showMessage({
-                                                        message: "Please Select Children!",
-                                                        description: "Please Select Number Of Children!",
-                                                        type: "danger",
-                                                    });
-                                                }
-                                            } else {
-                                                showMessage({
-                                                    message: "Please Select Adults!",
-                                                    description: "Please Select Number Of Adults!",
-                                                    type: "danger",
-                                                });
-                                            }
-                                        } else {
-                                            showMessage({
-                                                message: "Please Select Differently!",
-                                                description: "Please Select Differently abled!",
-                                                type: "danger",
-                                            });
-                                        }
-                                    } else {
-                                        showMessage({
-                                            message: "Please Select Area",
-                                            description: "Please Select Area!",
-                                            type: "danger",
-                                        });
-                                    }
-                                } else {
-                                    showMessage({
-                                        message: "Please Select District",
-                                        description: "Please Select District!",
-                                        type: "danger",
-                                    });
-                                }
-                            } else {
-                                showMessage({
-                                    message: "Please Select State",
-                                    description: "Please Select State!",
-                                    type: "danger",
-                                });
-                            }
-                        } else {
-                            showMessage({
-                                message: "Please Select Incomes",
-                                description: "Please Select Incomes!",
-                                type: "danger",
-                            });
-                        }
-                    } else {
-                        showMessage({
-                            message: "Please Select Education",
-                            description: "Please Select Education!",
-                            type: "danger",
-                        });
-                    }
-                } else {
-                    showMessage({
-                        message: "Please Select Occupation",
-                        description: "Please Select Occupation!",
-                        type: "danger",
-                    });
-                }
-            } else {
-                showMessage({
-                    message: "Please Enter Valid Age",
-                    description: "Please Enter Valid Age!",
-                    type: "danger",
-                });
-            }
-        } else {
+        if (Name === '') {
+            showMessage({
+                message: "Please Enter Name",
+                description: "Please Enter Valid Name!",
+                type: "danger",
+            });
+            return false;
+        } else if (address === '') {
+            showMessage({
+                message: "Please Select Address",
+                description: "Please Select Valid Address!",
+                type: "danger",
+            });
+            return false;
+        } else if (!pincode_.test(PinCode)) {
+            showMessage({
+                message: "Please Enter Pin Code",
+                description: "Please Enter 6 Digit Pin Code!",
+                type: "danger",
+            });
+            return false;
+        } else if (mobileRegex.test(contact) === false) {
+            showMessage({
+                message: "Please Enter Mobile",
+                description: "Please Enter 10 digit Valid mobile number!",
+                type: "danger",
+            });
+            return false;
+        } else if (gender === '') {
             showMessage({
                 message: "Please Select Gender",
                 description: "Please Select Valid Gender!",
                 type: "danger",
             });
+            return false;
+        } else if (Number(age) < 18) {
+            showMessage({
+                message: "Please Enter Age",
+                description: "Please Enter Valid Age! \n Age must be 18 or Above 18",
+                type: "danger",
+            });
+            return false;
+        } else if (selectedOccupations === '') {
+            showMessage({
+                message: "Please Select Occupations",
+                description: "Please Select Valid Occupations",
+                type: "danger",
+            });
+            return false;
+        } else if (selectedEducation === '') {
+            showMessage({
+                message: "Please Select Education",
+                description: "Please Select Valid Education",
+                type: "danger",
+            });
+            return false;
+        } else if (selectedIncomes === '') {
+            showMessage({
+                message: "Please Select Incomes",
+                description: "Please Select Valid Incomes",
+                type: "danger",
+            });
+            return false;
+        } else {
+            stopRecording();
+            return true;
         }
-        // } else {
-        //     showMessage({
-        //         message: "Please Enter Name",
-        //         description: "Please Enter Valid Name!",
-        //         type: "danger",
-        //     });
-        // }
     }
 
     const submitSurvey = async () => {
         setSubmitSurvey(true);
         const FormData = require('form-data');
         let data = new FormData();
-        data.append('user_name', 'Not to be recorded');
         data.append('survey_token', name);
+        data.append('user_name', Name);
+        data.append('address', address);
         data.append('gender', gender?.label);
         data.append('age_of_repons', Number(age));
-        data.append('city', value);
-        data.append('state', valueDistrict);
+        data.append('state', value);
+        data.append('city', valueDistrict);
+        data.append('pincode', PinCode);
+        data.append('mobile', contact);
         data.append('occupation_id', selectedOccupations);
         data.append('education_id', selectedEducation);
         data.append('income_id', selectedIncomes);
-        data.append('area_id', areasSelected);
-        data.append('diff_abled', differentlyAble?.label);
-        data.append('adults', adult);
-        data.append('children', children);
-        data.append('total', Number(adult) + Number(children));
-        data.append('part_of_group', anyGroup?.label);
-        data.append('own_smartphone', smartPhone?.label);
         data.append('latitude', Lattitude);
         data.append('longitude', Longitude);
-        data.append('other_occupation', 1);
         let config = {
             method: 'post',
             maxBodyLength: Infinity,
@@ -453,10 +404,10 @@ const AddSurveyScreen = () => {
             },
             data: data,
         };
-        console.warn('submitSurvey', JSON.stringify(config))
+        console.log('submitSurvey', JSON.stringify(config))
         Axios.request(config)
             .then((response) => {
-                console.warn('submitSurvey response', JSON.stringify(response.data))
+                console.log('submitSurvey response', JSON.stringify(response.data))
                 if (response.data.status === true) {
                     setSubmitSurvey(false);
                     showMessage({
@@ -474,15 +425,12 @@ const AddSurveyScreen = () => {
                     setSubmitSurvey(false);
                 }
             });
-
     }
 
     const saveSurveryAndMoveToNext = async () => {
         AsyncStorage.setItem(AsyncStorageContaints.surveyNextBlock, 'B');
         navigation.replace('BlockBSurveyScreen');
     }
-
-
 
     const uploadAudioFinal = async (file) => {
         setAudioUploading(true);
@@ -569,21 +517,61 @@ const AddSurveyScreen = () => {
 
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>City:</Text>
-                            <TextInput style={{ backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder='Enter City' editable={true} value={city} onChangeText={(text) => setCity(text)} />
+                            <Dropdown
+                                style={[styles.dropdown, is4Focus && { borderColor: 'blue' }]}
+                                placeholderStyle={styles.placeholderStyle}
+                                selectedTextStyle={styles.selectedTextStyle}
+                                inputSearchStyle={styles.inputSearchStyle}
+                                // iconStyle={styles.iconStyle}
+                                data={state}
+                                // search
+                                maxHeight={300}
+                                labelField="name"
+                                valueField="id"
+                                placeholder={!is4Focus ? 'Select State' : value}
+                                // searchPlaceholder="Search..."
+                                value={value}
+                                onFocus={() => setIs4Focus(true)}
+                                onBlur={() => setIs4Focus(false)}
+                                onChange={item => {
+                                    console.log('______>', JSON.stringify(item))
+                                    setValue(item?.id);
+                                    loadDistrict(item.id);
+                                    setIs4Focus(false);
+                                }}
+                            />
                         </View>
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>State:</Text>
-                            <TextInput style={{ backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder='Enter State' editable={true} value={Stata} onChangeText={(text) => setState(text)} />
+                            <Dropdown
+                                style={[styles.dropdown, is5Focus && { borderColor: 'blue' }]}
+                                placeholderStyle={styles.placeholderStyle}
+                                selectedTextStyle={styles.selectedTextStyle}
+                                inputSearchStyle={styles.inputSearchStyle}
+                                data={DistrictData}
+                                maxHeight={300}
+                                labelField="name"
+                                valueField="id"
+                                placeholder={!is5Focus ? 'Select District' : valueDistrict}
+                                value={selectedDistrict}
+                                onFocus={() => setIs5Focus(true)}
+                                onBlur={() => setIs5Focus(false)}
+                                onChange={item => {
+                                    console.log('______>', JSON.stringify(item))
+                                    setDistrictValue(item?.id);
+                                    setIs5Focus(false);
+                                }}
+                            />
                         </View>
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff', marginTop: 5 }}>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>Pin code:</Text>
-                            <TextInput style={{ backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder='Enter PinCode' editable={true} value={PinCode} onChangeText={(text) => setPinCode(text)} />
+                            <TextInput keyboardType='numeric' maxLength={6} style={{ backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder='Enter Pincode' editable={true} value={PinCode} onChangeText={(text) => setPinCode(text)} />
                         </View>
 
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff', marginTop: 5 }}>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>3. Contact no.</Text>
-                            <TextInput style={{ backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder='Enter Contact' editable={true} value={contact} onChangeText={(text) => setContact(text)} />
+                            <TextInput maxLength={10} keyboardType='numeric' style={{ backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder='Enter Contact' editable={true} value={contact} onChangeText={(text) => setContact(text)} />
                         </View>
 
                         <View style={{ padding: 10, }} />
@@ -594,19 +582,11 @@ const AddSurveyScreen = () => {
                                 selectedBtn={(e) => setGender(e)}
                             />
                         </View>
-
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff', marginTop: 5 }}>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>5. Age of the respondent (in completed years, 18 years and above).</Text>
-                            <TextInput onChangeText={(e) => setAgeNumber(e)} style={{ backgroundColor: '#fff', paddingLeft: 15 }} placeholder='Enter Age' keyboardType={'number-pad'} maxLength={2} value={age} />
+                            <TextInput keyboardType='numeric' onChangeText={(e) => setAgeNumber(e)} style={{ backgroundColor: '#fff', paddingLeft: 15 }} placeholder='Enter Age' maxLength={2} value={age} />
                         </View>
-
-
-                        {/* <View style={{ padding: 10, }} />
-                        <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>3. Age</Text>
-                            <TextInput onChangeText={(e) => setAgeNumber(e)} style={{ backgroundColor: '#fff', paddingLeft: 15 }} placeholder='Age' keyboardType={'number-pad'} maxLength={2} value={age} />
-                        </View> */}
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>6. Category/ occupation</Text>
@@ -627,8 +607,8 @@ const AddSurveyScreen = () => {
                                 onFocus={() => setIs1Focus(true)}
                                 onBlur={() => setIs1Focus(false)}
                                 onChange={item => {
-                                    console.log('______>', JSON.stringify(item))
-                                    onSelectedOccupationsChange(item?.id);
+                                    console.log('______>', JSON.stringify(item));
+                                    setSelectedOccupations(item?.id);
                                     setIs1Focus(false);
                                 }}
                             />
@@ -641,7 +621,6 @@ const AddSurveyScreen = () => {
                                 placeholderStyle={styles.placeholderStyle}
                                 selectedTextStyle={styles.selectedTextStyle}
                                 inputSearchStyle={styles.inputSearchStyle}
-                                // iconStyle={styles.iconStyle}
                                 data={educationData}
                                 // search
                                 maxHeight={300}
@@ -654,7 +633,7 @@ const AddSurveyScreen = () => {
                                 onBlur={() => setIs2Focus(false)}
                                 onChange={item => {
                                     console.log('______>', JSON.stringify(item))
-                                    onSelectedEducationChange(item?.id);
+                                    setSelectedEducation(item?.id);
                                     setIs2Focus(false);
                                 }}
                             />
@@ -667,20 +646,18 @@ const AddSurveyScreen = () => {
                                 placeholderStyle={styles.placeholderStyle}
                                 selectedTextStyle={styles.selectedTextStyle}
                                 inputSearchStyle={styles.inputSearchStyle}
-                                // iconStyle={styles.iconStyle}
                                 data={incomeData}
                                 // search
                                 maxHeight={300}
                                 labelField="lable"
                                 valueField="id"
                                 placeholder={!is3Focus ? 'Select Annual Income' : selectedIncomes}
-                                // searchPlaceholder="Search..."
                                 value={selectedIncomes}
                                 onFocus={() => setIs3Focus(true)}
                                 onBlur={() => setIs3Focus(false)}
                                 onChange={item => {
                                     console.log('______>', JSON.stringify(item))
-                                    onSelectedIncomesChange(item?.id);
+                                    setSelectedIncomes(item?.id);
                                     setIs3Focus(false);
                                 }}
                             />
@@ -688,7 +665,7 @@ const AddSurveyScreen = () => {
 
                         <View style={{ padding: 10, }} />
                         <TouchableOpacity disabled={isSubmitSurvey} onPress={() => {
-                            saveSurveryAndMoveToNext()
+                            validationCheck()
                         }} style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: '#000', borderRadius: 10 }}>
                             {isAudioUploading !== true ? <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>Next Block B</Text> : <ActivityIndicator color={'#fff'} style={{ alignItems: 'center', alignSelf: 'center' }} />}
                         </TouchableOpacity>

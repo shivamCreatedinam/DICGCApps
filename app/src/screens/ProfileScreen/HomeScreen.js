@@ -124,50 +124,50 @@ class HomeScreen extends Component {
   }
 
   async navigateToSurvey() {
-    this.props.navigation.navigate("AddSurveyScreen")
-    // api/generate-survey-token
-    // let SERVER = 'https://createdinam.in/SURVEY-3/public/api/generate-survey-token'
-    // let tempServerTokenId = ';'
-    // this.setState({ loading: true });
-    // const headers = {
-    //   'Content-Type': 'application/json',
-    //   'Authorization': `Bearer ${this.state.userToken}`
-    // }
-    // axios.get(`${SERVER}`, {
-    //   headers: headers
-    // })
-    //   .then((response) => {
-    //     if (response.data.status === true) {
-    //       let serverToken = response?.data?.surveyToken
-    //       console.log('navigateToSurvey', JSON.stringify(response.data))
-    //       AsyncStorage.setItem(AsyncStorageContaints.tempServerTokenId, serverToken);
-    //       showMessage({
-    //         message: "Survey Token Generated",
-    //         description: "Survey Token Generated, You can take survey!",
-    //         type: "success",
-    //       });
-    //       this.setState({ loading: false });
-    //       this.CheckCurrentActiveSurvey();
-    //       // this.props.navigation.navigate('BlockFSurveyScreen');
-    //     } else {
-    //       console.log('navigateToSurvey', JSON.stringify(response.data))
-    //       showMessage({
-    //         message: "Something went wrong!",
-    //         description: "Something went wrong. Try again!",
-    //         type: "danger",
-    //       });
-    //       this.setState({ loading: false });
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log('navigateToSurvey', JSON.stringify(error))
-    //     showMessage({
-    //       message: "Something went wrong!",
-    //       description: "Something went wrong. " + error,
-    //       type: "danger",
-    //     });
-    //     this.setState({ loading: false });
-    //   })
+    // api / generate - survey - token
+    let SERVER = 'https://createdinam.in/SURVEY-3/public/api/generate-survey-token'
+    let tempServerTokenId = ';'
+    this.setState({ loading: true });
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.state.userToken}`
+    }
+    console.log('navigateToSurvey', JSON.stringify(headers))
+    axios.get(`${SERVER}`, {
+      headers: headers
+    })
+      .then((response) => {
+        if (response.data.status === true) {
+          let serverToken = response?.data?.surveyToken
+          console.log('navigateToSurvey', JSON.stringify(response.data))
+          AsyncStorage.setItem(AsyncStorageContaints.tempServerTokenId, serverToken);
+          showMessage({
+            message: "Survey Token Generated",
+            description: "Survey Token Generated, You can take survey!",
+            type: "success",
+          });
+          this.setState({ loading: false });
+          this.CheckCurrentActiveSurvey();
+          // this.props.navigation.navigate('BlockFSurveyScreen');
+        } else {
+          console.log('navigateToSurvey', JSON.stringify(response.data))
+          showMessage({
+            message: "Something went wrong!",
+            description: "Something went wrong. Try again!",
+            type: "danger",
+          });
+          this.setState({ loading: false });
+        }
+      })
+      .catch((error) => {
+        console.log('navigateToSurvey', JSON.stringify(error))
+        showMessage({
+          message: "Something went wrong!",
+          description: "Something went wrong. " + error,
+          type: "danger",
+        });
+        this.setState({ loading: false });
+      })
   }
 
   async getDraftSurvey() {
@@ -215,6 +215,7 @@ class HomeScreen extends Component {
       headers: headers
     })
       .then((response) => {
+        console.log('getSurveyCount', JSON.stringify(response.data?.surveyToken))
         if (response.data.status === true) {
           console.log('getSurveyCount', JSON.stringify(response.data?.surveyToken))
           AsyncStorage.setItem(AsyncStorageContaints.surveyCompleteCount, response.data?.in_processing);
@@ -246,31 +247,8 @@ class HomeScreen extends Component {
   }
 
   navigateToPendingSurvey = () => {
-    console.log("this.state.surveyNextBlock", this.state.DraftSection)
+    console.log("this.state.surveyNextBlock", this.state.DraftSection);
     this.props.navigation.replace('DraftSurveyScreen');
-    // if (this.state.DraftSection === '' || this.state.DraftSection === null) {
-    //   showMessage({
-    //     message: "You Haven't Any Draft Survey",
-    //     description: "Create new survey!",
-    //     type: "danger",
-    //   });
-    //   // this.props.navigation.replace('AddSurveyScreen');
-    // } else if (this.state.DraftSection === 'B') {
-    //   console.log("inside B")
-    //   this.props.navigation.replace('BlockCSurveyScreen');
-    // } else if (this.state.DraftSection === 'C') {
-    //   console.log("inside C")
-    //   this.props.navigation.replace('BlockDSurveyScreen');
-    // } else if (this.state.DraftSection === 'D') {
-    //   this.props.navigation.replace('BlockESurveyScreen');
-    //   console.log("inside D")
-    // } else if (this.state.DraftSection === 'E') {
-    //   this.props.navigation.replace('BlockFSurveyScreen');
-    //   console.log("inside E")
-    // } else if (this.state.DraftSection === 'A') {
-    //   console.log("inside F")
-    //   this.props.navigation.replace('BlockBSurveyScreen');
-    // }
   }
 
   checkStartSurvey() {
