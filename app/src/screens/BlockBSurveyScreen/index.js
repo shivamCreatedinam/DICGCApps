@@ -307,11 +307,17 @@ const BlockBSurveyScreen = () => {
     ];
 
     const frequentlyBank = [
+        { id: 1, lable: 'Will have to wait till bank is liquidated' },
+        { id: 2, lable: 'Will get deposits (plus interest) upto ₹5 lakh from DICGC' },
+        { id: 3, lable: 'No Idea' },
+    ];
+
+    const privateInsuranceData = [
         { id: 1, lable: 'Private Insurance Company' },
         { id: 2, lable: 'Public Insurance Company' },
         { id: 3, lable: '100% Subsidiary of Reserve Bank of India (RBI)' },
         { id: 4, lable: 'No Idea' },
-    ];
+    ]
 
     const reasons = [
         { id: 1, lable: 'Upto ₹1 lakh' },
@@ -329,6 +335,12 @@ const BlockBSurveyScreen = () => {
         { id: 4, lable: 'No Idea' },
 
     ];
+
+    const depositAmount = [
+        { id: 1, lable: 'Will get entire amount from bank' },
+        { id: 2, lable: 'Will get deposits (plus interest) upto ₹5 lakh from DICGC' },
+        { id: 3, lable: 'No Idea' },
+    ]
 
     const subsidyTimes = [
         { id: 1, lable: 'Only Deposits of SB A/c' },
@@ -475,7 +487,7 @@ const BlockBSurveyScreen = () => {
     const stopRecording = async () => {
         try {
             // or to get the wav file path
-            console.log('startRecording')
+            console.log('stopRecording')
             const audioFile = await AudioRecord.stop();
             console.log(audioFile)
             setAudioPath(audioFile);
@@ -493,170 +505,181 @@ const BlockBSurveyScreen = () => {
                 description: "Please Select Bank Account!",
                 type: "danger",
             });
+            return false;
         }
-        else if (false) {
+        else if (DepositMoney === null) {
             showMessage({
                 message: "Please Select deposit money in a bank",
                 description: "Please Select deposit money in a bank!",
                 type: "danger",
             });
+            return false;
         }
-        else if (false) {
+        else if (HeardDepositInsurance === null) {
             showMessage({
                 message: "Please Select heard about Deposit Insurance",
                 description: "Please Select heard about Deposit Insurance!",
                 type: "danger",
             });
+            return false;
         }
-        else if (false) {
+        else if (ConstitutionDICGC === null) {
             showMessage({
                 message: "Please Select aware of the constitution/ nature",
                 description: "Please Select aware of the constitution/ nature!",
                 type: "danger",
             });
+            return false;
         }
-        else if (false) {
+        else if (FollowingIsDICGC === null) {
             showMessage({
                 message: "Please Select following is DICGC?",
                 description: "Please Select following is DICGC?!",
                 type: "danger",
             });
+            return false;
         }
-        else if (false) {
+        else if (FinancialInstitutionBanks === null) {
             showMessage({
                 message: "Please Select financial institutions",
                 description: "Please Select financial institutions!",
                 type: "danger",
             });
+            return false;
         }
-        else if (false) {
-            showMessage({
-                message: "Please Select Banks Financial Institution",
-                description: "Please Select Banks Financial Institution!",
-                type: "danger",
-            });
-        }
-        else if (false) {
+        else if (FinancialCategoryCompanies === null) {
             showMessage({
                 message: "Please Select Non-banking Financial Companies (NBFC)",
                 description: "Please Select Non-banking Financial Companies (NBFC)!",
                 type: "danger",
             });
+            return false;
         }
-        else if (false) {
+        else if (CreditSocieties === null) {
             showMessage({
                 message: "Please Select Co-operative credit societies",
                 description: "Please Select Co-operative credit societies!",
                 type: "danger",
             });
+            return false;
         }
-        else if (false) {
+        else if (DifferentBranches === null) {
             showMessage({
                 message: "Please Select different branches of a bank",
                 description: "Please Select different branches of a bank!",
                 type: "danger",
             });
+            return false;
         }
-        else if (false) {
+        else if (MandatoryRegistered === null) {
             showMessage({
                 message: "Please Select mandatory for banks",
                 description: "Please Select mandatory for banks!",
                 type: "danger",
             });
+            return false;
         }
-        else if (false) {
+        else if (MeaningCapacity === null) {
             showMessage({
                 message: "Please Select right and capacity?",
                 description: "Please Select right and capacity?!",
                 type: "danger",
             });
+            return false;
         }
-        else if (false) {
+        else if (DepositInsuranceCoverage === null) {
             showMessage({
                 message: "Please Select insurance coverage",
                 description: "Please Select insurance coverage!",
                 type: "danger",
             });
+            return false;
         }
-        else if (false) {
+        else if (ProvidingDepositInsurance === null) {
             showMessage({
                 message: "Please Select premium to DICGC",
                 description: "Please Select premium to DICGC!",
                 type: "danger",
             });
+            return false;
         }
-        else if (false) {
+        else if (TypesOfDeposits === null) {
             showMessage({
                 message: "Please Select deposits are insured by DICGC",
                 description: "Please Select deposits are insured by DICGC!",
                 type: "danger",
             });
+            return false;
         }
-        else if (false) {
+        else if (LongOutlet === null) {
             showMessage({
                 message: "Please Select All Inclusive Directions (AID)’",
                 description: "Please Select All Inclusive Directions (AID)’!",
                 type: "danger",
             });
+            return false;
         }
-        else if (false) {
+        else if (WithoutVisiting === null) {
             showMessage({
                 message: "Please Select Liquidation’ of a bank",
                 description: "Please Select Liquidation’ of a bank!",
                 type: "danger",
             });
+            return false;
         }
-        else if (false) {
+        else if (selectedwhatPurposes.length === 0) {
+            showMessage({
+                message: "Please Select placed under AID Or Liquidated by Reserve Bank of India",
+                description: "Please Select placed under AID Or Liquidated by Reserve Bank of India!",
+                type: "danger",
+            });
+            return false;
+        }
+        else if (PlacedUnderAID === null) {
             showMessage({
                 message: "Please Select placed under AID ",
                 description: "Please Select placed under AID !",
                 type: "danger",
             });
+            return false;
         }
-        else if (false) {
-            showMessage({
-                message: "Please Select your deposit amount ",
-                description: "Please Selectyour deposit amount !",
-                type: "danger",
-            });
-        }
-        else if (false) {
+        else if (transaction === null) {
             showMessage({
                 message: "Please Select  liquidated by Reserve Bank of India",
                 description: "Please Select  liquidated by Reserve Bank of India!",
                 type: "danger",
             });
+            return false;
         }
-        else if (false) {
+        else if (sub1sidy === null) {
             showMessage({
                 message: "Please Select bank is placed under AID",
                 description: "Please Select bank is placed under AID!",
                 type: "danger",
             });
+            return false;
         }
-        else if (false) {
+        else if (sub2sidy === null) {
             showMessage({
-                message: "Please Select receive your insured amount",
-                description: "Please Select receive your insured amount!",
+                message: "Please Provided KYC details are in place",
+                description: "Please Provided KYC details are in place!",
                 type: "danger",
             });
-        } else if (false) {
+            return false;
+        }
+        else if (sub3sidy === null) {
             showMessage({
                 message: "Please Select know more about DICGC",
                 description: "Please Select know more about DICGC!",
                 type: "danger",
             });
+            return false;
         }
         else {
-            // stopRecording();
-            showMessage({
-                message: "Congratulations",
-                description: "Congratulations!",
-                type: "success",
-            });
+            stopRecording();
         }
-
     }
+
     const submitSurveyXml = async () => {
         setSubmitSurvey(true);
         var myHeaders = new Headers();
@@ -682,32 +705,12 @@ const BlockBSurveyScreen = () => {
                 {
                     "section_no": "B",
                     "q_no": "2",
-                    "q_type": "CHILD",
-                    "sub_q_no": "a",
-                    "sub_q_title": "In case you are not able to open a bank account, please, indicate the reason(s)",
-                    "sub_q_type": "MULTICHECK",
+                    "q_type": "SELF",
+                    "sub_q_no": "",
+                    "sub_q_title": "",
+                    "sub_q_type": "",
                     "account_no": "",
-                    'response': selectedDigitalpreferred.length === 0 ? [] : selectedDigitalpreferred
-                },
-                {
-                    "section_no": "B",
-                    "q_no": "2",
-                    "q_type": "CHILD",
-                    "sub_q_no": "b",
-                    "sub_q_title": "If it is due to a lack of documents, what is it?",
-                    "sub_q_type": "MULTICHECK",
-                    "account_no": "",
-                    'response': selectedlackdocuments.length === 0 ? [] : selectedlackdocuments
-                },
-                {
-                    "section_no": "B",
-                    "q_no": "2",
-                    "q_type": "CHILD",
-                    "sub_q_no": "c",
-                    "sub_q_title": "If you don’t want a bank account, what could be the reasons?",
-                    "sub_q_type": "MULTICHECK",
-                    "account_no": "",
-                    'response': selectedbankAccounts.length === 0 ? [] : selectedbankAccounts
+                    'response': DepositMoney === null ? "" : DepositMoney?.label
                 },
                 {
                     "section_no": "B",
@@ -717,7 +720,7 @@ const BlockBSurveyScreen = () => {
                     "sub_q_title": "",
                     "sub_q_type": "",
                     "account_no": "",
-                    'response': DepositInsurance === null ? "" : `${DepositInsurance?.label}`
+                    'response': HeardDepositInsurance === null ? "" : HeardDepositInsurance?.label
                 },
                 {
                     "section_no": "B",
@@ -727,7 +730,17 @@ const BlockBSurveyScreen = () => {
                     "sub_q_title": "",
                     "sub_q_type": "",
                     "account_no": "",
-                    'response': ZeroBalance === null ? "" : `${ZeroBalance?.label}`
+                    'response': ConstitutionDICGC === null ? '' : ConstitutionDICGC?.label
+                },
+                {
+                    "section_no": "B",
+                    "q_no": "4",
+                    "q_type": "SELF",
+                    "sub_q_no": "",
+                    "sub_q_title": "",
+                    "sub_q_type": "",
+                    "account_no": "",
+                    'response': FollowingIsDICGC === null ? "" : `${FollowingIsDICGC}`
                 },
                 {
                     "section_no": "B",
@@ -737,7 +750,7 @@ const BlockBSurveyScreen = () => {
                     "sub_q_title": "",
                     "sub_q_type": "",
                     "account_no": "",
-                    'response': DirectBenefit === null ? "" : `${DirectBenefit?.label}`
+                    'response': FinancialInstitutionBanks === null ? "" : `${FinancialInstitutionBanks?.label}`
                 },
                 {
                     "section_no": "B",
@@ -747,51 +760,54 @@ const BlockBSurveyScreen = () => {
                     "sub_q_title": "",
                     "sub_q_type": "",
                     "account_no": "",
-                    'response': visitBranch === null ? "" : `${visitBranch?.label}`
+                    'response': FinancialCategoryCompanies === null ? "" : `${FinancialCategoryCompanies?.label}`
                 },
                 {
                     "section_no": "B",
-                    "q_no": "7",
+                    "q_no": "6",
+                    "q_type": "SELF",
+                    "sub_q_no": "",
+                    "sub_q_title": "",
+                    "sub_q_type": "",
+                    "account_no": "",
+                    'response': CreditSocieties === null ? "" : `${CreditSocieties?.label}`
+                },
+                {
+                    "section_no": "B",
+                    "q_no": "6",
                     "q_type": "CHILD",
                     "sub_q_no": "a",
-                    "sub_q_title": "Helpful and Easy-to-Understand Processes",
-                    "sub_q_type": "SINGLECHECK",
+                    "sub_q_title": "Banks",
+                    "sub_q_type": "",
                     "account_no": "",
-                    'response2': EnvironmentOutlet === null ? "" : `${EnvironmentOutlet?.label}`,
-                    'response': EnvironmentBranch === null ? "" : `${EnvironmentBranch?.label}`
+                    'response': DifferentBranches === null ? "" : `${DifferentBranches?.label}`
                 },
                 {
                     "section_no": "B",
-                    "q_no": "7",
+                    "q_no": "6",
                     "q_type": "CHILD",
                     "sub_q_no": "b",
-                    "sub_q_title": "Supportive and Welcome Attitude of Staff",
+                    "sub_q_title": "Non-banking Financial Companies (NBFC)",
                     "sub_q_type": "SINGLECHECK",
-                    "account_no": "",
-                    'response2': SupportiveOutlet === null ? "" : `${SupportiveOutlet?.label}`,
-                    'response': SupportiveBranch === null ? "" : `${SupportiveBranch?.label}`
+                    'response': DifferentBranches === null ? "" : `${DifferentBranches?.label}`
                 },
                 {
                     "section_no": "B",
-                    "q_no": "7",
+                    "q_no": "6",
                     "q_type": "CHILD",
                     "sub_q_no": "c",
-                    "sub_q_title": "Basic Amenities (seating/water/ washroom/ information)",
+                    "sub_q_title": "Co-operative credit societies",
                     "sub_q_type": "SINGLECHECK",
-                    "account_no": "",
-                    'response2': AmenitiesOutlet === null ? "" : `${AmenitiesOutlet?.label}`,
-                    'response': AmenitiesBranch === null ? "" : `${AmenitiesBranch?.label}`
+                    'response': MandatoryRegistered === null ? "" : `${MandatoryRegistered?.label}`
                 },
                 {
                     "section_no": "B",
                     "q_no": "7",
-                    "q_type": "CHILD",
-                    "sub_q_no": "d",
-                    "sub_q_title": "Long Wait Time (more than one hour)/ Long Queues",
+                    "q_type": "SELF",
+                    "sub_q_no": "",
+                    "sub_q_title": "Do the different branches of a bank have separate coverage?",
                     "sub_q_type": "SINGLECHECK",
-                    "account_no": "",
-                    'response2': LongOutlet === null ? "" : `${LongOutlet?.label}`,
-                    'response': LongBranch === null ? "" : `${LongBranch?.label}`
+                    'response': MeaningCapacity === null ? "" : `${MeaningCapacity?.label}`
                 },
                 {
                     'section_no': "B",
@@ -801,47 +817,46 @@ const BlockBSurveyScreen = () => {
                     'sub_q_title': "",
                     'sub_q_type': "",
                     'account_no': '',
-                    'response': WithoutVisiting === null ? "" : `${WithoutVisiting?.label}`
+                    'response': DepositInsuranceCoverage === null ? "" : `${DepositInsuranceCoverage}`
                 },
                 {
                     'section_no': "B",
                     'q_no': "9",
                     'q_type': "SELF",
                     'sub_q_no': "",
-                    'sub_q_title': "",
+                    'sub_q_title': "Do you know the meaning of same right and same capacity?*",
                     'sub_q_type': "",
                     'account_no': '',
-                    'response': AccountOpened === null ? "" : `${AccountOpened?.label}`
+                    'response': ProvidingDepositInsurance === null ? "" : `${ProvidingDepositInsurance}`
                 },
                 {
                     'section_no': "B",
                     'q_no': "10",
                     'q_type': "SELF",
                     'sub_q_no': "",
-                    'sub_q_title': "",
+                    'sub_q_title': "How much is the deposit insurance coverage?",
                     'sub_q_type': "",
-                    'account_no': "1", // accountValues.length === 0 ? [] : accountValues,
-                    'response': "1", // AccountTypeValue === null ? "" : AccountTypeValue[0],
+                    'response': TypesOfDeposits === null ? "" : `${TypesOfDeposits}`,
                 },
                 {
                     "section_no": "B",
                     "q_no": "11",
-                    "q_type": "MULTI",
+                    "q_type": "SELF",
                     "sub_q_no": "",
-                    "sub_q_title": "",
+                    "sub_q_title": "Who pays the premium to DICGC for providing Deposit Insurance Coverage?",
                     "sub_q_type": "",
                     "account_no": "",
-                    'response': selectedwhatPurposes.length === 0 ? [] : selectedwhatPurposes
+                    'response': LongOutlet === null ? "" : `${LongOutlet?.label}`
                 },
                 {
                     "section_no": "B",
                     "q_no": "12",
                     "q_type": "SELF",
                     "sub_q_no": "",
-                    "sub_q_title": "",
+                    "sub_q_title": "Which types of deposits are insured by DICGC? (Choose all applicable answers)",
                     "sub_q_type": "",
                     "account_no": "",
-                    'response': FollowingIsDICGC === null ? '' : FollowingIsDICGC
+                    'response': WithoutVisiting === null ? '' : `${WithoutVisiting?.label}`
                 },
                 {
                     "section_no": "B",
@@ -851,7 +866,7 @@ const BlockBSurveyScreen = () => {
                     "sub_q_title": "",
                     "sub_q_type": "",
                     "account_no": "",
-                    'response': selectedOccupations.length === 0 ? [] : selectedOccupations
+                    'response': selectedwhatPurposes.length === 0 ? [] : selectedwhatPurposes
                 },
                 {
                     "section_no": "B",
@@ -866,47 +881,65 @@ const BlockBSurveyScreen = () => {
                 {
                     "section_no": "B",
                     "q_no": "15",
+                    "q_type": "MULTI",
+                    "sub_q_no": "",
+                    "sub_q_title": "",
+                    "sub_q_type": "",
+                    "account_no": "",
+                    'response': selectedwhatPurposes.length === 0 ? [] : selectedwhatPurposes
+                },
+                {
+                    "section_no": "B",
+                    "q_no": "16",
                     "q_type": "SELF",
                     "sub_q_no": "",
                     "sub_q_title": "",
                     "sub_q_type": "",
                     "account_no": "",
-                    'response': subsidy === null ? "" : `${subsidy}`
-                },
-                {
-                    "section_no": "B",
-                    "q_no": "16",
-                    "q_type": "MULTI",
-                    "sub_q_no": "",
-                    "sub_q_title": "",
-                    "sub_q_type": "",
-                    "account_no": "",
-                    'response': selectedIncomes.length === 0 ? [] : selectedIncomes
+                    'response': PlacedUnderAID === null ? "" : PlacedUnderAID
                 },
                 {
                     "section_no": "B",
                     "q_no": "17",
-                    "q_type": "MULTI",
+                    "q_type": "SELF",
                     "sub_q_no": "",
                     "sub_q_title": "",
                     "sub_q_type": "",
                     "account_no": "",
-                    'response': selectCashReceipt.length === 0 ? [] : selectCashReceipt
+                    'response': transaction === null ? "" : transaction
                 },
                 {
                     "section_no": "B",
                     "q_no": "18",
-                    "q_type": "MULTI",
+                    "q_type": "SELF",
                     "sub_q_no": "",
                     "sub_q_title": "",
                     "sub_q_type": "",
                     "account_no": "",
-                    'response': SelectedSaveMoney.length === 0 ? [] : SelectedSaveMoney
+                    'response': sub1sidy === null ? "" : sub1sidy
+                },
+                {
+                    "section_no": "B",
+                    "q_no": "19",
+                    "q_type": "SELF",
+                    "sub_q_no": "",
+                    "sub_q_title": "",
+                    "sub_q_type": "",
+                    "account_no": "",
+                    'response': sub2sidy === null ? "" : sub2sidy
+                },
+                {
+                    "section_no": "B",
+                    "q_no": "20",
+                    "q_type": "SELF",
+                    "sub_q_no": "",
+                    "sub_q_title": "",
+                    "sub_q_type": "",
+                    "account_no": "",
+                    'response': sub3sidy === null ? "" : sub3sidy
                 }
             ]
         });
-
-        console.log('submitSurveyXml______>', raw)
 
         var requestOptions = {
             method: 'POST',
@@ -914,6 +947,8 @@ const BlockBSurveyScreen = () => {
             body: raw,
             redirect: 'follow'
         };
+
+        console.log('submitSurveyXml______>', raw);
 
         fetch("https://createdinam.in/SURVEY-3/public/api/create-survey-section-b", requestOptions)
             .then(response => response.json())
@@ -925,14 +960,14 @@ const BlockBSurveyScreen = () => {
                         description: result.message,
                         type: "success",
                     });
-                    saveSurveryAndMoveToNext();
+                    finishSurvey();
                 } else {
                     showMessage({
                         message: "Something went wrong!",
                         description: result.message,
                         type: "danger",
                     });
-                    saveSurveryAndMoveToNext();
+                    // saveSurveryAndMoveToNext();
                 }
             })
             .catch(error => {
@@ -1113,7 +1148,6 @@ const BlockBSurveyScreen = () => {
         AsyncStorage.setItem(AsyncStorageContaints.surveyNextBlock, '');
         navigation.replace('DashboardScreen');
         setSubmitSurvey(true);
-        saveSurveyCount();
     }
 
 
@@ -1176,10 +1210,7 @@ const BlockBSurveyScreen = () => {
                                 placeholderStyle={styles.placeholderStyle}
                                 selectedTextStyle={styles.selectedTextStyle}
                                 inputSearchStyle={styles.inputSearchStyle}
-                                // iconStyle={styles.iconStyle}
-                                // data={AccountType}
-                                data={frequentlyBank}
-                                // search
+                                data={privateInsuranceData}
                                 maxHeight={300}
                                 labelField="lable"
                                 valueField="id"
@@ -1267,7 +1298,7 @@ const BlockBSurveyScreen = () => {
                                         onBlur={() => setAccountTypeFocus(false)}
                                         onChange={item => {
                                             console.log(JSON.stringify(item))
-                                            setDepositInsuranceCoverage(item.id);
+                                            setDepositInsuranceCoverage(item?.id);
                                             setAccountFrequencyFocus(false);
                                         }}
                                     />
@@ -1414,12 +1445,9 @@ const BlockBSurveyScreen = () => {
                                     placeholderStyle={styles.placeholderStyle}
                                     selectedTextStyle={styles.selectedTextStyle}
                                     inputSearchStyle={styles.inputSearchStyle}
-                                    // iconStyle={styles.iconStyle}
-                                    // data={AccountType}
-                                    data={mostTransact}
-                                    // search
+                                    data={depositAmount}
                                     maxHeight={300}
-                                    labelField="lable"
+                                    labelField={"lable"}
                                     valueField="id"
                                     placeholder={!istransactionFocus ? 'Select liquidated by Reserve Bank' : transaction}
                                     // searchPlaceholder="Search..."
@@ -1441,10 +1469,7 @@ const BlockBSurveyScreen = () => {
                                     placeholderStyle={styles.placeholderStyle}
                                     selectedTextStyle={styles.selectedTextStyle}
                                     inputSearchStyle={styles.inputSearchStyle}
-                                    // iconStyle={styles.iconStyle}
-                                    // data={AccountType}
                                     data={saveMoney}
-                                    // search
                                     maxHeight={300}
                                     labelField="lable"
                                     valueField="id"

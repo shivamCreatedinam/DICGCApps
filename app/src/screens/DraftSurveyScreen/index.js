@@ -187,15 +187,15 @@ export default class DraftSurveyScreen extends Component {
             <SafeAreaView style={{ flex: 1 }}>
                 {this.renderCustomHeader()}
                 <View style={{ margin: 20 }}>
-                    <View style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: '#000', borderRadius: 10 }}>
-                        <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>Draft Survey {this.state?.DraftSection !== '' && this.state?.DraftSection} - {this.state?.DraftSection !== '' && this.state?.tempServerTokenId}</Text>
+                    <View style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: 'rgb(36,78,154)', borderRadius: 10 }}>
+                        <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>Draft Survey {this.state?.DraftSection !== '' && this.state?.DraftSection + ' -' } {this.state?.DraftSection !== '' && this.state?.tempServerTokenId}</Text>
                     </View>
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', margin: 20, marginTop: 0 }}>
                     <TouchableOpacity onPress={() => this.showConfirmationAlert()} style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: 'red', borderRadius: 10, flex: 1, marginRight: 5 }}>
                         <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>Delete Survey</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => this.DraftSurvey()} style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: '#000', borderRadius: 10, flex: 1 }}>
+                    <TouchableOpacity onPress={() => this.DraftSurvey()} style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: 'rgb(36,78,154)', borderRadius: 10, flex: 1 }}>
                         <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>Continue Survey</Text>
                     </TouchableOpacity>
                 </View>

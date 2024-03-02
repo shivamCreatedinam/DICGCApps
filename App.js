@@ -87,7 +87,7 @@ const App = () => {
       />
       <StatusBar translucent={true} backgroundColor="transparent" />
       <AppNavigation />
-      <FlashMessage style={{ marginBottom: 0 }} position={'bottom'} ref={myLocalFlashMessage} />
+      <FlashMessage style={{ marginTop: StatusBar.currentHeight }} position={'top'} ref={myLocalFlashMessage} />
     </SafeAreaView>
   );
 };

@@ -516,7 +516,7 @@ const AddSurveyScreen = () => {
                         </View>
 
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>City:</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>State:</Text>
                             <Dropdown
                                 style={[styles.dropdown, is4Focus && { borderColor: 'blue' }]}
                                 placeholderStyle={styles.placeholderStyle}
@@ -542,7 +542,7 @@ const AddSurveyScreen = () => {
                             />
                         </View>
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>State:</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>District:</Text>
                             <Dropdown
                                 style={[styles.dropdown, is5Focus && { borderColor: 'blue' }]}
                                 placeholderStyle={styles.placeholderStyle}
