@@ -186,7 +186,7 @@ const AddSurveyScreen = () => {
     const getState = async () => {
         setLoading(true);
         const UserToken = await AsyncStorage.getItem(AsyncStorageContaints.UserId);
-        let url = `https://createdinam.in/SURVEY-3/public/api/get-states`;
+        let url = `https://scslsurvey.online/DICGCA-SURVEY/public/api/get-states`;
         const headers = {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${UserToken}`
@@ -211,7 +211,7 @@ const AddSurveyScreen = () => {
 
     const loadDistrict = async (state) => {
         const UserToken = await AsyncStorage.getItem(AsyncStorageContaints.UserId);
-        let url = `https://createdinam.in/SURVEY-3/public/api/get-city/${Number(state)}`;
+        let url = `https://scslsurvey.online/DICGCA-SURVEY/public/api/get-city/${Number(state)}`;
         const headers = {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${UserToken}`
@@ -397,7 +397,7 @@ const AddSurveyScreen = () => {
         let config = {
             method: 'post',
             maxBodyLength: Infinity,
-            url: 'https://createdinam.in/SURVEY-3/public/api/create-survey-demographics',
+            url: 'https://scslsurvey.online/DICGCA-SURVEY/public/api/create-survey-demographics',
             headers: {
                 'Authorization': 'Bearer ' + userSendToken,
                 "Content-Type": "multipart/form-data",
@@ -434,7 +434,7 @@ const AddSurveyScreen = () => {
 
     const uploadAudioFinal = async (file) => {
         setAudioUploading(true);
-        let API_UPLOAD_MSG_FILE = `https://createdinam.in/SURVEY-3/public/api/survey-audio-files`;
+        let API_UPLOAD_MSG_FILE = `https://scslsurvey.online/DICGCA-SURVEY/public/api/survey-audio-files`;
         const path = `file://${file}`;
         const formData = new FormData();
         formData.append('survey_token', name);

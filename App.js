@@ -9,19 +9,24 @@ import {
   Text,
   View,
   Platform,
+  AppState,
   StatusBar,
   ScrollView,
   StyleSheet,
   Dimensions,
   SafeAreaView,
-  NativeModules,
+  Image,
   useColorScheme,
   TouchableOpacity,
-  NativeEventEmitter,
+  ImageBackground,
   PermissionsAndroid,
   FlatList,
+  Linking,
+  Alert
 } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import VersionCheck from 'react-native-version-check';
+import data from './package.json';
 
 console.disableYellowBox = true;
 
@@ -36,6 +41,8 @@ const options = {
 const App = () => {
 
   const myLocalFlashMessage = useRef();
+  const [isupdated, setisupdated] = React.useState(false);
+  const appState = React.useRef(AppState.currentState);
   const [isScanning, setIsScanning] = useState(false);
   const [connectedDevices, setConnectedDevices] = useState([]);
 
@@ -47,6 +54,68 @@ const App = () => {
 
     }
   }, []);
+
+
+  React.useEffect(() => {
+    checkAppVersion();
+  }, []);
+
+  const checkAppVersion = async () => {
+    try {
+      const latestVersion = await VersionCheck.getLatestVersion({
+        packageName: 'com.createdinam.dicgc.app', // Replace with your app's package name
+        ignoreErrors: true,
+      });
+
+      const currentVersion = VersionCheck.getCurrentVersion();
+
+      if (latestVersion > currentVersion) {
+        console.log(' App is up-to-date, proceed with the app');
+        setisupdated(true);
+        Alert.alert(
+          'Update Required',
+          `A new version of ${data?.name} app is available. Please update to continue using the app.`,
+          [
+            {
+              text: 'Update Now',
+              onPress: () => {
+                Linking.openURL(
+                  Platform.OS === 'ios'
+                    ? VersionCheck.getAppStoreUrl({ appID: 'com.createdinam.dicgc.app' })
+                    : 'https://play.google.com/store/apps/details?id=com.createdinam.dicgc.app&hl=en&gl=US'
+                );
+              },
+            },
+          ],
+          { cancelable: false }
+        );
+      } else {
+        // App is up-to-date, proceed with the app
+        setisupdated(false);
+        console.log(' App is up-to-date, proceed with the app');
+      }
+    } catch (error) {
+      // Handle error while checking app version
+      console.error('Error checking app version:', error);
+    }
+  };
+
+  const forceUpdate = async () => {
+    try {
+      const PlayStoreUrl = await VersionCheck.getPlayStoreUrl();
+      VersionCheck.needUpdate({
+        currentVersion: VersionCheck.getCurrentVersion(),
+        latestVersion: data.version
+      }).then((res) => {
+        if (res.isNeeded) {
+          console.log('updateNeeded------------->' + PlayStoreUrl, JSON.stringify(res));
+        }
+      })
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
 
   Geolocation.getCurrentPosition(
     (position) => {
@@ -79,17 +148,35 @@ const App = () => {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <StatusBar translucent={true} backgroundColor="transparent" />
-      <AppNavigation />
-      <FlashMessage style={{ marginTop: StatusBar.currentHeight }} position={'top'} ref={myLocalFlashMessage} />
-    </SafeAreaView>
-  );
+
+
+  if (isupdated) {
+    return <ImageBackground
+      style={{ flex: 1 }}
+      source={require('./app/assets/background_maps.jpeg')}
+      resizeMode={'cover'}>
+      <Image
+        style={{ width: 300, height: 300, resizeMode: 'contain', alignSelf: 'center', marginTop: 150, tintColor: 'rgb(131,24,28)' }}
+        source={require('./app/assets/updateImage.png')} />
+      <TouchableOpacity
+        style={{ alignSelf: 'center', top: -50, backgroundColor: 'rgb(131,24,28)', paddingVertical: 10, paddingHorizontal: 30, borderRadius: 10, elevation: 5 }}
+        onPress={() => checkAppVersion()}>
+        <Text style={{ color: '#ffffff', textTransform: 'uppercase', fontWeight: 'bold' }}>Update Now {data?.version}</Text>
+      </TouchableOpacity>
+    </ImageBackground>
+  } else {
+    return (
+      <SafeAreaView style={{ flex: 1 }}>
+        <StatusBar
+          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+          backgroundColor={backgroundStyle.backgroundColor}
+        />
+        <StatusBar translucent={true} backgroundColor="transparent" />
+        <AppNavigation />
+        <FlashMessage style={{ marginTop: StatusBar.currentHeight }} position={'top'} ref={myLocalFlashMessage} />
+      </SafeAreaView>
+    );
+  }
 };
 
 const windowHeight = Dimensions.get('window').height;

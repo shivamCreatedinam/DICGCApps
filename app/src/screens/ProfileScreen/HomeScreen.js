@@ -125,7 +125,7 @@ class HomeScreen extends Component {
 
   async navigateToSurvey() {
     // api / generate - survey - token
-    let SERVER = 'https://createdinam.in/SURVEY-3/public/api/generate-survey-token'
+    let SERVER = 'https://scslsurvey.online/DICGCA-SURVEY/public/api/generate-survey-token'
     let tempServerTokenId = ';'
     this.setState({ loading: true });
     const headers = {
@@ -172,7 +172,7 @@ class HomeScreen extends Component {
 
   async getDraftSurvey() {
     // api/generate-survey-token
-    let SERVER = 'https://createdinam.in/SURVEY-3/public/api/get-survey-token'
+    let SERVER = 'https://scslsurvey.online/DICGCA-SURVEY/public/api/get-survey-token'
     this.setState({ DraftLoading: true });
     const headers = {
       'Content-Type': 'application/json',
@@ -205,7 +205,7 @@ class HomeScreen extends Component {
   }
 
   async getSurveyCount() {
-    let SERVER = 'https://createdinam.in/SURVEY-3/public/api/get-my-survey-count'
+    let SERVER = 'https://scslsurvey.online/DICGCA-SURVEY/public/api/get-my-survey-count'
     this.setState({ DraftLoading: true });
     const headers = {
       'Content-Type': 'application/json',

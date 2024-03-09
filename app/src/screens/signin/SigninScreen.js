@@ -90,7 +90,7 @@ const SigninScreen = props => {
       password: pass,
     }
     axios
-      .post(`https://createdinam.in/SURVEY-3/public/api/login`, resource)
+      .post(`https://scslsurvey.online/DICGCA-SURVEY/public/api/login`, resource)
       .then((res) => {
         console.log(res);
         if (res.data.status === true) {

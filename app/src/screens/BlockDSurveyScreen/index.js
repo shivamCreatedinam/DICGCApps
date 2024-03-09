@@ -269,7 +269,7 @@ const BlockDSurveyScreen = () => {
 
     const uploadAudioFinal = async (file) => {
         setAudioUploading(true);
-        let API_UPLOAD_MSG_FILE = `https://createdinam.in/SURVEY-3/public/api/survey-audio-files`;
+        let API_UPLOAD_MSG_FILE = `https://scslsurvey.online/DICGCA-SURVEY/public/api/survey-audio-files`;
         const path = `file://${file}`;
         const formData = new FormData();
         formData.append('survey_token', name);
@@ -894,7 +894,7 @@ const BlockDSurveyScreen = () => {
 
         console.log('--------->>', requestOptions?.body);
 
-        fetch("https://createdinam.in/SURVEY-3/public/api/create-survey-section-d", requestOptions)
+        fetch("https://scslsurvey.online/DICGCA-SURVEY/public/api/create-survey-section-d", requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (result?.status === true) {
