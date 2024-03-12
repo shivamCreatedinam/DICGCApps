@@ -822,12 +822,12 @@ const BlockBSurveyScreen = () => {
                 {
                     'section_no': "B",
                     'q_no': "12",
-                    'q_type': "SELF",
+                    'q_type': "MULTI",
                     'sub_q_no': "",
                     'sub_q_title': "",
                     'sub_q_type': "",
                     'account_no': '',
-                    'response': TypesOfDeposits === null ? "" : `${TypesOfDeposits}`
+                    'response': TypesOfDeposits === null ? [] : `[${TypesOfDeposits}]`
                 },
                 {
                     'section_no': "B",
@@ -836,37 +836,7 @@ const BlockBSurveyScreen = () => {
                     'sub_q_no': "",
                     'sub_q_title': "",
                     'sub_q_type': "",
-                    'response': LongOutlet === null ? "" : `${LongOutlet}`,
-                },
-                {
-                    "section_no": "B",
-                    "q_no": "11",
-                    "q_type": "SELF",
-                    "sub_q_no": "",
-                    "sub_q_title": "",
-                    "sub_q_type": "",
-                    "account_no": "",
-                    'response': WithoutVisiting === null ? "" : `${WithoutVisiting?.label}`
-                },
-                {
-                    "section_no": "B",
-                    "q_no": "12",
-                    "q_type": "SELF",
-                    "sub_q_no": "",
-                    "sub_q_title": "Which types of deposits are insured by DICGC? (Choose all applicable answers)",
-                    "sub_q_type": "",
-                    "account_no": "",
-                    'response': WithoutVisiting === null ? '' : `${WithoutVisiting?.label}`
-                },
-                {
-                    "section_no": "B",
-                    "q_no": "13",
-                    "q_type": "MULTI",
-                    "sub_q_no": "",
-                    "sub_q_title": "",
-                    "sub_q_type": "",
-                    "account_no": "",
-                    'response': selectedwhatPurposes.length === 0 ? [] : selectedwhatPurposes
+                    'response': LongOutlet === null ? "" : `${LongOutlet?.label}`,
                 },
                 {
                     "section_no": "B",
@@ -876,7 +846,7 @@ const BlockBSurveyScreen = () => {
                     "sub_q_title": "",
                     "sub_q_type": "",
                     "account_no": "",
-                    'response': transaction === null ? "" : `${transaction}`
+                    'response': WithoutVisiting === null ? "" : `${WithoutVisiting?.label}`
                 },
                 {
                     "section_no": "B",
@@ -896,7 +866,7 @@ const BlockBSurveyScreen = () => {
                     "sub_q_title": "",
                     "sub_q_type": "",
                     "account_no": "",
-                    'response': PlacedUnderAID === null ? "" : PlacedUnderAID
+                    'response': PlacedUnderAID === null ? '' : PlacedUnderAID
                 },
                 {
                     "section_no": "B",
@@ -906,7 +876,7 @@ const BlockBSurveyScreen = () => {
                     "sub_q_title": "",
                     "sub_q_type": "",
                     "account_no": "",
-                    'response': transaction === null ? "" : transaction
+                    'response': transaction === null ? "" : `${transaction}`
                 },
                 {
                     "section_no": "B",
@@ -931,12 +901,12 @@ const BlockBSurveyScreen = () => {
                 {
                     "section_no": "B",
                     "q_no": "20",
-                    "q_type": "SELF",
+                    "q_type": "MULTI",
                     "sub_q_no": "",
                     "sub_q_title": "",
                     "sub_q_type": "",
                     "account_no": "",
-                    'response': sub3sidy === null ? "" : sub3sidy
+                    'response': sub3sidy === null ? [] : `[${sub3sidy}]`
                 }
             ]
         });
@@ -950,30 +920,30 @@ const BlockBSurveyScreen = () => {
 
         console.log('submitSurveyXml______>', raw);
 
-        // fetch("https://scslsurvey.online/DICGCA-SURVEY/public/api/create-survey-section-b", requestOptions)
-        //     .then(response => response.json())
-        //     .then(result => {
-        //         console.log('submitSurveyXml______', JSON.stringify(result));
-        //         if (result?.status === true) {
-        //             showMessage({
-        //                 message: result.message,
-        //                 description: result.message,
-        //                 type: "success",
-        //             });
-        //             finishSurvey();
-        //         } else {
-        //             showMessage({
-        //                 message: "Something went wrong!",
-        //                 description: result.message,
-        //                 type: "danger",
-        //             });
-        //             // saveSurveryAndMoveToNext();
-        //         }
-        //     })
-        //     .catch(error => {
-        //         console.log('error', error);
-        //         setSubmitSurvey(false);
-        //     });
+        fetch("https://scslsurvey.online/DICGCA-SURVEY/public/api/create-survey-section-b", requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                console.log('submitSurveyXml______', JSON.stringify(result));
+                if (result?.status === true) {
+                    showMessage({
+                        message: result.message,
+                        description: result.message,
+                        type: "success",
+                    });
+                    finishSurvey();
+                } else {
+                    showMessage({
+                        message: "Something went wrong!",
+                        description: result.message,
+                        type: "danger",
+                    });
+                    // saveSurveryAndMoveToNext();
+                }
+            })
+            .catch(error => {
+                console.log('error', error);
+                setSubmitSurvey(false);
+            });
     }
 
     const uploadAudioFinal = async (file) => {
