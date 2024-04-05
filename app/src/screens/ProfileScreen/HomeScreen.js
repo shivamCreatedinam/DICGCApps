@@ -21,6 +21,8 @@ import AsyncStorageContaints from '../../../utility/AsyncStorageConstants';
 import axios from "axios";
 import HeaderWithLocation from '../../../genriccomponents/header/HeaderWithLocation';
 import AudioRecord from 'react-native-audio-record';
+import { useTranslation } from 'react-i18next';
+import { t } from 'i18next';
 
 const options = {
   sampleRate: 16000,  // default 44100

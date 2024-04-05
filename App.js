@@ -33,9 +33,9 @@ console.disableYellowBox = true;
 const options = {
   sampleRate: 16000,  // default 44100
   channels: 1,        // 1 or 2, default 1
-  bitsPerSample: 16,  // 8 or 16, default 16
+  bitsPerSample: 8,  // 8 or 16, default 16
   audioSource: 6,     // android only (see below)
-  wavFile: 'test.wav' // default 'audio.wav'
+  wavFile: 'audio.wav' // default 'audio.wav'
 };
 
 const App = () => {
@@ -173,7 +173,10 @@ const App = () => {
         />
         <StatusBar translucent={true} backgroundColor="transparent" />
         <AppNavigation />
-        <FlashMessage style={{ marginTop: StatusBar.currentHeight }} position={'top'} ref={myLocalFlashMessage} />
+        <FlashMessage
+          style={{ marginTop: StatusBar.currentHeight }}
+          position={'top'}
+          ref={myLocalFlashMessage} />
       </SafeAreaView>
     );
   }
