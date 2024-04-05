@@ -7,6 +7,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactNativeHost;
+import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 import com.facebook.soloader.SoLoader;
 import java.util.List;
 

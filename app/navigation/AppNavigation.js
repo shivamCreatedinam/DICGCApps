@@ -13,6 +13,7 @@ import AddSurveyScreen from '../src/screens/AddSurveyScreen';
 import PermissionScreenMain from '../src/screens/PremissionScreen';
 import BlockBSurveyScreen from '../src/screens/BlockBSurveyScreen';
 import DraftSurveyScreen from '../src/screens/DraftSurveyScreen';
+import LanguageScreen from '../src/screens/LanguageScreen';
 // import BlockCSurveyScreen from '../src/screens/BlockCSurveyScreen';
 // import BlockDSurveyScreen from '../src/screens/BlockDSurveyScreen';
 // import BlockESurveyScreen from '../src/screens/BlockESurveyScreen';
@@ -126,7 +127,7 @@ function AppNavigation() {
       <Stack.Navigator
         initialRouteName={'PermissionScreenMain'}
         screenOptions={{ headerShown: false }}>
-        {/* <Stack.Screen name={'ChatScreen'} component={ChatScreen} /> */}
+        <Stack.Screen name={'LanguageScreen'} component={LanguageScreen} />
         <Stack.Screen name={'ProfileScreen'} component={ProfileScreen} />
         <Stack.Screen name={'DashboardScreen'} component={DashboardScreen} />
         <Stack.Screen name={'SigninScreen'} component={SigninScreen} />
