@@ -11,6 +11,7 @@ import MultiSelect from 'react-native-multiple-select';
 import AudioRecord from 'react-native-audio-record';
 import Modal from 'react-native-modal';
 import Axios from 'axios';
+import { useTranslation } from 'react-i18next';
 // import fs from 'fs';
 
 const AddSurveyScreen = () => {
@@ -67,7 +68,7 @@ const AddSurveyScreen = () => {
     const [is4Focus, setIs4Focus] = React.useState(false);
     const [is5Focus, setIs5Focus] = React.useState(false);
     const [is6Focus, setIs6Focus] = React.useState(false);
-
+    const { t, i18n } = useTranslation();
 
     // gender setDifferently
     const data = [
@@ -84,62 +85,62 @@ const AddSurveyScreen = () => {
 
     // anyGroup
     const occupationData = [
-        { id: 1, lable: '(i) Financial Sector' },
-        { id: 2, lable: '(ii) Other employees Employee' },
-        { id: 3, lable: '(iii) Self-employed/ Business' },
-        { id: 4, lable: '(iv) Homemaker' },
-        { id: 5, lable: '(v) Daily worker' },
-        { id: 6, lable: '(vi) Retired person' },
-        { id: 7, lable: '(vii) Others (incl. unemployed, students etc.)' },
+        { id: 1, lable: t('financial_sector')},
+        { id: 2, lable: t("other_employees_employee") },
+        { id: 3, lable: t('self_employed_business') },
+        { id: 4, lable: t('homemaker') },
+        { id: 5, lable: t("daily_worker") },
+        { id: 6, lable: t('retired_person') },
+        { id: 7, lable: t('others') },
 
     ]
 
     const educationData = [
-        { id: 1, lable: '(i) Illiterate' },
-        { id: 2, lable: '(ii) Below 5th Std.' },
-        { id: 3, lable: '(iii) 5th Std- Below 10th Std.' },
-        { id: 4, lable: '(iv) 10th Std.- Below 12th Std.' },
-        { id: 5, lable: '(v) 12th Std.' },
-        { id: 6, lable: '(vi) Graduate' },
-        { id: 7, lable: '(vii)Post Graduate and above' },
+        { id: 1, lable: t('illiterate') },
+        { id: 2, lable: t('below_5th_std') },
+        { id: 3, lable: t('5th_Below') },
+        { id: 4, lable: t('10th_below') },
+        { id: 5, lable: t('12th_std') },
+        { id: 6, lable: t('graduate') },
+        { id: 7, lable: t('Post_graduate') },
 
     ]
 
     const incomeData = [
-        { id: 1, lable: '(i) Less than ₹ 5 thousand' },
-        { id: 2, lable: '(ii) ₹ 5 thousand- ₹ 10 thousand' },
-        { id: 3, lable: '(iii) ₹ 10 thousand- ₹ 25 thousand' },
-        { id: 4, lable: '(iv) ₹ 25 thousand- ₹ 50' },
-        { id: 5, lable: '(v) ₹ 50 thousand- ₹ 1 lakh thousand' },
-        { id: 6, lable: '(vi) ₹ 1 lakh and above' },
+        { id: 1, lable: t('less_than_5') },
+        { id: 2, lable: t('5_10_thousand') },
+        { id: 3, lable: t('10_25_thousand') },
+        { id: 4, lable: t('25_50_thousand') },
+        { id: 5, lable: t('50_thousand_1_lakh') },
+        { id: 6, lable: t("lakh_and_above") },
 
 
     ]
 
     const dataGroup = [
         {
-            label: 'Yes'
+            label: t('Yes')
         },
         {
-            label: 'No'
+            label:t('No')
         }
     ];
 
     const smartphone = [
         {
-            label: 'Yes'
+            label: t('Yes')
         },
         {
-            label: 'No'
+            label: t('No')
         }
     ];
 
     const differently = [
         {
-            label: 'Yes'
+            label: t('Yes')
         },
         {
-            label: 'No'
+            label: t('No')
         }
     ];
 
@@ -272,7 +273,7 @@ const AddSurveyScreen = () => {
                 />
                 <View style={{ marginLeft: 10, flex: 1 }}>
                     <Text style={{ fontWeight: 'bold' }}>{userName} - {user.name}</Text>
-                    {user.active && <Text style={{ color: 'green', fontSize: 12, fontWeight: 'bold' }}>Active Survey Token - <Text style={{ fontWeight: 'bold', fontSize: 14, color: 'red' }}>Block A</Text> </Text>}
+                    {user.active && <Text style={{ color: 'green', fontSize: 12, fontWeight: 'bold' }}>{t('active_survey_token')} - <Text style={{ fontWeight: 'bold', fontSize: 14, color: 'red' }}>{t('Block_A')}</Text> </Text>}
                 </View>
                 {isRecording === true ? <View style={{ height: 10, width: 10, borderRadius: 100, backgroundColor: 'green' }} /> : <View style={{ height: 10, width: 10, borderRadius: 100, backgroundColor: 'red' }} />}
             </View>
@@ -492,31 +493,31 @@ const AddSurveyScreen = () => {
             <Modal isVisible={isInstruction}>
                 <View style={{ width: Dimensions.get('screen').width - 50, backgroundColor: '#fff', alignSelf: 'center', borderRadius: 5, padding: 20 }}>
                     <View style={{ alignItems: 'center', alignContent: 'center', marginTop: 15 }}>
-                        <Text style={{ fontWeight: 'bold', fontSize: 16 }}>Survey Instructions</Text>
-                        <Text style={{ textAlign: 'center', paddingVertical: 15 }}>Once your start the survey, this will track your location, and also record your audio, by click on start button all the featurs enable and track your location and record your audio.</Text>
+                        <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{t('Survey_Instructions')}</Text>
+                        <Text style={{ textAlign: 'center', paddingVertical: 15 }}>{t('Survey_description')}</Text>
                     </View>
                     <TouchableOpacity onPress={() => startRecording()} style={{ paddingVertical: 10, paddingHorizontal: 50, backgroundColor: '#000', borderRadius: 5, elevation: 5, zIndex: 999 }}>
-                        <Text style={{ fontWeight: 'bold', color: '#fff', textAlign: 'center', padding: 5 }}>Start</Text>
+                        <Text style={{ fontWeight: 'bold', color: '#fff', textAlign: 'center', padding: 5 }}>{t('Start')}</Text>
                     </TouchableOpacity>
                 </View>
             </Modal>
-            <Text style={{ fontWeight: 'bold', paddingLeft: 20, paddingTop: 10 }}> Block I. Respondent’s Details</Text>
+            <Text style={{ fontWeight: 'bold', paddingLeft: 20, paddingTop: 10 }}> {t('Block_I')}. {t('Respondennt_Details')}</Text>
             {isLoading === false ?
                 <ScrollView>
                     <View style={{ padding: 10 }}>
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>1. Name:</Text>
-                            <TextInput style={{ backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder='Enter Name' editable={true} value={Name} onChangeText={(text) => setname(text)} />
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>1. {t("name")}:</Text>
+                            <TextInput style={{ backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder={t('Enter_Name')} editable={true} value={Name} onChangeText={(text) => setname(text)} />
                         </View>
 
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>2. Address:</Text>
-                            <TextInput style={{ backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder='Enter Address' editable={true} value={address} onChangeText={(text) => setAddress(text)} />
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>2. {t('address')}:</Text>
+                            <TextInput style={{ backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder={t('enter_address')} editable={true} value={address} onChangeText={(text) => setAddress(text)} />
                         </View>
 
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>State:</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>{t('state')}:</Text>
                             <Dropdown
                                 style={[styles.dropdown, is4Focus && { borderColor: 'blue' }]}
                                 placeholderStyle={styles.placeholderStyle}
@@ -528,7 +529,7 @@ const AddSurveyScreen = () => {
                                 maxHeight={300}
                                 labelField="name"
                                 valueField="id"
-                                placeholder={!is4Focus ? 'Select State' : value}
+                                placeholder={!is4Focus ? t('select_state') : value}
                                 // searchPlaceholder="Search..."
                                 value={value}
                                 onFocus={() => setIs4Focus(true)}
@@ -542,7 +543,7 @@ const AddSurveyScreen = () => {
                             />
                         </View>
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>District:</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>{t('district')}:</Text>
                             <Dropdown
                                 style={[styles.dropdown, is5Focus && { borderColor: 'blue' }]}
                                 placeholderStyle={styles.placeholderStyle}
@@ -552,7 +553,7 @@ const AddSurveyScreen = () => {
                                 maxHeight={300}
                                 labelField="name"
                                 valueField="id"
-                                placeholder={!is5Focus ? 'Select District' : valueDistrict}
+                                placeholder={!is5Focus ? t('select_district') : valueDistrict}
                                 value={selectedDistrict}
                                 onFocus={() => setIs5Focus(true)}
                                 onBlur={() => setIs5Focus(false)}
@@ -564,19 +565,19 @@ const AddSurveyScreen = () => {
                             />
                         </View>
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff', marginTop: 5 }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>Pin code:</Text>
-                            <TextInput keyboardType='numeric' maxLength={6} style={{ backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder='Enter Pincode' editable={true} value={PinCode} onChangeText={(text) => setPinCode(text)} />
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>{t('pin_code')}</Text>
+                            <TextInput keyboardType='numeric' maxLength={6} style={{ backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder={t('enter_pincode')} editable={true} value={PinCode} onChangeText={(text) => setPinCode(text)} />
                         </View>
 
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff', marginTop: 5 }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>3. Contact no.</Text>
-                            <TextInput maxLength={10} keyboardType='numeric' style={{ backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder='Enter Contact' editable={true} value={contact} onChangeText={(text) => setContact(text)} />
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>3. {t('contact_no')}.</Text>
+                            <TextInput maxLength={10} keyboardType='numeric' style={{ backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder={t('enter_contact')} editable={true} value={contact} onChangeText={(text) => setContact(text)} />
                         </View>
 
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>4. Gender</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>4. {t('gender')}</Text>
                             <RadioButtonRN
                                 data={data}
                                 selectedBtn={(e) => setGender(e)}
@@ -584,12 +585,12 @@ const AddSurveyScreen = () => {
                         </View>
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff', marginTop: 5 }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>5. Age of the respondent (in completed years, 18 years and above).</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>5. {t('age')}.</Text>
                             <TextInput keyboardType='numeric' onChangeText={(e) => setAgeNumber(e)} style={{ backgroundColor: '#fff', paddingLeft: 15 }} placeholder='Enter Age' maxLength={2} value={age} />
                         </View>
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>6. Category/ occupation</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>6. {t('category/ occupation')}</Text>
                             <Dropdown
                                 style={[styles.dropdown, is1Focus && { borderColor: 'blue' }]}
                                 placeholderStyle={styles.placeholderStyle}
@@ -601,7 +602,7 @@ const AddSurveyScreen = () => {
                                 maxHeight={300}
                                 labelField="lable"
                                 valueField="id"
-                                placeholder={!is1Focus ? 'Select Category/ occupation' : selectedOccupations}
+                                placeholder={!is1Focus ? t('select_category') : selectedOccupations}
                                 // searchPlaceholder="Search..."
                                 value={selectedOccupations}
                                 onFocus={() => setIs1Focus(true)}
@@ -615,7 +616,7 @@ const AddSurveyScreen = () => {
                         </View>
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>7. Education Qualification of the respondent</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>7. {t('education')}</Text>
                             <Dropdown
                                 style={[styles.dropdown, is2Focus && { borderColor: 'blue' }]}
                                 placeholderStyle={styles.placeholderStyle}
@@ -626,7 +627,7 @@ const AddSurveyScreen = () => {
                                 maxHeight={300}
                                 labelField="lable"
                                 valueField="id"
-                                placeholder={!is2Focus ? 'Select Education Qualification' : selectedEducation}
+                                placeholder={!is2Focus ? t('education_qualification') : selectedEducation}
                                 // searchPlaceholder="Search..."
                                 value={selectedEducation}
                                 onFocus={() => setIs2Focus(true)}
@@ -640,7 +641,7 @@ const AddSurveyScreen = () => {
                         </View>
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>8. Average monthly Household/ Family Income</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>8. {t('income')}</Text>
                             <Dropdown
                                 style={[styles.dropdown, is3Focus && { borderColor: 'blue' }]}
                                 placeholderStyle={styles.placeholderStyle}
@@ -651,7 +652,7 @@ const AddSurveyScreen = () => {
                                 maxHeight={300}
                                 labelField="lable"
                                 valueField="id"
-                                placeholder={!is3Focus ? 'Select Annual Income' : selectedIncomes}
+                                placeholder={!is3Focus ? t('Select_annual_income') : selectedIncomes}
                                 value={selectedIncomes}
                                 onFocus={() => setIs3Focus(true)}
                                 onBlur={() => setIs3Focus(false)}
@@ -667,7 +668,7 @@ const AddSurveyScreen = () => {
                         <TouchableOpacity disabled={isSubmitSurvey} onPress={() => {
                             validationCheck()
                         }} style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: '#000', borderRadius: 10 }}>
-                            {isAudioUploading !== true ? <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>Next Block B</Text> : <ActivityIndicator color={'#fff'} style={{ alignItems: 'center', alignSelf: 'center' }} />}
+                            {isAudioUploading !== true ? <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>{t('next_block_B')}</Text> : <ActivityIndicator color={'#fff'} style={{ alignItems: 'center', alignSelf: 'center' }} />}
                         </TouchableOpacity>
                     </View>
                 </ScrollView> : <ActivityIndicator style={{ alignItems: 'center', marginTop: Dimensions.get('screen').width }} color={'#000'} />}

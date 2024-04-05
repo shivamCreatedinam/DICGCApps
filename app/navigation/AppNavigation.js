@@ -125,7 +125,7 @@ function AppNavigation() {
         routeNameRef.current = currentRouteName;
       }}>
       <Stack.Navigator
-        initialRouteName={'PermissionScreenMain'}
+        initialRouteName={'BlockBSurveyScreen'}
         screenOptions={{ headerShown: false }}>
         <Stack.Screen name={'LanguageScreen'} component={LanguageScreen} />
         <Stack.Screen name={'ProfileScreen'} component={ProfileScreen} />

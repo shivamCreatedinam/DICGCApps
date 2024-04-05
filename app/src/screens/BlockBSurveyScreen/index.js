@@ -11,6 +11,7 @@ import AudioRecord from 'react-native-audio-record';
 import { Platform } from 'react-native';
 import Modal from 'react-native-modal';
 import Axios from 'axios';
+import { useTranslation } from 'react-i18next';
 
 const options = {
     sampleRate: 16000,  // default 44100
@@ -78,6 +79,7 @@ const BlockBSurveyScreen = () => {
     const [subsidy, setSubsidy] = React.useState(null);
     const [subsidyFocus, setSubsidyFocus] = React.useState(false);
     const multiSelectRef = useRef(null);
+    const { t, i18n } = useTranslation();
     // anyGroup
 
     React.useEffect(() => {
@@ -89,10 +91,10 @@ const BlockBSurveyScreen = () => {
     }, []);
 
     const Nodata = [
-        { id: 1, lable: 'No nearby bank branch or BC' },
-        { id: 2, lable: 'Bank timings are not suitable' },
-        { id: 3, lable: 'Don’t have documents' },
-        { id: 4, lable: 'Don’t know the process' },
+        { id: 1, lable: t('bank_branch_or_BC') },
+        { id: 2, lable: t('bank_timings') },
+        { id: 3, lable: t('Dont_have_documents') },
+        { id: 4, lable: t('know_the_process') },
     ]
 
     // multi select 
@@ -118,10 +120,10 @@ const BlockBSurveyScreen = () => {
     });
 
     const lackdocumentsdata = [
-        { id: 1, lable: 'Lack of ID proof' },
-        { id: 2, lable: 'Lack of Address Proof' },
-        { id: 3, lable: 'Both' },
-        { id: 4, lable: 'Any other' },
+        { id: 1, lable: t('Lack_of_proof') },
+        { id: 2, lable: t('lack_of_address_proof') },
+        { id: 3, lable: t('both') },
+        { id: 4, lable: t('any_other') },
     ]
 
     // multi select 
@@ -147,13 +149,13 @@ const BlockBSurveyScreen = () => {
     });
 
     const bankAccountsdata = [
-        { id: 1, lable: 'No source of deposit to bank account' },
-        { id: 2, lable: 'Prefer Cash' },
-        { id: 3, lable: 'No knowledge' },
-        { id: 4, lable: 'No trust – happy to keep money with myself' },
-        { id: 5, lable: 'Fee and Charges' },
-        { id: 6, lable: 'Family Members have an account' },
-        { id: 7, lable: 'My acquaintances have had bad experience with bank account' },
+        { id: 1, lable: t('no_source') },
+        { id: 2, lable: t('prefer_cash') },
+        { id: 3, lable: t('no_knowledge') },
+        { id: 4, lable: t('no_trust') },
+        { id: 5, lable: t('fee_and_charges') },
+        { id: 6, lable: t('family_members') },
+        { id: 7, lable: t('acquaintances') },
     ]
 
     // multi select 
@@ -267,12 +269,12 @@ const BlockBSurveyScreen = () => {
     };
 
     const whatPurposesdata = [
-        { id: 1, lable: 'Receive Salary/ Money' },
-        { id: 2, lable: 'Pay Money/ Make Purchases' },
-        { id: 3, lable: 'Save / Invest Money' },
-        { id: 4, lable: 'For Business' },
-        { id: 5, lable: 'Transfer/Remittance' },
-        { id: 6, lable: 'Do not use' },
+        { id: 1, lable: t('receive_salary') },
+        { id: 2, lable: t('pay_money') },
+        { id: 3, lable: t('save_money') },
+        { id: 4, lable: t('for_business') },
+        { id: 5, lable: t('transfer_remittance') },
+        { id: 6, lable: t('do_not_use') },
     ]
 
     // multi select 
@@ -298,100 +300,100 @@ const BlockBSurveyScreen = () => {
     });
 
     const AccountType = [
-        { id: 1, lable: 'Newspapers' },
-        { id: 2, lable: 'Reserve Bank of India website and social media handles' },
-        { id: 3, lable: 'DICGC website and social media handles' },
-        { id: 4, lable: 'Bank' },
-        { id: 5, lable: 'All the earlier options' },
-        { id: 6, lable: 'No Idea' },
+        { id: 1, lable: t('newspapers') },
+        { id: 2, lable: t('website_and_social_media') },
+        { id: 3, lable: t('DICGC_website_and_social_media_handles') },
+        { id: 4, lable: t('bank') },
+        { id: 5, lable: t('earlier_options') },
+        { id: 6, lable: t('no_idea') },
     ];
 
     const frequentlyBank = [
-        { id: 1, lable: 'Will have to wait till bank is liquidated' },
-        { id: 2, lable: 'Will get deposits (plus interest) upto ₹5 lakh from DICGC' },
-        { id: 3, lable: 'No Idea' },
+        { id: 1, lable: t('till_bank_is_liquidated') },
+        { id: 2, lable: t('deposits_int') },
+        { id: 3, lable: t('no_idea') },
     ];
 
     const privateInsuranceData = [
-        { id: 1, lable: 'Private Insurance Company' },
-        { id: 2, lable: 'Public Insurance Company' },
-        { id: 3, lable: '100% Subsidiary of Reserve Bank of India (RBI)' },
-        { id: 4, lable: 'No Idea' },
+        { id: 1, lable: t('private_insurance_company') },
+        { id: 2, lable: t('public_insurance_company') },
+        { id: 3, lable: t('subsidiary') },
+        { id: 4, lable: t('no_idea') },
     ]
 
     const reasons = [
-        { id: 1, lable: 'Upto ₹1 lakh' },
-        { id: 2, lable: 'Upto ₹5 lakh in one branch' },
-        { id: 3, lable: 'Upto ₹5 lakh in one bank' },
-        { id: 4, lable: 'Entire amount' },
-        { id: 5, lable: 'No Idea' },
+        { id: 1, lable: t('upto_11akh') },
+        { id: 2, lable: t('upto_51akh') },
+        { id: 3, lable: t('5lakh_in_one_bank') },
+        { id: 4, lable: t('entire_amount') },
+        { id: 5, lable: t('no_idea') },
 
     ];
 
     const mostTransact = [
-        { id: 1, lable: 'Depositors.' },
-        { id: 2, lable: 'Banks having the deposit account' },
-        { id: 3, lable: 'Government' },
-        { id: 4, lable: 'No Idea' },
+        { id: 1, lable: t('depositors') },
+        { id: 2, lable: t('deposit_account') },
+        { id: 3, lable: t('government') },
+        { id: 4, lable: t('no_idea') },
 
     ];
 
     const depositAmount = [
-        { id: 1, lable: 'Will get entire amount from bank' },
-        { id: 2, lable: 'Will get deposits (plus interest) upto ₹5 lakh from DICGC' },
-        { id: 3, lable: 'No Idea' },
+        { id: 1, lable: t('get_entire_amount_from_bank') },
+        { id: 2, lable: t('deposits_int') },
+        { id: 3, lable: t('no_idea') },
     ]
 
     const subsidyTimes = [
-        { id: 1, lable: 'Only Deposits of SB A/c' },
-        { id: 2, lable: 'Deposits of SB A/c plus interest' },
-        { id: 3, lable: 'Current account' },
-        { id: 4, lable: 'Only Deposits of Fixed/ Recurring Deposit A/cs' },
-        { id: 5, lable: 'Deposits of Fixed/ Recurring A/cs plus interest' },
-        { id: 5, lable: 'No Idea' },
+        { id: 1, lable: t('deposits_SB') },
+        { id: 2, lable: t('deposits_SB_interest') },
+        { id: 3, lable: t('current_account') },
+        { id: 4, lable: t('deposits_fixed') },
+        { id: 5, lable: t('deposits_fixed_interest') },
+        { id: 5, lable: t('no_idea') },
     ];
 
     const Incomedata = [
-        { id: 1, lable: 'Newspapers' },
-        { id: 2, lable: 'Banks' },
-        { id: 3, lable: 'Social media' },
-        { id: 4, lable: 'Website' },
-        { id: 5, lable: 'All the earlier Options.' },
-        { id: 6, lable: 'Others (specify)' },
+        { id: 1, lable: t('news_papers') },
+        { id: 2, lable: t('b_anks') },
+        { id: 3, lable: t('Social_media') },
+        { id: 4, lable: t('Website') },
+        { id: 5, lable: t('earlier_options') },
+        { id: 6, lable: t('other_specify') },
     ];
 
     const cashReceipt = [
-        { id: 1, lable: 'Automatic credit' },
-        { id: 2, lable: 'Approach brokers' },
-        { id: 3, lable: 'No Idea' }
+        { id: 1, lable: t('automatic_credit') },
+        { id: 2, lable: t('approach_brokers') },
+        { id: 3, lable: t('no_idea')}
     ];
 
     const saveMoney = [
-        { id: 1, lable: 'Automatic credit' },
-        { id: 2, lable: 'Approach brokers' },
-        { id: 3, lable: 'Approach bank with updated KYC details and submit willingness form to bank/ DICGC along with alternate account details' },
-        { id: 4, lable: 'No Idea' }
+        { id: 1, lable: t('automatic_credit')  },
+        { id: 2, lable: t('approach_brokers') },
+        { id: 3, lable: t('updated_kyc_details')},
+        { id: 4, lable:t('no_idea') }
     ];
 
     // gender setDifferently
     const data = [
         {
-            label: 'Yes'
+            label: t('Yes')
         },
         {
-            label: 'No'
+            label: t('No')
         }
     ];
 
     const dataOne = [
         {
-            label: 'Yes'
+            label: t('Yes')
         },
         {
-            label: 'No'
+            label: t('No')
         },
         {
-            label: 'No Idea'
+            label:t('no_idea')
         }
     ];
 
@@ -467,7 +469,7 @@ const BlockBSurveyScreen = () => {
                 />
                 <View style={{ marginLeft: 10, flex: 1 }}>
                     <Text style={{ fontWeight: 'bold' }}>{userName} - {user.name}</Text>
-                    {user.active && <Text style={{ color: 'green', fontSize: 12, fontWeight: 'bold' }}>Active Survey Token - <Text style={{ fontWeight: 'bold', fontSize: 14, color: 'red' }}>Block B</Text> </Text>}
+                    {user.active && <Text style={{ color: 'green', fontSize: 12, fontWeight: 'bold' }}>{t('active_survey_token')} - <Text style={{ fontWeight: 'bold', fontSize: 14, color: 'red' }}>{t('Block_B')}</Text> </Text>}
                 </View>
                 {isRecording === true ? <View style={{ height: 10, width: 10, borderRadius: 100, backgroundColor: 'green' }} /> : <View style={{ height: 10, width: 10, borderRadius: 100, backgroundColor: 'red' }} />}
             </View>
@@ -1127,20 +1129,20 @@ const BlockBSurveyScreen = () => {
             <Modal isVisible={isInstruction}>
                 <View style={{ width: Dimensions.get('screen').width - 50, backgroundColor: '#fff', alignSelf: 'center', borderRadius: 5, padding: 20 }}>
                     <View style={{ alignItems: 'center' }}>
-                        <Text style={{ fontWeight: 'bold', fontSize: 16 }}>Survey Instructions</Text>
-                        <Text style={{ textAlign: 'center', paddingVertical: 15 }}>Once your start the survey, this will track your location, and also record your audio, by click on start button all the featurs enable and track your location and record your audio.</Text>
+                        <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{t('Survey_Instructions')}</Text>
+                        <Text style={{ textAlign: 'center', paddingVertical: 15 }}>{t('Survey_description')}</Text>
                     </View>
                     <TouchableOpacity onPress={() => startRecording()} style={{ paddingVertical: 10, paddingHorizontal: 50, backgroundColor: '#000', borderRadius: 5, elevation: 5, zIndex: 999 }}>
-                        <Text style={{ fontWeight: 'bold', color: '#fff', textAlign: 'center', padding: 5 }}>Start</Text>
+                        <Text style={{ fontWeight: 'bold', color: '#fff', textAlign: 'center', padding: 5 }}>{t('Start')}</Text>
                     </TouchableOpacity>
                 </View>
             </Modal>
-            <Text style={{ fontWeight: 'bold', paddingLeft: 20, paddingTop: 10 }}>Block II: Respondent’s feedback</Text>
+            <Text style={{ fontWeight: 'bold', paddingLeft: 20, paddingTop: 10 }}>{t('Block_II')}: {t('respondent_feedback')}</Text>
             {isLoading === false ?
                 <ScrollView>
                     <View style={{ padding: 10 }}>
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q. No 1 Do you have a bank account? (Yes/ No) </Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('bank_account')} </Text>
                             <RadioButtonRN
                                 data={data}
                                 selectedBtn={(e) => setBank(e)}
@@ -1149,7 +1151,7 @@ const BlockBSurveyScreen = () => {
                         <View style={{ flex: 1 }}>
                             <View style={{ padding: 10, }} />
                             <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.2 If you deposit money in a bank, do you think it is safe?</Text>
+                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('money_deposit_safe')}</Text>
                                 <RadioButtonRN
                                     data={dataOne}
                                     selectedBtn={(e) => setDepositMoney(e)}
@@ -1157,7 +1159,7 @@ const BlockBSurveyScreen = () => {
                             </View>
                             <View style={{ padding: 10, }} />
                             <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.3 Have you heard about Deposit Insurance? *</Text>
+                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('deposit_insurance')}</Text>
                                 <RadioButtonRN
                                     data={dataOne}
                                     selectedBtn={(e) => setHeardDepositInsurance(e)}
@@ -1165,7 +1167,7 @@ const BlockBSurveyScreen = () => {
                             </View>
                             <View style={{ padding: 10, }} />
                             <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.4 Are you aware of the constitution/ nature of DICGC (Deposit Insurance and Credit Guarantee Corporation?)</Text>
+                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('constitution_nature')}</Text>
                                 <RadioButtonRN
                                     data={dataOne}
                                     selectedBtn={(e) => setConstitutionDICGC(e)}
@@ -1174,7 +1176,7 @@ const BlockBSurveyScreen = () => {
                         </View>
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.5 If yes for Q.4, which of the following is DICGC?</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('if_yes_DICGC')}</Text>
                             <Dropdown
                                 style={[styles.dropdown, AccountFrequencyFocus && { borderColor: 'blue' }]}
                                 placeholderStyle={styles.placeholderStyle}
@@ -1184,7 +1186,7 @@ const BlockBSurveyScreen = () => {
                                 maxHeight={300}
                                 labelField="lable"
                                 valueField="id"
-                                placeholder={!AccountFrequencyFocus ? 'Select DICGC' : FollowingIsDICGC}
+                                placeholder={!AccountFrequencyFocus ? t('select_dICGC') : FollowingIsDICGC}
                                 // searchPlaceholder="Search..."
                                 value={FollowingIsDICGC}
                                 onFocus={() => setAccountTypeFocus(true)}
@@ -1197,10 +1199,10 @@ const BlockBSurveyScreen = () => {
                             />
                         </View>
                         <View style={{ padding: 10, }} />
-                        <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.6 As per your information, depositors of which financial institutions are insured by DICGC?</Text>
-                        <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Category of Financial Institution</Text>
+                        <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('depositors_financial_institutions')}</Text>
+                        <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('category_financial_institution')}</Text>
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No. A Banks</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('banks')}</Text>
                             <RadioButtonRN
                                 data={data}
                                 selectedBtn={(e) => setFinancialInstitutionBanks(e)}
@@ -1208,7 +1210,7 @@ const BlockBSurveyScreen = () => {
                         </View>
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No. B Non-banking Financial Companies (NBFC)</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('non-banking_financial')}</Text>
                             <RadioButtonRN
                                 data={data}
                                 selectedBtn={(e) => setFinancialCategoryCompanies(e)}
@@ -1216,7 +1218,7 @@ const BlockBSurveyScreen = () => {
                         </View>
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No. C Co-operative credit societies</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('co-operative_credit')}</Text>
                             <RadioButtonRN
                                 data={data}
                                 selectedBtn={(e) => setCreditSocieties(e)}
@@ -1227,20 +1229,20 @@ const BlockBSurveyScreen = () => {
                             <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
                                 <View style={{ padding: 10, }} />
                                 <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No. 7 Do the different branches of a bank have separate coverage?</Text>
+                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('different_branches')}</Text>
                                     <RadioButtonRN
                                         data={dataOne}
                                         selectedBtn={(e) => setDifferentBranches(e)}
                                     />
                                     <View style={{ padding: 10, }} />
-                                    <Text>Q.No. 8 Is it mandatory for banks to be registered with DICGC?</Text>
+                                    <Text>{t('mandatory_for_banks_registered')}</Text>
                                     <RadioButtonRN
                                         data={dataOne}
                                         selectedBtn={(e) => setMandatoryRegistered(e)}
                                     />
                                 </View>
                                 <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No. 9 Do you know the meaning of same right and same capacity?*</Text>
+                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('right_and_capacity')}</Text>
                                     <RadioButtonRN
                                         data={dataOne}
                                         selectedBtn={(e) => setMeaningCapacity(e)}
@@ -1248,7 +1250,7 @@ const BlockBSurveyScreen = () => {
                                     <View style={{ padding: 10, }} />
                                 </View>
                                 <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.10 How much is the deposit insurance coverage?</Text>
+                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('deposit_insurance_coverage')}</Text>
                                     <Dropdown
                                         style={[styles.dropdown, AccountFrequencyFocus && { borderColor: 'blue' }]}
                                         placeholderStyle={styles.placeholderStyle}
@@ -1261,7 +1263,7 @@ const BlockBSurveyScreen = () => {
                                         maxHeight={300}
                                         labelField="lable"
                                         valueField="id"
-                                        placeholder={!AccountFrequencyFocus ? 'Select deposit insurance coverage' : DepositInsuranceCoverage}
+                                        placeholder={!AccountFrequencyFocus ? t('select_deposit_insurance_coverage') : DepositInsuranceCoverage}
                                         // searchPlaceholder="Search..."
                                         value={DepositInsuranceCoverage}
                                         onFocus={() => setAccountTypeFocus(true)}
@@ -1273,7 +1275,7 @@ const BlockBSurveyScreen = () => {
                                         }}
                                     />
                                     <View style={{ padding: 10, }} />
-                                    <Text style={{ marginBottom: 5 }}>Q.No.11 Who pays the premium to DICGC for providing Deposit Insurance Coverage?</Text>
+                                    <Text style={{ marginBottom: 5 }}>{t('providing_deposit_insurance_coverage')}</Text>
                                     <Dropdown
                                         style={[styles.dropdown, AccountFrequencyFocus && { borderColor: 'blue' }]}
                                         placeholderStyle={styles.placeholderStyle}
@@ -1286,7 +1288,7 @@ const BlockBSurveyScreen = () => {
                                         maxHeight={300}
                                         labelField="lable"
                                         valueField="id"
-                                        placeholder={!AccountFrequencyFocus ? 'Select Providing Deposit Insurance' : ProvidingDepositInsurance}
+                                        placeholder={!AccountFrequencyFocus ? t('select_ providing_deposit_insurance') : ProvidingDepositInsurance}
                                         // searchPlaceholder="Search..."
                                         value={ProvidingDepositInsurance}
                                         onFocus={() => setAccountTypeFocus(true)}
@@ -1299,7 +1301,7 @@ const BlockBSurveyScreen = () => {
                                     />
                                 </View>
                                 <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.12 Which types of deposits are insured by DICGC? (Choose all applicable answers)</Text>
+                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('deposits_insured_DICGC')}</Text>
                                     <Dropdown
                                         style={[styles.dropdown, AccountFrequencyFocus && { borderColor: 'blue' }]}
                                         placeholderStyle={styles.placeholderStyle}
@@ -1312,7 +1314,7 @@ const BlockBSurveyScreen = () => {
                                         maxHeight={300}
                                         labelField="lable"
                                         valueField="id"
-                                        placeholder={!AccountFrequencyFocus ? 'Select insured by DICGC' : TypesOfDeposits}
+                                        placeholder={!AccountFrequencyFocus ? t('select_insured_by_DICGC') : TypesOfDeposits}
                                         // searchPlaceholder="Search..."
                                         value={TypesOfDeposits}
                                         onFocus={() => setAccountTypeFocus(true)}
@@ -1324,7 +1326,7 @@ const BlockBSurveyScreen = () => {
                                         }}
                                     />
                                     <View style={{ padding: 10, }} />
-                                    <Text>Q.No.13 Have you heard of the term ‘All Inclusive Directions (AID)’?</Text>
+                                    <Text>{t('term')}</Text>
                                     <RadioButtonRN
                                         data={data}
                                         selectedBtn={(e) => setLongOutlet(e)}
@@ -1334,7 +1336,7 @@ const BlockBSurveyScreen = () => {
                         </View>
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.14 Have you heard of the term ‘Liquidation’ of a bank?</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('liquidation_bank')}</Text>
                             <RadioButtonRN
                                 data={data}
                                 selectedBtn={(e) => setWithoutVisiting(e)}
@@ -1344,7 +1346,7 @@ const BlockBSurveyScreen = () => {
                         <View>
                             <View style={{ padding: 10, }} />
                             <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.15 How are you likely to get to know whether your bank is placed under AID or is liquidated?</Text>
+                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('bank_placed')}</Text>
                                 <View>
                                     <MultiSelect
                                         hideTags
@@ -1355,7 +1357,7 @@ const BlockBSurveyScreen = () => {
                                             onSelectedwhatPurposesChange(items)
                                         }
                                         selectedItems={selectedwhatPurposes}
-                                        selectText="Select placed under AID "
+                                        selectText={t('select_placed')}
                                         onChangeInput={(text) => console.log(text)}
                                         altFontFamily="ProximaNova-Light"
                                         tagRemoveIconColor="#000"
@@ -1382,7 +1384,7 @@ const BlockBSurveyScreen = () => {
                             </View>
                             <View style={{ padding: 10, }} />
                             <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                <Text style={{ marginBottom: 5, fontWeight: 'bold', flex: 1 }}>Q.No.16 What happens to your deposit amount if your bank is placed under AID?</Text>
+                                <Text style={{ marginBottom: 5, fontWeight: 'bold', flex: 1 }}>{t('deposit_amount_under_AID')}</Text>
                                 <Dropdown
                                     style={[styles.dropdown, AccountFrequencyFocus && { borderColor: 'blue' }]}
                                     placeholderStyle={styles.placeholderStyle}
@@ -1395,7 +1397,7 @@ const BlockBSurveyScreen = () => {
                                     maxHeight={300}
                                     labelField="lable"
                                     valueField="id"
-                                    placeholder={!AccountFrequencyFocus ? 'Select bank is placed under AID' : PlacedUnderAID}
+                                    placeholder={!AccountFrequencyFocus ? t('select_bank_AID') : PlacedUnderAID}
                                     // searchPlaceholder="Search..."
                                     value={PlacedUnderAID}
                                     onFocus={() => setAccountTypeFocus(true)}
@@ -1419,7 +1421,7 @@ const BlockBSurveyScreen = () => {
                                     maxHeight={300}
                                     labelField={"lable"}
                                     valueField="id"
-                                    placeholder={!istransactionFocus ? 'Select liquidated by Reserve Bank' : transaction}
+                                    placeholder={!istransactionFocus ? t('select_liquidated') : transaction}
                                     // searchPlaceholder="Search..."
                                     value={transaction}
                                     onFocus={() => setIsTransactionFocus(true)}
@@ -1433,7 +1435,7 @@ const BlockBSurveyScreen = () => {
                             </View>
                             <View style={{ padding: 10, }} />
                             <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                <Text style={{ marginBottom: 5, fontWeight: 'bold', flex: 1 }}>Q.No.18 How will you receive your insured amount when the bank is placed under AID?</Text>
+                                <Text style={{ marginBottom: 5, fontWeight: 'bold', flex: 1 }}>{t('receive_your_insured_amount')}</Text>
                                 <Dropdown
                                     style={[styles.dropdown, subsidy1Focus && { borderColor: 'blue' }]}
                                     placeholderStyle={styles.placeholderStyle}
@@ -1443,7 +1445,7 @@ const BlockBSurveyScreen = () => {
                                     maxHeight={300}
                                     labelField="lable"
                                     valueField="id"
-                                    placeholder={!subsidy1Focus ? 'Select receive your insured amount' : sub1sidy}
+                                    placeholder={!subsidy1Focus ? t('select_receive_your_insured_amount') : sub1sidy}
                                     // searchPlaceholder="Search..."
                                     value={sub1sidy}
                                     onFocus={() => setSubsidy1Focus(true)}
@@ -1458,7 +1460,7 @@ const BlockBSurveyScreen = () => {
                         </View>
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.19 How will you receive your insured amount when the bank is liquidated? (Provided KYC details are in place)</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('bank_liquidated')}</Text>
                             <Dropdown
                                 style={[styles.dropdown, subsidy2Focus && { borderColor: 'blue' }]}
                                 placeholderStyle={styles.placeholderStyle}
@@ -1471,7 +1473,7 @@ const BlockBSurveyScreen = () => {
                                 maxHeight={300}
                                 labelField="lable"
                                 valueField="id"
-                                placeholder={!subsidy2Focus ? 'Select receive your insured liquidated' : sub2sidy}
+                                placeholder={!subsidy2Focus ? t('Select receive your insured liquidated') : sub2sidy}
                                 // searchPlaceholder="Search..."
                                 value={sub2sidy}
                                 onFocus={() => setSubsidy2Focus(true)}
@@ -1485,7 +1487,7 @@ const BlockBSurveyScreen = () => {
                         </View>
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>Q.No.20 How would you like to know more about DICGC? (Choose all applicable answers)</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('like_more_about_DICGC')}</Text>
                             <Dropdown
                                 style={[styles.dropdown, subsidy3Focus && { borderColor: 'blue' }]}
                                 placeholderStyle={styles.placeholderStyle}
@@ -1498,7 +1500,7 @@ const BlockBSurveyScreen = () => {
                                 maxHeight={300}
                                 labelField="lable"
                                 valueField="id"
-                                placeholder={!subsidy3Focus ? 'Select more about DICGC' : sub3sidy}
+                                placeholder={!subsidy3Focus ? t('select_more_about_DICGC') : sub3sidy}
                                 // searchPlaceholder="Search..."
                                 value={sub3sidy}
                                 onFocus={() => setSubsidy3Focus(true)}
@@ -1514,7 +1516,7 @@ const BlockBSurveyScreen = () => {
                         <TouchableOpacity
                             // disabled={isSubmitSurvey}
                             onPress={() => validate()} style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: 'rgb(36,78,154)', borderRadius: 10 }}>
-                            {isSubmitSurvey === true ? <ActivityIndicator style={{ alignItems: 'center' }} color={'#fff'} /> : <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>Complete Survey</Text>}
+                            {isSubmitSurvey === true ? <ActivityIndicator style={{ alignItems: 'center' }} color={'#fff'} /> : <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>{t('complete_survey')}</Text>}
                         </TouchableOpacity>
                         <View style={{ padding: 10, }} />
                     </View>
