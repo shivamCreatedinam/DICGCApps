@@ -3,15 +3,11 @@ import React, { Component, useCallback } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AsyncStorageContaints from '../../../utility/AsyncStorageConstants';
 import { showMessage, hideMessage } from "react-native-flash-message";
+import { withTranslation } from 'react-i18next';
 import axios from "axios";
-;
 
-export default class DraftSurveyScreen extends Component {
-
-
+class DraftSurveyScreen extends Component {
     static ROUTE_NAME = 'DraftSurveyScreen';
-
-
     constructor(props) {
         super(props);
         console.log("props", props?.route?.params);
@@ -109,13 +105,13 @@ export default class DraftSurveyScreen extends Component {
     }
 
 
-    showConfirmationAlert = () => {
+    showConfirmationAlert = (t) => {
         Alert.alert(
-            "Delete Survey",
-            "Are you sure, you want to Delete All Data Delete?",
+            t('delete_survey'),
+            t('delete_all'),
             [
-                { text: "Yes", onPress: () => this.finishSurvey() },
-                { text: "No" }
+                { text: t("yes"), onPress: () => this.finishSurvey() },
+                { text: t("no") }
             ]
         );
     };
@@ -140,7 +136,7 @@ export default class DraftSurveyScreen extends Component {
                 console.log('finishSurvey', result)
                 if (result?.status === true) {
                     this.saveSurveryAndMoveToNext();
-                } else { 
+                } else {
                     showMessage({
                         message: "Something went wrong!",
                         description: result?.message,
@@ -183,23 +179,26 @@ export default class DraftSurveyScreen extends Component {
     }
 
     render() {
+        const { t } = this.props;
         return (
             <SafeAreaView style={{ flex: 1 }}>
                 {this.renderCustomHeader()}
                 <View style={{ margin: 20 }}>
                     <View style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: 'rgb(36,78,154)', borderRadius: 10 }}>
-                        <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>Draft Survey {this.state?.DraftSection !== '' && this.state?.DraftSection + ' -' } {this.state?.DraftSection !== '' && this.state?.tempServerTokenId}</Text>
+                        <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>{t("draft_survey")} {this.state?.DraftSection !== '' && this.state?.DraftSection + ' -'} {this.state?.DraftSection !== '' && this.state?.tempServerTokenId}</Text>
                     </View>
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', margin: 20, marginTop: 0 }}>
-                    <TouchableOpacity onPress={() => this.showConfirmationAlert()} style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: 'red', borderRadius: 10, flex: 1, marginRight: 5 }}>
-                        <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>Delete Survey</Text>
+                    <TouchableOpacity onPress={() => this.showConfirmationAlert(t)} style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: 'red', borderRadius: 10, flex: 1, marginRight: 5 }}>
+                        <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>{t("delete_survey")}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => this.DraftSurvey()} style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: 'rgb(36,78,154)', borderRadius: 10, flex: 1 }}>
-                        <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>Continue Survey</Text>
+                        <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>{t("continue_survey")}</Text>
                     </TouchableOpacity>
                 </View>
             </SafeAreaView>
         )
     }
 }
+
+export default withTranslation()(DraftSurveyScreen);

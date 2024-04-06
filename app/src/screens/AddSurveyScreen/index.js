@@ -85,14 +85,13 @@ const AddSurveyScreen = () => {
 
     // anyGroup
     const occupationData = [
-        { id: 1, lable: t('financial_sector')},
+        { id: 1, lable: t('financial_sector') },
         { id: 2, lable: t("other_employees_employee") },
         { id: 3, lable: t('self_employed_business') },
         { id: 4, lable: t('homemaker') },
         { id: 5, lable: t("daily_worker") },
         { id: 6, lable: t('retired_person') },
         { id: 7, lable: t('others') },
-
     ]
 
     const educationData = [
@@ -122,7 +121,7 @@ const AddSurveyScreen = () => {
             label: t('Yes')
         },
         {
-            label:t('No')
+            label: t('No')
         }
     ];
 
@@ -237,12 +236,12 @@ const AddSurveyScreen = () => {
 
     const askToCloseApp = () => {
         Alert.alert(
-            "Close Survey",
-            "Are you sure, you want to Close survey, you lose all the data?",
+            t("close_survey"),
+            t("are_you_sure"),
             [
-                { text: "No" },
+                { text: t("no") },
                 {
-                    text: "Yes", onPress: () => {
+                    text: t("yes"), onPress: () => {
                         stopRecordingBack();
                         navigation.replace('DashboardScreen');
                         return true;

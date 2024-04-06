@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from 'react-native'
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from 'react-native';
 import AsyncStorageContaints from '../../../utility/AsyncStorageConstants';
-import { showMessage, hideMessage } from "react-native-flash-message";
-import React from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+import { showMessage } from "react-native-flash-message";
 import { useTranslation } from 'react-i18next';
+import React from 'react';
 
 export default function LanguageScreen() {
 
@@ -12,6 +12,27 @@ export default function LanguageScreen() {
     const [selectedLanguage, setSelectedLanguage] = React.useState(false);
     const [SelectLanguage, setSelectLanguage] = React.useState(null);
     const { t, i18n } = useTranslation();
+
+
+    React.useEffect(() => {
+        navigate.addListener("focus", () => {
+            getLanguage();
+        });
+    }, []);
+
+
+    const getLanguage = async () => {
+        try {
+            const language = await AsyncStorage.getItem('@appLanguage');
+            if (language !== null) {
+                setSelectLanguage(language);
+                i18n.changeLanguage(language);
+            }
+        } catch (e) {
+            // error reading value
+            console.log('storeData', e)
+        }
+    }
 
     const setLanguage = (info) => {
         setSelectLanguage(info);
@@ -50,7 +71,7 @@ export default function LanguageScreen() {
             } catch (error) {
                 console.log('Error fetching user id', error);
             }
-            navigate.replace('LoginScreen');
+            // navigate.replace('LoginScreen');
         }
     }
 
@@ -68,7 +89,7 @@ export default function LanguageScreen() {
                     <Text style={{ fontWeight: 'bold', color: '#fff', fontSize: 20, padding: 2, textAlign: 'center', }}>A</Text>
                 </View>
                 <Text style={{ color: '#fff', paddingVertical: 0, paddingHorizontal: 5 }}>English</Text>
-                {SelectLanguage === 'English' ? <View style={{ position: 'absolute', right: 0, top: -5, zIndex: 9999 }}>
+                {SelectLanguage === 'en' ? <View style={{ position: 'absolute', right: 0, top: -5, zIndex: 9999 }}>
                     <Image style={{ width: 20, height: 20, resizeMode: 'contain' }} source={require('../../../assets/check_mark.png')} />
                 </View> : null}
             </TouchableOpacity>
@@ -77,49 +98,49 @@ export default function LanguageScreen() {
                     <Text style={{ fontWeight: 'bold', color: '#fff', fontSize: 20, padding: 2, textAlign: 'center', }}>हिं</Text>
                 </View>
                 <Text style={{ color: '#fff', paddingVertical: 0, paddingHorizontal: 5 }}>Hindi</Text>
-                {SelectLanguage === 'Hindi' ? <View style={{ position: 'absolute', right: 0, top: -5, zIndex: 9999 }}>
+                {SelectLanguage === 'hi' ? <View style={{ position: 'absolute', right: 0, top: -5, zIndex: 9999 }}>
                     <Image style={{ width: 20, height: 20, resizeMode: 'contain' }} source={require('../../../assets/check_mark.png')} />
                 </View> : null}
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setLanguage('Marathi')} style={{ paddingHorizontal: 20, paddingVertical: 15, backgroundColor: '#000', marginTop: 10, elevation: 5, borderRadius: 10, flexDirection: 'row', alignItems: 'center' }}>
+            <TouchableOpacity onPress={() => setLanguage('mr')} style={{ paddingHorizontal: 20, paddingVertical: 15, backgroundColor: '#000', marginTop: 10, elevation: 5, borderRadius: 10, flexDirection: 'row', alignItems: 'center' }}>
                 <View style={{ height: 30, width: 30, borderRadius: 150, backgroundColor: 'grey', }}>
                     <Text style={{ fontWeight: 'bold', color: '#fff', fontSize: 20, padding: 2, textAlign: 'center', }}>म</Text>
                 </View>
                 <Text style={{ color: '#fff', paddingVertical: 0, paddingHorizontal: 5 }}>Marathi</Text>
-                {SelectLanguage === 'Marathi' ? <View style={{ position: 'absolute', right: 0, top: -5, zIndex: 9999 }}>
+                {SelectLanguage === 'mr' ? <View style={{ position: 'absolute', right: 0, top: -5, zIndex: 9999 }}>
                     <Image style={{ width: 20, height: 20, resizeMode: 'contain' }} source={require('../../../assets/check_mark.png')} />
                 </View> : null}
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setLanguage('Telgu')} style={{ paddingHorizontal: 20, paddingVertical: 15, backgroundColor: '#000', marginTop: 10, elevation: 5, borderRadius: 10, flexDirection: 'row', alignItems: 'center' }}>
+            <TouchableOpacity onPress={() => setLanguage('te')} style={{ paddingHorizontal: 20, paddingVertical: 15, backgroundColor: '#000', marginTop: 10, elevation: 5, borderRadius: 10, flexDirection: 'row', alignItems: 'center' }}>
                 <View style={{ height: 30, width: 30, borderRadius: 150, backgroundColor: 'grey', }}>
                     <Text style={{ fontWeight: 'bold', color: '#fff', fontSize: 20, padding: 2, textAlign: 'center', }}>మ</Text>
                 </View>
                 <Text style={{ color: '#fff', paddingVertical: 0, paddingHorizontal: 5 }}>Telgu</Text>
-                {SelectLanguage === 'Telgu' ? <View style={{ position: 'absolute', right: 0, top: -5, zIndex: 9999 }}>
+                {SelectLanguage === 'te' ? <View style={{ position: 'absolute', right: 0, top: -5, zIndex: 9999 }}>
                     <Image style={{ width: 20, height: 20, resizeMode: 'contain' }} source={require('../../../assets/check_mark.png')} />
                 </View> : null}
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setLanguage('Kannada')} style={{ paddingHorizontal: 20, paddingVertical: 15, backgroundColor: '#000', marginTop: 10, elevation: 5, borderRadius: 10, flexDirection: 'row', alignItems: 'center' }}>
+            <TouchableOpacity onPress={() => setLanguage('kn')} style={{ paddingHorizontal: 20, paddingVertical: 15, backgroundColor: '#000', marginTop: 10, elevation: 5, borderRadius: 10, flexDirection: 'row', alignItems: 'center' }}>
                 <View style={{ height: 30, width: 30, borderRadius: 150, backgroundColor: 'grey', }}>
                     <Text style={{ fontWeight: 'bold', color: '#fff', fontSize: 20, padding: 2, textAlign: 'center', }}>ಮ</Text>
                 </View>
                 <Text style={{ color: '#fff', paddingVertical: 0, paddingHorizontal: 5 }}>Kannada</Text>
-                {SelectLanguage === 'Kannada' ? <View style={{ position: 'absolute', right: 0, top: -5, zIndex: 9999 }}>
+                {SelectLanguage === 'kn' ? <View style={{ position: 'absolute', right: 0, top: -5, zIndex: 9999 }}>
                     <Image style={{ width: 20, height: 20, resizeMode: 'contain' }} source={require('../../../assets/check_mark.png')} />
                 </View> : null}
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setLanguage('Gujarati')} style={{ paddingHorizontal: 20, paddingVertical: 15, backgroundColor: '#000', marginTop: 10, elevation: 5, borderRadius: 10, flexDirection: 'row', alignItems: 'center' }}>
+            <TouchableOpacity onPress={() => setLanguage('gu')} style={{ paddingHorizontal: 20, paddingVertical: 15, backgroundColor: '#000', marginTop: 10, elevation: 5, borderRadius: 10, flexDirection: 'row', alignItems: 'center' }}>
                 <View style={{ height: 30, width: 30, borderRadius: 150, backgroundColor: 'grey', }}>
                     <Text style={{ fontWeight: 'bold', color: '#fff', fontSize: 20, padding: 2, textAlign: 'center', }}>મ</Text>
                 </View>
                 <Text style={{ color: '#fff', paddingVertical: 0, paddingHorizontal: 5 }}>Gujarati</Text>
-                {SelectLanguage === 'Gujarati' ? <View style={{ position: 'absolute', right: 0, top: -5, zIndex: 9999 }}>
+                {SelectLanguage === 'gu' ? <View style={{ position: 'absolute', right: 0, top: -5, zIndex: 9999 }}>
                     <Image style={{ width: 20, height: 20, resizeMode: 'contain' }} source={require('../../../assets/check_mark.png')} />
                 </View> : null}
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => saveLanguage()} style={{ width: '100%', height: 50, backgroundColor: '#000', marginTop: 40, elevation: 5, borderRadius: 5, marginBottom: 150, }}>
-                <Text style={{ fontSize: 14, color: '#fff', textAlign: 'center', marginTop: 15, textTransform: 'uppercase', fontWeight: 'bold' }}>Save Language</Text>
+                <Text style={{ fontSize: 14, color: '#fff', textAlign: 'center', marginTop: 15, textTransform: 'uppercase', fontWeight: 'bold' }}>{t('save_language')}</Text>
             </TouchableOpacity>
         </ScrollView>
     )

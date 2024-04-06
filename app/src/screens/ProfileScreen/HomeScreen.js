@@ -14,29 +14,28 @@ import {
   Alert,
   TextInput
 } from 'react-native';
+import axios from "axios";
 import { version } from '../../../../package.json';
 import { showMessage, hideMessage } from "react-native-flash-message";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AsyncStorageContaints from '../../../utility/AsyncStorageConstants';
-import axios from "axios";
 import HeaderWithLocation from '../../../genriccomponents/header/HeaderWithLocation';
 import AudioRecord from 'react-native-audio-record';
-import { useTranslation } from 'react-i18next';
-import { t } from 'i18next';
+import { withTranslation } from 'react-i18next';
+
 
 const options = {
   sampleRate: 16000,  // default 44100
   channels: 1,        // 1 or 2, default 1
   bitsPerSample: 16,  // 8 or 16, default 16
   audioSource: 6,     // android only (see below)
-  wavFile: 'test.wav' // default 'audio.wav'
+  wavFile: 'audio.wav' // default 'audio.wav'
 };
 
 class HomeScreen extends Component {
   static ROUTE_NAME = 'HomeScreen';
   constructor(props) {
     super(props);
-    console.log("props", props?.navigation?.navigate)
     this.state = {
       allUsers: [],
       name: '',
@@ -53,7 +52,7 @@ class HomeScreen extends Component {
       surveyCountInTotal: null,
       surveyCompleteCount: null,
       surveyToken: null,
-      appVersion: version
+      appVersion: version,
     };
   }
 
@@ -83,10 +82,7 @@ class HomeScreen extends Component {
     try {
       const latitude = await AsyncStorage.getItem(AsyncStorageContaints.surveyLatitude);
       const longitude = await AsyncStorage.getItem(AsyncStorageContaints.surveyLongitude);
-
       if (latitude !== null && longitude !== null) {
-        // console.log('Latitude:', latitude);
-        // console.log('Longitude:', longitude);
       } else {
         console.log('Latitude and longitude not found in AsyncStorage.');
       }
@@ -264,36 +260,35 @@ class HomeScreen extends Component {
 
 
   render() {
+    const { t } = this.props;
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: '#F7F7F8', marginTop: 0 }}>
         {this.renderHeader()}
         {/* <StatusBar backgroundColor={'transparent'} barStyle={'dark-content'} /> */}
         <View style={{ height: 50, width: '90%', marginHorizontal: 20, marginVertical: 10, borderRadius: 15, borderColor: 'grey', borderWidth: 1, elevation: 5, backgroundColor: '#fff' }} >
-          <TextInput placeholder='Search' style={{ flex: 1, paddingLeft: 15 }} />
+          <TextInput placeholder={t('search')} style={{ flex: 1, paddingLeft: 15 }} />
         </View>
         <View style={{ marginLeft: 20, marginRight: 20 }}>
           <TouchableOpacity onPress={() => this.checkStartSurvey()} style={{ paddingVertical: 14, paddingHorizontal: 20, backgroundColor: 'rgb(36,78,154)', borderRadius: 5, flexDirection: 'row', alignItems: 'center' }}>
             <Image style={{ width: 20, height: 20, resizeMode: 'contain', tintColor: '#fff' }} source={require('../../../assets/add_survery_logo.png')} />
-            {this.state.loading === false ? <Text style={{ textAlign: 'center', fontWeight: 'bold', color: '#fff', flex: 1 }}>Create New Survey</Text> : <ActivityIndicator style={{ alignSelf: 'center', flex: 1 }} color={'#fff'} />}
+            {this.state.loading === false ? <Text style={{ textAlign: 'center', fontWeight: 'bold', color: '#fff', flex: 1 }}>{t('create_new_survey')}</Text> : <ActivityIndicator style={{ alignSelf: 'center', flex: 1 }} color={'#fff'} />}
           </TouchableOpacity>
           {this.state.surveyNextBlock !== '' ? <TouchableOpacity onPress={() => this.navigateToPendingSurvey()} style={{ paddingVertical: 14, paddingHorizontal: 20, backgroundColor: 'rgb(36,78,154)', borderRadius: 5, flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
             <Image style={{ width: 20, height: 20, resizeMode: 'contain', tintColor: '#fff' }} source={require('../../../assets/add_survery_logo.png')} />
             {/* {this.state.loading === false ?  */}
-            <Text style={{ textAlign: 'center', fontWeight: 'bold', color: '#fff', flex: 1 }}>Draft Survey</Text>
+            <Text style={{ textAlign: 'center', fontWeight: 'bold', color: '#fff', flex: 1 }}>{t('draft_survey')}</Text>
             {/* : <ActivityIndicator style={{ alignSelf: 'center', flex: 1 }} color={'#fff'} />} */}
           </TouchableOpacity> : null}
         </View>
         <View style={{ position: 'absolute', bottom: 50, alignSelf: 'center', flexDirection: 'row', margin: 10 }}>
-          <Text adjustsFontSizeToFit style={{ marginRight: 20, fontWeight: 'bold' }}>Survey in Progress:- {this.state.surveyCountInProcessing}</Text>
-          <Text adjustsFontSizeToFit style={{ marginRight: 0, fontWeight: 'bold' }}>Complete Survey:- {this.state.surveyCompleteCount}</Text>
+          <Text adjustsFontSizeToFit style={{ marginRight: 20, fontWeight: 'bold' }}>{t('survey_in_progress')} {this.state.surveyCountInProcessing}</Text>
+          <Text adjustsFontSizeToFit style={{ marginRight: 0, fontWeight: 'bold' }}>{t('complete_survey')} {this.state.surveyCompleteCount}</Text>
         </View>
-        <Text style={{ position: 'absolute', textAlign: 'center', alignSelf: 'center', bottom: 5, fontWeight: 'bold' }}>App Version - {this.state.appVersion}</Text>
+        <Text style={{ position: 'absolute', textAlign: 'center', alignSelf: 'center', bottom: 5, fontWeight: 'bold' }}>{t('app_version')} {this.state.appVersion}</Text>
       </SafeAreaView>
     );
   }
-
-
 }
 
 
-export default HomeScreen;
+export default withTranslation()(HomeScreen);

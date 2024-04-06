@@ -2,13 +2,9 @@ import { Text, View, Image, SafeAreaView, Alert, TouchableOpacity, StatusBar } f
 import React, { Component, useCallback } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AsyncStorageContaints from '../../../utility/AsyncStorageConstants';
-import { useTranslation } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 
-export default class ProfileScreen extends Component {
-
-
-    static ROUTE_NAME = 'ProfileScreen';
-
+class ProfileScreen extends Component {
 
     constructor(props) {
         super(props);
@@ -22,7 +18,7 @@ export default class ProfileScreen extends Component {
         };
 
     }
- 
+
     componentDidMount() {
         this.readMessages()
     }
@@ -83,6 +79,7 @@ export default class ProfileScreen extends Component {
     }
 
     render() {
+        const { t } = this.props;
         return (
             <SafeAreaView style={{ flex: 1 }}>
                 {this.renderCustomHeader()}
@@ -93,13 +90,15 @@ export default class ProfileScreen extends Component {
                         <Text style={{ textTransform: 'uppercase', textAlign: 'center', marginTop: 5 }} adjustsFontSizeToFit={true} numberOfLines={1}><Text style={{ fontWeight: 'bold' }}>URID:</Text> *****{this.state.userToken.slice(0, 10)}******</Text>
                     </View>
                     <TouchableOpacity onPress={() => this.props.navigation.replace('LanguageScreen')} style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: 'rgb(36,78,154)', borderRadius: 10, marginBottom: 10 }}>
-                        <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>Change Language</Text>
+                        <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>{t('change_language')}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => this.showConfirmationAlert()} style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: 'rgb(36,78,154)', borderRadius: 10 }}>
-                        <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>Logout</Text>
+                        <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>{t('logout')}</Text>
                     </TouchableOpacity>
                 </View>
             </SafeAreaView>
         )
     }
 }
+
+export default withTranslation()(ProfileScreen);
