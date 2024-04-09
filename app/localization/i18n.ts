@@ -2,6 +2,10 @@ import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import hi from './hi/hi.json'
 import en from './en/en.json'
+import ma from './en/ma.json'
+import te from './en/te.json'
+import kn from './en/kn.json'
+import gu from './en/gu.json'
 
 // list of languages
 
@@ -11,6 +15,18 @@ const resources = {
     },
     hi: {
         translation: hi
+    },
+    ma: {
+        translation: ma
+    },
+    te: {
+        translation: te
+    },
+    kn: {
+        translation: kn
+    },
+    gu: {
+        translation: gu
     }
 };
 

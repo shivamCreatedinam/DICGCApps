@@ -82,8 +82,8 @@ export default function LanguageScreen() {
                 flexGrow: 1,
             }}
             style={{ padding: 20, flex: 1, marginBottom: 50 }}>
-            <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 60 }}>{t('choose_language')}</Text>
-            <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>{t('select_your_language')}</Text>
+            <Text style={{ fontWeight: 'bold', fontSize: 18, marginTop: 60, fontWeight: 'bold', color: 'black' }}>{t('choose_language')}</Text>
+            <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5, fontWeight: 'bold', color: '#b4b4b4', marginBottom: 20 }}>{t('select_your_language')}</Text>
             <TouchableOpacity onPress={() => setLanguage('en')} style={{ paddingHorizontal: 20, paddingVertical: 15, backgroundColor: '#000', marginTop: 10, elevation: 5, borderRadius: 10, flexDirection: 'row', alignItems: 'center' }}>
                 <View style={{ height: 30, width: 30, borderRadius: 150, backgroundColor: 'grey', }}>
                     <Text style={{ fontWeight: 'bold', color: '#fff', fontSize: 20, padding: 2, textAlign: 'center', }}>A</Text>
@@ -102,12 +102,12 @@ export default function LanguageScreen() {
                     <Image style={{ width: 20, height: 20, resizeMode: 'contain' }} source={require('../../../assets/check_mark.png')} />
                 </View> : null}
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setLanguage('mr')} style={{ paddingHorizontal: 20, paddingVertical: 15, backgroundColor: '#000', marginTop: 10, elevation: 5, borderRadius: 10, flexDirection: 'row', alignItems: 'center' }}>
+            <TouchableOpacity onPress={() => setLanguage('ma')} style={{ paddingHorizontal: 20, paddingVertical: 15, backgroundColor: '#000', marginTop: 10, elevation: 5, borderRadius: 10, flexDirection: 'row', alignItems: 'center' }}>
                 <View style={{ height: 30, width: 30, borderRadius: 150, backgroundColor: 'grey', }}>
                     <Text style={{ fontWeight: 'bold', color: '#fff', fontSize: 20, padding: 2, textAlign: 'center', }}>म</Text>
                 </View>
                 <Text style={{ color: '#fff', paddingVertical: 0, paddingHorizontal: 5 }}>Marathi</Text>
-                {SelectLanguage === 'mr' ? <View style={{ position: 'absolute', right: 0, top: -5, zIndex: 9999 }}>
+                {SelectLanguage === 'ma' ? <View style={{ position: 'absolute', right: 0, top: -5, zIndex: 9999 }}>
                     <Image style={{ width: 20, height: 20, resizeMode: 'contain' }} source={require('../../../assets/check_mark.png')} />
                 </View> : null}
             </TouchableOpacity>

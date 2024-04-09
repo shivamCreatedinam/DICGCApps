@@ -57,13 +57,13 @@ class ProfileScreen extends Component {
     }
 
 
-    showConfirmationAlert = () => {
+    showConfirmationAlert = (t) => {
         Alert.alert(
-            "Logout",
-            "Are you sure, you want to logout?",
+            t("logout"),
+            t("logout_message"),
             [
-                { text: "Yes", onPress: () => this.clearAsyncStorage() },
-                { text: "No" }
+                { text: t("yes"), onPress: () => this.clearAsyncStorage() },
+                { text: t("no") }
             ]
         );
     };
@@ -87,12 +87,12 @@ class ProfileScreen extends Component {
                     <View style={{ alignItems: 'center', padding: 50 }}>
                         <Image style={{ width: 120, height: 120, resizeMode: 'contain' }} source={require('../../../assets/app_logo.png')} />
                         <Text style={{ marginTop: 20, textTransform: 'capitalize', fontWeight: 'bold' }}>{this.state.name}</Text>
-                        <Text style={{ textTransform: 'uppercase', textAlign: 'center', marginTop: 5 }} adjustsFontSizeToFit={true} numberOfLines={1}><Text style={{ fontWeight: 'bold' }}>URID:</Text> *****{this.state.userToken.slice(0, 10)}******</Text>
+                        <Text style={{ textTransform: 'uppercase', textAlign: 'center', marginTop: 5 }} adjustsFontSizeToFit={true} numberOfLines={1}><Text style={{ fontWeight: 'bold' }}>{t("urid")}</Text> *****{this.state.userToken.slice(0, 10)}******</Text>
                     </View>
-                    <TouchableOpacity onPress={() => this.props.navigation.replace('LanguageScreen')} style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: 'rgb(36,78,154)', borderRadius: 10, marginBottom: 10 }}>
+                    <TouchableOpacity onPress={() => this.props.navigation.replace('LanguageScreen')} style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: '#000000', borderRadius: 10, marginBottom: 10 }}>
                         <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>{t('change_language')}</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => this.showConfirmationAlert()} style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: 'rgb(36,78,154)', borderRadius: 10 }}>
+                    <TouchableOpacity onPress={() => this.showConfirmationAlert(t)} style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: '#000000', borderRadius: 10 }}>
                         <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>{t('logout')}</Text>
                     </TouchableOpacity>
                 </View>

@@ -9,6 +9,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 import RadioButtonRN from 'radio-buttons-react-native';
 import MultiSelect from 'react-native-multiple-select';
 import AudioRecord from 'react-native-audio-record';
+import * as Progress from 'react-native-progress';
 import Modal from 'react-native-modal';
 import Axios from 'axios';
 import { useTranslation } from 'react-i18next';
@@ -44,7 +45,7 @@ const AddSurveyScreen = () => {
     const [valueDistrict, setDistrictValue] = React.useState(null);
     const [selectedDistrict, setSelectedDistrict] = React.useState(null);
     const [isDistrictFocus, setIsDistrictFocus] = React.useState(false);
-
+    const [percentage, setPercentage] = React.useState(0);
     // lable fields. 
     const [Name, setname] = React.useState('');
     const [address, setAddress] = React.useState('');
@@ -432,6 +433,19 @@ const AddSurveyScreen = () => {
         navigation.replace('BlockBSurveyScreen');
     }
 
+    const uploadProgress = (progressEvent) => {
+        var Percentage = Math.round(
+            (progressEvent.loaded / progressEvent.total) * 100,
+        );
+        setPercentage(Percentage);
+        console.log(progressEvent.loaded, progressEvent.total);
+        console.log(
+            'Upload progress: ' +
+            Math.round((progressEvent.loaded / progressEvent.total) * 100) +
+            '%',
+        );
+    };
+
     const uploadAudioFinal = async (file) => {
         setAudioUploading(true);
         let API_UPLOAD_MSG_FILE = `https://scslsurvey.online/DICGCA-SURVEY/public/api/survey-audio-files`;
@@ -453,6 +467,7 @@ const AddSurveyScreen = () => {
                     'Authorization': 'Bearer ' + userSendToken,
                 },
                 body: formData,
+                onUploadProgress: uploadProgress,
             });
             const json = await res.json();
             setAudioUploading(false);
@@ -500,6 +515,7 @@ const AddSurveyScreen = () => {
                     </TouchableOpacity>
                 </View>
             </Modal>
+            {isAudioUploading && <Progress.Bar progress={percentage} width={Dimensions.get('screen').width} color={'green'} style={{ borderRadius: 0 }} indeterminate={false} />}
             <Text style={{ fontWeight: 'bold', paddingLeft: 20, paddingTop: 10 }}> {t('Block_I')}. {t('Respondennt_Details')}</Text>
             {isLoading === false ?
                 <ScrollView>
@@ -662,7 +678,6 @@ const AddSurveyScreen = () => {
                                 }}
                             />
                         </View>
-
                         <View style={{ padding: 10, }} />
                         <TouchableOpacity disabled={isSubmitSurvey} onPress={() => {
                             validationCheck()

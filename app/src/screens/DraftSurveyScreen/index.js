@@ -184,7 +184,7 @@ class DraftSurveyScreen extends Component {
             <SafeAreaView style={{ flex: 1 }}>
                 {this.renderCustomHeader()}
                 <View style={{ margin: 20 }}>
-                    <View style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: 'rgb(36,78,154)', borderRadius: 10 }}>
+                    <View style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: '#000000', borderRadius: 10 }}>
                         <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>{t("draft_survey")} {this.state?.DraftSection !== '' && this.state?.DraftSection + ' -'} {this.state?.DraftSection !== '' && this.state?.tempServerTokenId}</Text>
                     </View>
                 </View>
@@ -192,7 +192,7 @@ class DraftSurveyScreen extends Component {
                     <TouchableOpacity onPress={() => this.showConfirmationAlert(t)} style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: 'red', borderRadius: 10, flex: 1, marginRight: 5 }}>
                         <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>{t("delete_survey")}</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => this.DraftSurvey()} style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: 'rgb(36,78,154)', borderRadius: 10, flex: 1 }}>
+                    <TouchableOpacity onPress={() => this.DraftSurvey()} style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: '#000000', borderRadius: 10, flex: 1 }}>
                         <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>{t("continue_survey")}</Text>
                     </TouchableOpacity>
                 </View>

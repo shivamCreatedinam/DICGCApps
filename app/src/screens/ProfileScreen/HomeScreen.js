@@ -269,11 +269,11 @@ class HomeScreen extends Component {
           <TextInput placeholder={t('search')} style={{ flex: 1, paddingLeft: 15 }} />
         </View>
         <View style={{ marginLeft: 20, marginRight: 20 }}>
-          <TouchableOpacity onPress={() => this.checkStartSurvey()} style={{ paddingVertical: 14, paddingHorizontal: 20, backgroundColor: 'rgb(36,78,154)', borderRadius: 5, flexDirection: 'row', alignItems: 'center' }}>
+          <TouchableOpacity onPress={() => this.checkStartSurvey()} style={{ paddingVertical: 14, paddingHorizontal: 20, backgroundColor: '#000000', borderRadius: 5, flexDirection: 'row', alignItems: 'center' }}>
             <Image style={{ width: 20, height: 20, resizeMode: 'contain', tintColor: '#fff' }} source={require('../../../assets/add_survery_logo.png')} />
             {this.state.loading === false ? <Text style={{ textAlign: 'center', fontWeight: 'bold', color: '#fff', flex: 1 }}>{t('create_new_survey')}</Text> : <ActivityIndicator style={{ alignSelf: 'center', flex: 1 }} color={'#fff'} />}
           </TouchableOpacity>
-          {this.state.surveyNextBlock !== '' ? <TouchableOpacity onPress={() => this.navigateToPendingSurvey()} style={{ paddingVertical: 14, paddingHorizontal: 20, backgroundColor: 'rgb(36,78,154)', borderRadius: 5, flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
+          {this.state.surveyNextBlock !== '' ? <TouchableOpacity onPress={() => this.navigateToPendingSurvey()} style={{ paddingVertical: 14, paddingHorizontal: 20, backgroundColor: '#000000', borderRadius: 5, flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
             <Image style={{ width: 20, height: 20, resizeMode: 'contain', tintColor: '#fff' }} source={require('../../../assets/add_survery_logo.png')} />
             {/* {this.state.loading === false ?  */}
             <Text style={{ textAlign: 'center', fontWeight: 'bold', color: '#fff', flex: 1 }}>{t('draft_survey')}</Text>

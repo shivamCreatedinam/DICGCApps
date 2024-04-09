@@ -143,5 +143,7 @@
     "yes":"Yes",
     "delete_survey":"Delete Survey",
     "continue_survey":"Continue Survey",
-    "delete_all":"Are you sure, you want to Delete All Data Delete?"
+    "delete_all":"Are you sure, you want to Delete All Data Delete?",
+    "logout_message":"Are you sure, you want to logout?",
+    "urid":"URID:"
 }
