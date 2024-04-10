@@ -1,10 +1,13 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, TextInput } from 'react-native';
 import AsyncStorageContaints from '../../../utility/AsyncStorageConstants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { showMessage } from "react-native-flash-message";
 import { useTranslation } from 'react-i18next';
 import React from 'react';
+// redux
+import { save } from "../../../redux/reducers/surveycounter";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function LanguageScreen() {
 
@@ -13,12 +16,27 @@ export default function LanguageScreen() {
     const [SelectLanguage, setSelectLanguage] = React.useState(null);
     const { t, i18n } = useTranslation();
 
+    // redux
+    const dispatch = useDispatch();
+    const { location } = useSelector(state => state)
+    const [locationName, setLocationName] = React.useState('');
+
 
     React.useEffect(() => {
         navigate.addListener("focus", () => {
             getLanguage();
         });
     }, []);
+
+    const handleSave = () => {
+        const ifPrestent = location?.includes(locationName);
+        if (locationName !== undefined && !ifPrestent) {
+            dispatch(save(locationName));
+            setLocationName('')
+        } else {
+            setLocationName('')
+        }
+    }
 
 
     const getLanguage = async () => {
@@ -74,6 +92,20 @@ export default function LanguageScreen() {
             // navigate.replace('LoginScreen');
         }
     }
+
+
+    // return (
+    //     <View style={{padding:20}}>
+    //         <Text style={{ marginTop: 40, fontSize: 22, fontWeight: 'bold' }}>HI</Text>
+    //         <TextInput placeholder='Enter Location' value={locationName} onChangeText={setLocationName} />
+    //         <TouchableOpacity onPress={() => handleSave()} style={{ backgroundColor: '#000', padding: 10, borderRadius: 10, marginTop: 10 }}>
+    //             <Text style={{fontWeight:'bold',color:'#fff',textAlign:'center'}}>Save</Text>
+    //         </TouchableOpacity>
+    //         {location?.map((res) =>
+    //             <Text>{JSON.stringify(res)}</Text>
+    //         )}
+    //     </View>
+    // )
 
     return (
         <ScrollView

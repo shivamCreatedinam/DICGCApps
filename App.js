@@ -26,6 +26,8 @@ import {
 } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import VersionCheck from 'react-native-version-check';
+import { store } from './app/redux/store';
+import { Provider } from 'react-redux';
 import data from './package.json';
 
 console.disableYellowBox = true;
@@ -166,18 +168,20 @@ const App = () => {
     </ImageBackground>
   } else {
     return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <StatusBar
-          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-          backgroundColor={backgroundStyle.backgroundColor}
-        />
-        <StatusBar translucent={true} backgroundColor="transparent" />
-        <AppNavigation />
-        <FlashMessage
-          style={{ marginTop: StatusBar.currentHeight }}
-          position={'top'}
-          ref={myLocalFlashMessage} />
-      </SafeAreaView>
+      <Provider store={store}>
+        <SafeAreaView style={{ flex: 1 }}>
+          <StatusBar
+            barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+            backgroundColor={backgroundStyle.backgroundColor}
+          />
+          <StatusBar translucent={true} backgroundColor="transparent" />
+          <AppNavigation />
+          <FlashMessage
+            style={{ marginTop: StatusBar.currentHeight }}
+            position={'top'}
+            ref={myLocalFlashMessage} />
+        </SafeAreaView>
+      </Provider>
     );
   }
 };

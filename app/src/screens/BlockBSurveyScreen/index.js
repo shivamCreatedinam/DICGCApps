@@ -8,6 +8,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 import RadioButtonRN from 'radio-buttons-react-native';
 import MultiSelect from 'react-native-multiple-select';
 import AudioRecord from 'react-native-audio-record';
+import * as Progress from 'react-native-progress';
 import { Platform } from 'react-native';
 import Modal from 'react-native-modal';
 import Axios from 'axios';
@@ -81,6 +82,7 @@ const BlockBSurveyScreen = () => {
     const multiSelectRef = useRef(null);
     const { t, i18n } = useTranslation();
     // anyGroup
+    const [percentage, setPercentage] = React.useState(0);
 
     React.useEffect(() => {
         try {
@@ -355,7 +357,7 @@ const BlockBSurveyScreen = () => {
 
     const Incomedata = [
         { id: 1, lable: t('news_papers') },
-        { id: 2, lable: t('b_anks') },
+        { id: 2, lable: t('bank') },
         { id: 3, lable: t('Social_media') },
         { id: 4, lable: t('Website') },
         { id: 5, lable: t('earlier_options') },
@@ -365,14 +367,14 @@ const BlockBSurveyScreen = () => {
     const cashReceipt = [
         { id: 1, lable: t('automatic_credit') },
         { id: 2, lable: t('approach_brokers') },
-        { id: 3, lable: t('no_idea')}
+        { id: 3, lable: t('no_idea') }
     ];
 
     const saveMoney = [
-        { id: 1, lable: t('automatic_credit')  },
+        { id: 1, lable: t('automatic_credit') },
         { id: 2, lable: t('approach_brokers') },
-        { id: 3, lable: t('updated_kyc_details')},
-        { id: 4, lable:t('no_idea') }
+        { id: 3, lable: t('updated_kyc_details') },
+        { id: 4, lable: t('no_idea') }
     ];
 
     // gender setDifferently
@@ -393,7 +395,7 @@ const BlockBSurveyScreen = () => {
             label: t('No')
         },
         {
-            label:t('no_idea')
+            label: t('no_idea')
         }
     ];
 
@@ -932,14 +934,13 @@ const BlockBSurveyScreen = () => {
                         description: result.message,
                         type: "success",
                     });
-                    finishSurvey();
+                    setSubmitSurvey(false);
                 } else {
                     showMessage({
                         message: "Something went wrong!",
                         description: result.message,
                         type: "danger",
                     });
-                    // saveSurveryAndMoveToNext();
                 }
             })
             .catch(error => {
@@ -947,6 +948,19 @@ const BlockBSurveyScreen = () => {
                 setSubmitSurvey(false);
             });
     }
+
+    const uploadProgress = (progressEvent) => {
+        var Percentage = Math.round(
+            (progressEvent.loaded / progressEvent.total) * 100,
+        );
+        setPercentage(Percentage);
+        console.log(progressEvent.loaded, progressEvent.total);
+        console.log(
+            'Upload progress: ' +
+            Math.round((progressEvent.loaded / progressEvent.total) * 100) +
+            '%',
+        );
+    };
 
     const uploadAudioFinal = async (file) => {
         setAudioUploading(true);
@@ -969,6 +983,7 @@ const BlockBSurveyScreen = () => {
                     'Authorization': 'Bearer ' + userSendToken,
                 },
                 body: formData,
+                onUploadProgress: uploadProgress,
             });
             const json = await res.json();
             setAudioUploading(false);
@@ -977,12 +992,20 @@ const BlockBSurveyScreen = () => {
                 description: "Audio Upload Successfully!",
                 type: "success",
             });
+            finishSurvey();
         } catch (err) {
             showMessage({
                 message: "Audio Upload",
-                description: "Audio Upload Successfully",
-                type: "success",
+                description: "Audio Upload Failed!",
+                type: "error",
             });
+            Alert.alert(
+                'Audio Uploading Failed!',
+                'Audio Uploading Failed! Please Retry',
+                [
+                    { text: 'Retry', onPress: () => uploadAudioFinal(audioPath) },
+                ]
+            )
         }
     }
 
@@ -1137,6 +1160,7 @@ const BlockBSurveyScreen = () => {
                     </TouchableOpacity>
                 </View>
             </Modal>
+            {isAudioUploading && <Progress.Bar progress={percentage} width={Dimensions.get('screen').width} color={'green'} style={{ borderRadius: 0 }} indeterminate={false} />}
             <Text style={{ fontWeight: 'bold', paddingLeft: 20, paddingTop: 10 }}>{t('Block_II')}: {t('respondent_feedback')}</Text>
             {isLoading === false ?
                 <ScrollView>
@@ -1235,7 +1259,7 @@ const BlockBSurveyScreen = () => {
                                         selectedBtn={(e) => setDifferentBranches(e)}
                                     />
                                     <View style={{ padding: 10, }} />
-                                    <Text>{t('mandatory_for_banks_registered')}</Text>
+                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('mandatory_for_banks_registered')}</Text>
                                     <RadioButtonRN
                                         data={dataOne}
                                         selectedBtn={(e) => setMandatoryRegistered(e)}
@@ -1275,7 +1299,7 @@ const BlockBSurveyScreen = () => {
                                         }}
                                     />
                                     <View style={{ padding: 10, }} />
-                                    <Text style={{ marginBottom: 5 }}>{t('providing_deposit_insurance_coverage')}</Text>
+                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('providing_deposit_insurance_coverage')}</Text>
                                     <Dropdown
                                         style={[styles.dropdown, AccountFrequencyFocus && { borderColor: 'blue' }]}
                                         placeholderStyle={styles.placeholderStyle}
@@ -1326,7 +1350,7 @@ const BlockBSurveyScreen = () => {
                                         }}
                                     />
                                     <View style={{ padding: 10, }} />
-                                    <Text>{t('term')}</Text>
+                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('term')}</Text>
                                     <RadioButtonRN
                                         data={data}
                                         selectedBtn={(e) => setLongOutlet(e)}
@@ -1411,7 +1435,7 @@ const BlockBSurveyScreen = () => {
                             </View>
                             <View style={{ padding: 10, }} />
                             <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                <Text style={{ marginBottom: 5, fontWeight: 'bold', flex: 1 }}>Q.No.17 What happens to your deposit amount if your bank is liquidated by Reserve Bank of India?</Text>
+                                <Text style={{ marginBottom: 5, fontWeight: 'bold', flex: 1 }}>{t('what_happens_to_your_deposit_amount')}</Text>
                                 <Dropdown
                                     style={[styles.dropdown, istransactionFocus && { borderColor: 'blue' }]}
                                     placeholderStyle={styles.placeholderStyle}
@@ -1473,7 +1497,7 @@ const BlockBSurveyScreen = () => {
                                 maxHeight={300}
                                 labelField="lable"
                                 valueField="id"
-                                placeholder={!subsidy2Focus ? t('Select receive your insured liquidated') : sub2sidy}
+                                placeholder={!subsidy2Focus ? t('select_receive_insured_liquidated') : sub2sidy}
                                 // searchPlaceholder="Search..."
                                 value={sub2sidy}
                                 onFocus={() => setSubsidy2Focus(true)}

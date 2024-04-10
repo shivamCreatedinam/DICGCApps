@@ -416,7 +416,6 @@ const AddSurveyScreen = () => {
                         description: response.data.message,
                         type: "success",
                     });
-                    saveSurveryAndMoveToNext();
                 } else {
                     showMessage({
                         message: "Something went wrong!",
@@ -476,12 +475,20 @@ const AddSurveyScreen = () => {
                 description: "Audio Upload Successfully!",
                 type: "success",
             });
+            saveSurveryAndMoveToNext();
         } catch (err) {
             showMessage({
                 message: "Audio Upload",
-                description: "Audio Upload Successfully",
-                type: "success",
+                description: "Audio Upload Failed!",
+                type: "error",
             });
+            Alert.alert(
+                'Audio Uploading Failed!',
+                'Audio Uploading Failed! Please Retry',
+                [
+                    { text: 'Retry', onPress: () => uploadAudioFinal(audioPath) },
+                ]
+            )
         }
     }
 
