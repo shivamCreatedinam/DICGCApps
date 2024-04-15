@@ -80,6 +80,8 @@ const BlockBSurveyScreen = () => {
     const [subsidy, setSubsidy] = React.useState(null);
     const [subsidyFocus, setSubsidyFocus] = React.useState(false);
     const multiSelectRef = useRef(null);
+    const multiSelectRefQ12 = useRef(null);
+    const multiSelectRefQ20 = useRef(null);
     const { t, i18n } = useTranslation();
     // anyGroup
     const [percentage, setPercentage] = React.useState(0);
@@ -281,25 +283,31 @@ const BlockBSurveyScreen = () => {
 
     // multi select 
     const [selectedwhatPurposes, setSelectedwhatPurposes] = React.useState([]);
+    const [selectedwhatPurposesQ12, setSelectedwhatPurposesQ12] = React.useState([]);
+    const [selectedwhatPurposesQ20, setSelectedwhatPurposesQ20] = React.useState([]);
 
     const onSelectedwhatPurposesChange = (selectedItems) => {
-        if (selectedItems.length === 0) {
-            Alert.alert('Selection Required', 'Please select two valid reason.');
-            return
-        }
-        else if (selectedItems.length > 2) {
-            Alert.alert('Limit Exceeded', 'You cannot select more than 2 reasons.', [
-                { text: 'OK', onPress: () => multiSelectRef.current._removeItem(selectedItems[selectedItems.length - 1]) },
-            ]);
-            return
-        }
+        // if (selectedItems.length === 0) {
+        //     Alert.alert('Selection Required', 'Please select two valid reason.');
+        //     return
+        // }
+        // else if (selectedItems.length > 2) {
+        //     Alert.alert('Limit Exceeded', 'You cannot select more than 2 reasons.', [
+        //         { text: 'OK', onPress: () => multiSelectRef.current._removeItem(selectedItems[selectedItems.length - 1]) },
+        //     ]);
+        //     return
+        // }
         setSelectedwhatPurposes(selectedItems);
     }
 
-    const SelectedwhatPurposesLabels = selectedwhatPurposes.map((selectedId) => {
-        const selectedReason = whatPurposesdata.find((reason) => reason.id === selectedId);
-        return selectedReason ? selectedReason.lable : '';
-    });
+    const onSelectedwhatPurposesChangeQ12 = (selectedItems) => {
+        setSelectedwhatPurposesQ12(selectedItems);
+    }
+
+    const onSelectedwhatPurposesChangeQ20 = (selectedItems) => {
+        setSelectedwhatPurposesQ20(selectedItems);
+    }
+
 
     const AccountType = [
         { id: 1, lable: t('newspapers') },
@@ -352,7 +360,7 @@ const BlockBSurveyScreen = () => {
         { id: 3, lable: t('current_account') },
         { id: 4, lable: t('deposits_fixed') },
         { id: 5, lable: t('deposits_fixed_interest') },
-        { id: 5, lable: t('no_idea') },
+        { id: 6, lable: t('no_idea') },
     ];
 
     const Incomedata = [
@@ -607,7 +615,7 @@ const BlockBSurveyScreen = () => {
             });
             return false;
         }
-        else if (TypesOfDeposits === null) {
+        else if (selectedwhatPurposesQ12 === null) {
             showMessage({
                 message: "Please Select deposits are insured by DICGC",
                 description: "Please Select deposits are insured by DICGC!",
@@ -671,7 +679,7 @@ const BlockBSurveyScreen = () => {
             });
             return false;
         }
-        else if (sub3sidy === null) {
+        else if (selectedwhatPurposesQ20 === null) {
             showMessage({
                 message: "Please Select know more about DICGC",
                 description: "Please Select know more about DICGC!",
@@ -831,7 +839,7 @@ const BlockBSurveyScreen = () => {
                     'sub_q_title': "",
                     'sub_q_type': "",
                     'account_no': '',
-                    'response': TypesOfDeposits === null ? [] : `[${TypesOfDeposits}]`
+                    'response': selectedwhatPurposesQ12 === null ? [] : selectedwhatPurposesQ12
                 },
                 {
                     'section_no': "B",
@@ -910,7 +918,7 @@ const BlockBSurveyScreen = () => {
                     "sub_q_title": "",
                     "sub_q_type": "",
                     "account_no": "",
-                    'response': sub3sidy === null ? [] : `[${sub3sidy}]`
+                    'response': selectedwhatPurposesQ20 === null ? [] : selectedwhatPurposesQ20
                 }
             ]
         });
@@ -1045,6 +1053,22 @@ const BlockBSurveyScreen = () => {
 
     const selectedSaveMoneyLabels = SelectedSaveMoney.map((selectedId) => {
         const selectedReason = saveMoney.find((reason) => reason.id === selectedId);
+        return selectedReason ? selectedReason.lable : '';
+    });
+
+
+    const SelectedwhatPurposesLabels = selectedwhatPurposes.map((selectedId) => {
+        const selectedReason = AccountType.find((reason) => reason.id === selectedId);
+        return selectedReason ? selectedReason.lable : '';
+    });
+
+    const SelectedwhatPurposesQ12Labels = selectedwhatPurposesQ12.map((selectedId) => {
+        const selectedReason = subsidyTimes.find((reason) => reason.id === selectedId);
+        return selectedReason ? selectedReason.lable : '';
+    });
+
+    const SelectedwhatPurposesQ20Labels = selectedwhatPurposesQ20.map((selectedId) => {
+        const selectedReason = Incomedata.find((reason) => reason.id === selectedId);
         return selectedReason ? selectedReason.lable : '';
     });
 
@@ -1326,29 +1350,40 @@ const BlockBSurveyScreen = () => {
                                 </View>
                                 <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
                                     <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('deposits_insured_DICGC')}</Text>
-                                    <Dropdown
-                                        style={[styles.dropdown, AccountFrequencyFocus && { borderColor: 'blue' }]}
-                                        placeholderStyle={styles.placeholderStyle}
-                                        selectedTextStyle={styles.selectedTextStyle}
-                                        inputSearchStyle={styles.inputSearchStyle}
-                                        // iconStyle={styles.iconStyle}
-                                        // data={AccountType}
-                                        data={subsidyTimes}
-                                        // search
-                                        maxHeight={300}
-                                        labelField="lable"
-                                        valueField="id"
-                                        placeholder={!AccountFrequencyFocus ? t('select_insured_by_DICGC') : TypesOfDeposits}
-                                        // searchPlaceholder="Search..."
-                                        value={TypesOfDeposits}
-                                        onFocus={() => setAccountTypeFocus(true)}
-                                        onBlur={() => setAccountTypeFocus(false)}
-                                        onChange={item => {
-                                            console.log(JSON.stringify(item))
-                                            setTypesOfDeposits(item.id);
-                                            setAccountFrequencyFocus(false);
-                                        }}
-                                    />
+                                    <View>
+                                        <MultiSelect
+                                            hideTags
+                                            items={subsidyTimes}
+                                            uniqueKey="id"
+                                            ref={multiSelectRefQ12}
+                                            onSelectedItemsChange={(items) =>
+                                                onSelectedwhatPurposesChangeQ12(items)
+                                            }
+                                            selectedItems={selectedwhatPurposesQ12}
+                                            selectText={t('select_insured_by_DICGC')}
+                                            onChangeInput={(text) => console.log(text)}
+                                            altFontFamily="ProximaNova-Light"
+                                            tagRemoveIconColor="#000"
+                                            tagBorderColor="#000"
+                                            tagTextColor="#000"
+                                            selectedItemTextColor="#000"
+                                            selectedItemIconColor="#000"
+                                            itemTextColor="#000"
+                                            displayKey="lable"
+                                            searchInputStyle={{ color: '#000', paddingLeft: 10 }}
+                                            submitButtonColor="#000"
+                                            submitButtonText="Submit"
+                                            itemBackground="#000"
+                                            styleTextDropdownSelected={{ color: '#000', paddingLeft: 8, fontSize: 16 }}
+                                        />
+                                        <View style={{ padding: 8, flexDirection: 'row', flexWrap: 'wrap' }}>
+                                            {SelectedwhatPurposesQ12Labels.map((label, index) => (
+                                                <View style={{ margin: 5 }}>
+                                                    <Text key={index} style={{ color: '#000', borderColor: '#DFDFDF', borderWidth: 0.8, padding: 10 }}>{label}</Text>
+                                                </View>
+                                            ))}
+                                        </View>
+                                    </View>
                                     <View style={{ padding: 10, }} />
                                     <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('term')}</Text>
                                     <RadioButtonRN
@@ -1511,7 +1546,41 @@ const BlockBSurveyScreen = () => {
                         </View>
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('like_more_about_DICGC')}</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>xx{t('like_more_about_DICGC')}</Text>
+                            <View>
+                                <MultiSelect
+                                    hideTags
+                                    items={Incomedata}
+                                    uniqueKey="id"
+                                    ref={multiSelectRefQ20}
+                                    onSelectedItemsChange={(items) =>
+                                        onSelectedwhatPurposesChangeQ20(items)
+                                    }
+                                    selectedItems={selectedwhatPurposesQ20}
+                                    selectText={t('select_more_about_DICGC')}
+                                    onChangeInput={(text) => console.log(text)}
+                                    altFontFamily="ProximaNova-Light"
+                                    tagRemoveIconColor="#000"
+                                    tagBorderColor="#000"
+                                    tagTextColor="#000"
+                                    selectedItemTextColor="#000"
+                                    selectedItemIconColor="#000"
+                                    itemTextColor="#000"
+                                    displayKey="lable"
+                                    searchInputStyle={{ color: '#000', paddingLeft: 10 }}
+                                    submitButtonColor="#000"
+                                    submitButtonText="Submit"
+                                    itemBackground="#000"
+                                    styleTextDropdownSelected={{ color: '#000', paddingLeft: 8, fontSize: 16 }}
+                                />
+                                <View style={{ padding: 8, flexDirection: 'row', flexWrap: 'wrap' }}>
+                                    {SelectedwhatPurposesQ20Labels.map((label, index) => (
+                                        <View style={{ margin: 5 }}>
+                                            <Text key={index} style={{ color: '#000', borderColor: '#DFDFDF', borderWidth: 0.8, padding: 10 }}>{label}</Text>
+                                        </View>
+                                    ))}
+                                </View>
+                            </View>
                             <Dropdown
                                 style={[styles.dropdown, subsidy3Focus && { borderColor: 'blue' }]}
                                 placeholderStyle={styles.placeholderStyle}

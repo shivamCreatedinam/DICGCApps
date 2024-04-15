@@ -170,7 +170,6 @@ export default function LanguageScreen() {
                     <Image style={{ width: 20, height: 20, resizeMode: 'contain' }} source={require('../../../assets/check_mark.png')} />
                 </View> : null}
             </TouchableOpacity>
-
             <TouchableOpacity onPress={() => saveLanguage()} style={{ width: '100%', height: 50, backgroundColor: '#000', marginTop: 40, elevation: 5, borderRadius: 5, marginBottom: 150, }}>
                 <Text style={{ fontSize: 14, color: '#fff', textAlign: 'center', marginTop: 15, textTransform: 'uppercase', fontWeight: 'bold' }}>{t('save_language')}</Text>
             </TouchableOpacity>

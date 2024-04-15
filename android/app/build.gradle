@@ -77,8 +77,8 @@ android {
         applicationId "com.createdinam.dicgc.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 5
-        versionName "1.5"
+        versionCode 7
+        versionName "1.7"
     }
     signingConfigs {
         debug {
@@ -113,6 +113,7 @@ dependencies {
     }
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-i18n')
+    implementation project(':react-native-network-speed')
     debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}")
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")

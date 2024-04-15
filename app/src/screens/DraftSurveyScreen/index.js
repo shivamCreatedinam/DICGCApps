@@ -162,7 +162,13 @@ class DraftSurveyScreen extends Component {
             });
         } else if (this.state.DraftSection === 'B') {
             console.log("inside B")
-            this.props.navigation.replace('BlockCSurveyScreen');
+            // this.props.navigation.replace('BlockCSurveyScreen');
+            showMessage({
+                message: "Finished the Sruvey",
+                description: "Your Survey is Finished!",
+                type: "success",
+            });
+            this.finishSurvey();
         } else if (this.state.DraftSection === 'C') {
             console.log("inside C")
             this.props.navigation.replace('BlockDSurveyScreen');

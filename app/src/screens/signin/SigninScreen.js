@@ -104,7 +104,7 @@ const SigninScreen = props => {
             type: "success",
           });
           setLoading(false);
-          navigation.replace('DashboardScreen');
+          navigation.replace('PermissionScreenMain');
         } else {
           showMessage({
             message: "User Not Found",

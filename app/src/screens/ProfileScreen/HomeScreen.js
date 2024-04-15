@@ -20,6 +20,7 @@ import { showMessage, hideMessage } from "react-native-flash-message";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AsyncStorageContaints from '../../../utility/AsyncStorageConstants';
 import HeaderWithLocation from '../../../genriccomponents/header/HeaderWithLocation';
+import networkSpeed from 'react-native-network-speed';
 import AudioRecord from 'react-native-audio-record';
 import { withTranslation } from 'react-i18next';
 
@@ -75,7 +76,17 @@ class HomeScreen extends Component {
       //do your api call
       this.readMessages();
       this.getSavedLocation();
+      this.checkInternetSpeed();
     });
+  }
+
+  checkInternetSpeed() {
+    // networkSpeed.startListenNetworkSpeed(({ downLoadSpeed, downLoadSpeedCurrent, upLoadSpeed, upLoadSpeedCurrent }) => {
+    //   console.log(downLoadSpeed + 'kb/s') // download speed for the entire device 整个设备的下载速度
+    //   console.log(downLoadSpeedCurrent + 'kb/s') // download speed for the current app 当前app的下载速度(currently can only be used on Android)
+    //   console.log(upLoadSpeed + 'kb/s') // upload speed for the entire device 整个设备的上传速度
+    //   console.log(upLoadSpeedCurrent + 'kb/s') // upload speed for the current app 当前app的上传速度(currently can only be used on Android)
+    // })
   }
 
   getSavedLocation = async () => {

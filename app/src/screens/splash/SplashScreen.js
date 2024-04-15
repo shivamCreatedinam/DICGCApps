@@ -20,7 +20,7 @@ class SplashScreen extends Component {
       const userId = await AsyncStorage.getItem(AsyncStorageContaints.UserId);
       if (userId !== null && userId != '') {
         console.log('componentDidMount--->', userId);
-        this.props.navigation.replace('LanguageScreen');
+        this.props.navigation.replace('PermissionScreenMain');
         isLoggedIn = true;
       } else {
         this.props.navigation.replace('SigninScreen');

@@ -1,4 +1,5 @@
 import { Text, View, TouchableOpacity, Image, PermissionsAndroid, BackHandler, Platform } from 'react-native';
+import AsyncStorageContaints from '../../../utility/AsyncStorageConstants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { showMessage, hideMessage } from "react-native-flash-message";
 import React, { Component } from 'react';
@@ -19,7 +20,7 @@ export default class PermissionScreenMain extends Component {
     async componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.onBackClick);
         this.props.navigation.addListener('focus', () => {
-            this.componentDidFocus()
+            // this.componentDidFocus()
         });
     }
 
@@ -30,8 +31,13 @@ export default class PermissionScreenMain extends Component {
     componentDidFocus = async () => {
         try {
             const value = await AsyncStorage.getItem('@permissioncheck');
+            const userId = await AsyncStorage.getItem(AsyncStorageContaints.UserId);
             if (value === 'true') {
-                this.props.navigation.replace('SplashScreen');
+                if (userId !== null && userId != '') {
+                    this.props.navigation.replace('LanguageScreen');
+                }else{ 
+                    this.props.navigation.replace('SigninScreen');
+                } 
             }
         } catch (error) {
             console.error('componentDidFocus', JSON.stringify(error))
@@ -127,7 +133,7 @@ export default class PermissionScreenMain extends Component {
                 this.setState({ filePermission: false });
             }
         } catch (err) {
-            console.log(err)
+            console.log(err);
         }
     }
 
@@ -171,7 +177,7 @@ export default class PermissionScreenMain extends Component {
     async checkAllPermission() {
         if (this.state.cameraPermission === true && this.state.locationPermission === true && this.state.notificationPermission === true) {
             AsyncStorage.setItem('@permissioncheck', 'true');
-            this.props.navigation.replace('SigninScreen');
+            this.props.navigation.replace('LanguageScreen');
             console.log('saved')
         } else {
             showMessage({
