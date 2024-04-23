@@ -13,6 +13,7 @@ import { Platform } from 'react-native';
 import Modal from 'react-native-modal';
 import Axios from 'axios';
 import { useTranslation } from 'react-i18next';
+import { Audio } from 'react-native-compressor';
 
 const options = {
     sampleRate: 16000,  // default 44100
@@ -499,11 +500,12 @@ const BlockBSurveyScreen = () => {
     const stopRecording = async () => {
         try {
             // or to get the wav file path
-            console.log('stopRecording')
+            console.log('stopRecording');
             const audioFile = await AudioRecord.stop();
-            console.log(audioFile)
+            console.log(audioFile);
             setAudioPath(audioFile);
-            uploadAudioFinal(audioFile);
+            const audioResultFile = await Audio.compress(audioFile, { quality: 'low' });
+            uploadAudioFinal(audioResultFile);
             submitSurveyXml();
         } catch (error) {
             console.log(error);
@@ -1581,29 +1583,6 @@ const BlockBSurveyScreen = () => {
                                     ))}
                                 </View>
                             </View>
-                            <Dropdown
-                                style={[styles.dropdown, subsidy3Focus && { borderColor: 'blue' }]}
-                                placeholderStyle={styles.placeholderStyle}
-                                selectedTextStyle={styles.selectedTextStyle}
-                                inputSearchStyle={styles.inputSearchStyle}
-                                // iconStyle={styles.iconStyle}
-                                // data={AccountType}
-                                data={Incomedata}
-                                // search
-                                maxHeight={300}
-                                labelField="lable"
-                                valueField="id"
-                                placeholder={!subsidy3Focus ? t('select_more_about_DICGC') : sub3sidy}
-                                // searchPlaceholder="Search..."
-                                value={sub3sidy}
-                                onFocus={() => setSubsidy3Focus(true)}
-                                onBlur={() => setSubsidy3Focus(false)}
-                                onChange={item => {
-                                    console.log(JSON.stringify(item))
-                                    set3Subsidy(item.id);
-                                    setSubsidy3Focus(false);
-                                }}
-                            />
                         </View>
                         <View style={{ padding: 10, }} />
                         <TouchableOpacity

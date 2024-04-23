@@ -1,4 +1,5 @@
 {
   "name": "DICGC Survey",
-  "displayName": "DICGC Survey"
+  "displayName": "DICGC Survey",
+  "plugins": ["react-native-compressor"]
 }

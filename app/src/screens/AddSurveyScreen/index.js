@@ -13,6 +13,7 @@ import * as Progress from 'react-native-progress';
 import Modal from 'react-native-modal';
 import Axios from 'axios';
 import { useTranslation } from 'react-i18next';
+import { Audio } from 'react-native-compressor';
 // import fs from 'fs';
 
 const AddSurveyScreen = () => {
@@ -296,7 +297,8 @@ const AddSurveyScreen = () => {
             const audioFile = await AudioRecord.stop();
             console.log('stopRecording', audioFile);
             setAudioPath(audioFile);
-            uploadAudioFinal(audioFile);
+            const audioResultFile = await Audio.compress(audioFile, { quality: 'low' });
+            uploadAudioFinal(audioResultFile);
             submitSurvey();
         } catch (error) {
             console.log(error);
