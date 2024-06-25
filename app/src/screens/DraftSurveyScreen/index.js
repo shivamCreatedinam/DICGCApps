@@ -47,7 +47,7 @@ class DraftSurveyScreen extends Component {
 
     async getDraftSurvey() {
         // api/generate-survey-token
-        let SERVER = 'https://scslsurvey.online/DICGCA-SURVEY/public/api/get-survey-token'
+        let SERVER = 'https://createdinam.com/DICGCA-SURVEY/public/api/get-survey-token'
         this.setState({ DraftLoading: true });
         const headers = {
             'Content-Type': 'application/json',
@@ -118,7 +118,7 @@ class DraftSurveyScreen extends Component {
 
     async finishSurvey() {
         const userId = await AsyncStorage.getItem(AsyncStorageContaints.tempServerTokenId);
-        let SERVER = 'https://scslsurvey.online/DICGCA-SURVEY/public/api/finish-survey';
+        let SERVER = 'https://createdinam.com/DICGCA-SURVEY/public/api/finish-survey';
         var myHeaders = new Headers();
         myHeaders.append("Authorization", `Bearer ${this.state.userToken}`);
         var formdata = new FormData();

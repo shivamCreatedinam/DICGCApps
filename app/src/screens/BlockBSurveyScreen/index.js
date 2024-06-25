@@ -45,6 +45,7 @@ const BlockBSurveyScreen = () => {
     const [Longitude, setLongitude] = React.useState('');
     const [isAudioUploading, setAudioUploading] = React.useState(false);
     const [isSubmitSurvey, setSubmitSurvey] = React.useState(false);
+    const [extraComments, setExtraComments] = React.useState('');
 
     // country dropdowns
     const [value, setValue] = React.useState(null);
@@ -920,7 +921,8 @@ const BlockBSurveyScreen = () => {
                     "sub_q_title": "",
                     "sub_q_type": "",
                     "account_no": "",
-                    'response': selectedwhatPurposesQ20 === null ? [] : selectedwhatPurposesQ20
+                    'response': selectedwhatPurposesQ20 === null ? [] : selectedwhatPurposesQ20,
+                    "other_comments": extraComments,
                 }
             ]
         });
@@ -934,7 +936,7 @@ const BlockBSurveyScreen = () => {
 
         console.log('submitSurveyXml______>', raw);
 
-        fetch("https://scslsurvey.online/DICGCA-SURVEY/public/api/create-survey-section-b", requestOptions)
+        fetch("https://createdinam.com/DICGCA-SURVEY/public/api/create-survey-section-b", requestOptions)
             .then(response => response.json())
             .then(result => {
                 console.log('submitSurveyXml______', JSON.stringify(result));
@@ -974,7 +976,7 @@ const BlockBSurveyScreen = () => {
 
     const uploadAudioFinal = async (file) => {
         setAudioUploading(true);
-        let API_UPLOAD_MSG_FILE = `https://scslsurvey.online/DICGCA-SURVEY/public/api/survey-audio-files`;
+        let API_UPLOAD_MSG_FILE = `https://createdinam.com/DICGCA-SURVEY/public/api/survey-audio-files`;
         const path = `file://${file}`;
         const formData = new FormData();
         formData.append('survey_token', name);
@@ -1136,7 +1138,7 @@ const BlockBSurveyScreen = () => {
 
     const finishSurvey = async () => {
         const userId = await AsyncStorage.getItem(AsyncStorageContaints.tempServerTokenId);
-        let SERVER = 'https://scslsurvey.online/DICGCA-SURVEY/public/api/finish-survey';
+        let SERVER = 'https://createdinam.com/DICGCA-SURVEY/public/api/finish-survey';
         var myHeaders = new Headers();
         myHeaders.append("Authorization", "Bearer " + userSendToken);
         var formdata = new FormData();
@@ -1208,7 +1210,9 @@ const BlockBSurveyScreen = () => {
                                 />
                             </View>
                             <View style={{ padding: 10, }} />
-                            <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
+                            <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff', borderWidth: .5 }}>
+                                <Text style={{ marginBottom: 20, fontSize: 16 }}>{t('deposit_insurance_intro')}</Text>
+                                <Text style={{ marginBottom: 20, fontSize: 16 }}>{t('understand_deposit')}</Text>
                                 <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('deposit_insurance')}</Text>
                                 <RadioButtonRN
                                     data={dataOne}
@@ -1225,7 +1229,8 @@ const BlockBSurveyScreen = () => {
                             </View>
                         </View>
                         <View style={{ padding: 10, }} />
-                        <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
+                        <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff', borderWidth: .5 }}>
+                            <Text style={{ marginBottom: 20, fontSize: 16 }}>{t('guarantee_corporation')}</Text>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('if_yes_DICGC')}</Text>
                             <Dropdown
                                 style={[styles.dropdown, AccountFrequencyFocus && { borderColor: 'blue' }]}
@@ -1291,7 +1296,12 @@ const BlockBSurveyScreen = () => {
                                         selectedBtn={(e) => setMandatoryRegistered(e)}
                                     />
                                 </View>
-                                <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
+                                <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff', borderWidth: .5, marginTop: 20, marginBottom: 20 }}>
+                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('individual_accounts')}</Text>
+                                    <Text style={{ marginBottom: 5 }}>{t('individual_opens')}</Text>
+                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('joint_accounts')}</Text>
+                                    <Text style={{ marginBottom: 5 }}>{t('individuals_three')}</Text>
+                                    <Image resizeMode={'contain'} style={{ resizeMode: 'contain', width: Dimensions.get('screen').width - 40, height: 220, alignSelf: 'center' }} source={require('../../../assets/table_info.png')} />
                                     <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('right_and_capacity')}</Text>
                                     <RadioButtonRN
                                         data={dataOne}
@@ -1386,7 +1396,11 @@ const BlockBSurveyScreen = () => {
                                             ))}
                                         </View>
                                     </View>
-                                    <View style={{ padding: 10, }} />
+                                </View>
+                                <View style={{ borderWidth: .5, padding: 5 }}>
+                                    <Text style={{ marginBottom: 20, fontSize: 16, fontWeight: '900' }}>{t('inclusive_directions')}</Text>
+                                    <Text style={{ marginBottom: 20, fontSize: 16 }}>{t('certain_cases')}</Text>
+                                    <View style={{ padding: 10 }} />
                                     <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('term')}</Text>
                                     <RadioButtonRN
                                         data={data}
@@ -1396,7 +1410,9 @@ const BlockBSurveyScreen = () => {
                             </View>
                         </View>
                         <View style={{ padding: 10, }} />
-                        <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
+                        <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff', borderWidth: .5 }}>
+                            <Text style={{ marginBottom: 20, fontSize: 16, fontWeight: '900' }}>{t('Liquidation')}</Text>
+                            <Text style={{ marginBottom: 20, fontSize: 16 }}>{t('liquidation_process')}</Text>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('liquidation_bank')}</Text>
                             <RadioButtonRN
                                 data={data}
@@ -1548,7 +1564,7 @@ const BlockBSurveyScreen = () => {
                         </View>
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>xx{t('like_more_about_DICGC')}</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('like_more_about_DICGC')}</Text>
                             <View>
                                 <MultiSelect
                                     hideTags
@@ -1582,6 +1598,18 @@ const BlockBSurveyScreen = () => {
                                         </View>
                                     ))}
                                 </View>
+                            </View>
+                            <View>
+                                {selectedwhatPurposesQ20 == 6 ?
+                                    <TextInput
+                                        placeholder='Enter reasons/additional comments'
+                                        multiline
+                                        numberOfLines={5}
+                                        textAlignVertical={'top'}
+                                        editable={true}
+                                        value={extraComments}
+                                        onChangeText={(text) => setExtraComments(text)}
+                                        style={{ borderWidth: 1, borderColor: '#b4b4b4', padding: 5, borderRadius: 5 }} /> : null}
                             </View>
                         </View>
                         <View style={{ padding: 10, }} />

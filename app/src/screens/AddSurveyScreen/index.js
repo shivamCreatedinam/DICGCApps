@@ -188,7 +188,7 @@ const AddSurveyScreen = () => {
     const getState = async () => {
         setLoading(true);
         const UserToken = await AsyncStorage.getItem(AsyncStorageContaints.UserId);
-        let url = `https://scslsurvey.online/DICGCA-SURVEY/public/api/get-states`;
+        let url = `https://createdinam.com/DICGCA-SURVEY/public/api/get-states`;
         const headers = {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${UserToken}`
@@ -213,7 +213,7 @@ const AddSurveyScreen = () => {
 
     const loadDistrict = async (state) => {
         const UserToken = await AsyncStorage.getItem(AsyncStorageContaints.UserId);
-        let url = `https://scslsurvey.online/DICGCA-SURVEY/public/api/get-city/${Number(state)}`;
+        let url = `https://createdinam.com/DICGCA-SURVEY/public/api/get-city/${Number(state)}`;
         const headers = {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${UserToken}`
@@ -400,7 +400,7 @@ const AddSurveyScreen = () => {
         let config = {
             method: 'post',
             maxBodyLength: Infinity,
-            url: 'https://scslsurvey.online/DICGCA-SURVEY/public/api/create-survey-demographics',
+            url: 'https://createdinam.com/DICGCA-SURVEY/public/api/create-survey-demographics',
             headers: {
                 'Authorization': 'Bearer ' + userSendToken,
                 "Content-Type": "multipart/form-data",
@@ -449,7 +449,7 @@ const AddSurveyScreen = () => {
 
     const uploadAudioFinal = async (file) => {
         setAudioUploading(true);
-        let API_UPLOAD_MSG_FILE = `https://scslsurvey.online/DICGCA-SURVEY/public/api/survey-audio-files`;
+        let API_UPLOAD_MSG_FILE = `https://createdinam.com/DICGCA-SURVEY/public/api/survey-audio-files`;
         const path = `file://${file}`;
         const formData = new FormData();
         formData.append('survey_token', name);
@@ -528,6 +528,13 @@ const AddSurveyScreen = () => {
             <Text style={{ fontWeight: 'bold', paddingLeft: 20, paddingTop: 10 }}> {t('Block_I')}. {t('Respondennt_Details')}</Text>
             {isLoading === false ?
                 <ScrollView>
+                    <View style={{ margin: 20, marginBottom: 0 }}>
+                        <Text style={{ marginBottom: 20, fontSize: 16 }}>{t('check_respondent')}</Text>
+                        <Text style={{ marginBottom: 20, fontSize: 16 }}>{t('check_validation')}</Text>
+                        <Text style={{ marginBottom: 20, fontSize: 16 }}>{t('check_accepted')}</Text>
+                        <Text style={{ marginBottom: 20, fontSize: 16 }}>{t('check_category')}</Text>
+                    </View>
+                    <View style={{ padding: 10, borderBottomWidth: 1, borderColor: '#b4b4b4', marginBottom: 20 }} />
                     <View style={{ padding: 10 }}>
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>1. {t("name")}:</Text>
@@ -639,7 +646,8 @@ const AddSurveyScreen = () => {
                             />
                         </View>
                         <View style={{ padding: 10, }} />
-                        <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
+                        <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff',borderWidth:.5 }}>
+                            <Text style={{ paddingVertical: 20, paddingHorizontal: 5 }}>{t('respondent_certificate')}</Text>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>7. {t('education')}</Text>
                             <Dropdown
                                 style={[styles.dropdown, is2Focus && { borderColor: 'blue' }]}
@@ -664,7 +672,8 @@ const AddSurveyScreen = () => {
                             />
                         </View>
                         <View style={{ padding: 10, }} />
-                        <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
+                        <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff',borderWidth:.5 }}>
+                            <Text style={{ paddingVertical: 20, paddingHorizontal: 5 }}>{t('monthly_income')}</Text>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>8. {t('income')}</Text>
                             <Dropdown
                                 style={[styles.dropdown, is3Focus && { borderColor: 'blue' }]}
