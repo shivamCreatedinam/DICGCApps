@@ -529,8 +529,8 @@ const AddSurveyScreen = () => {
             {isLoading === false ?
                 <ScrollView>
                     <View style={{ margin: 20, marginBottom: 0 }}>
-                        <Text style={{ marginBottom: 20, fontSize: 16 }}>{t('check_respondent')}</Text>
-                        <Text style={{ marginBottom: 20, fontSize: 16 }}>{t('check_validation')}</Text>
+                        {/* <Text style={{ marginBottom: 20, fontSize: 16 }}>{t('check_respondent')}</Text> */}
+                        {/* <Text style={{ marginBottom: 20, fontSize: 16 }}>{t('check_validation')}</Text> */}
                         <Text style={{ marginBottom: 20, fontSize: 16 }}>{t('check_accepted')}</Text>
                         <Text style={{ marginBottom: 20, fontSize: 16 }}>{t('check_category')}</Text>
                     </View>

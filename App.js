@@ -43,6 +43,7 @@ const options = {
 const App = () => {
 
   const myLocalFlashMessage = useRef();
+  const [isMockLocation, setIsMockLocation] = useState(false);
   const [isupdated, setisupdated] = React.useState(false);
   const appState = React.useRef(AppState.currentState);
   const [isScanning, setIsScanning] = useState(false);
@@ -57,6 +58,18 @@ const App = () => {
     }
   }, []);
 
+  // useEffect(() => {
+  //   checkMockLocation()
+  //     .then(result => {
+  //       setIsMockLocation(result);
+  //       if (result) {
+  //         Alert.alert('Warning', 'Mock location detected!');
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.error(error);
+  //     });
+  // }, []);
 
   React.useEffect(() => {
     checkAppVersion();
@@ -121,7 +134,12 @@ const App = () => {
 
   Geolocation.getCurrentPosition(
     (position) => {
-      console.log("position", position)
+      console.log("position", position?.mocked)
+      if (position?.mocked) {
+        Alert.alert('Security Warring 👨‍💻', 'Mock location detected! Your location is not secure.');
+      } else {
+        Alert.alert('Info 👨‍💻', 'Your location is secure.');
+      }
       //getting the Longitude from the location json
       const currentLongitude = JSON.stringify(position.coords.longitude);
       //getting the Latitude from the location json

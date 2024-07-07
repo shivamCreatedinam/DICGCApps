@@ -101,13 +101,13 @@ const InstructionScreen = () => {
             {renderCustomHeader()}
             <ScrollView>
                 <View style={{ margin: 20 }}>
-                    <Text style={{ marginBottom: 20, fontSize: 16, fontWeight: '900' }}>{t('following_instructions')}</Text>
+                    {/* <Text style={{ marginBottom: 20, fontSize: 16, fontWeight: '900' }}>{t('following_instructions')}</Text> */}
                     <Text style={{ marginBottom: 20, fontSize: 16 }}>{t('good_morning_one')}{userName}{t('good_morning_two')}</Text>
                     <Text style={{ marginBottom: 20, fontSize: 16 }}>{t('awareness')}</Text>
                     <Text style={{ marginBottom: 20, fontSize: 16 }}>{t('confidential')}</Text>
                     <Text style={{ marginBottom: 20, fontSize: 16 }}>{t('participate')}</Text>
                     <Text style={{ marginBottom: 20, fontSize: 16 }}>{t('banking')}</Text>
-                    <Text style={{ marginBottom: 20, fontSize: 16, fontWeight: '900' }}>{t('following_description')}</Text>
+                    {/* <Text style={{ marginBottom: 20, fontSize: 16, fontWeight: '900' }}>{t('following_description')}</Text> */}
                     <Text style={{ marginBottom: 20, fontSize: 16 }}>{t('financial_sector_employee')}</Text>
                     <Text style={{ marginBottom: 20, fontSize: 16 }}>{t('other_employees')}</Text>
                     <Text style={{ marginBottom: 20, fontSize: 16 }}>{t('self_employed')}</Text>
