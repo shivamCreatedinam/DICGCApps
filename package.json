@@ -1,6 +1,6 @@
 {
   "name": "dicgcsurvey",
-  "version": "0.1.13",
+  "version": "0.1.15",
   "private": true,
   "scripts": {
     "android": "react-native run-android",

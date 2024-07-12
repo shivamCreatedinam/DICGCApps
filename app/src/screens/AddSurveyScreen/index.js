@@ -35,6 +35,7 @@ const AddSurveyScreen = () => {
     const [areasSelected, setSelectedAreas] = React.useState([]);
     const [state, setStateData] = React.useState([]);
     const [DistrictData, setDistrictData] = React.useState([]);
+    const [PinCodeData, setPinCodeData] = React.useState([]);
     const [Lattitude, setLattitude] = React.useState('');
     const [Longitude, setLongitude] = React.useState('');
     // country dropdowns
@@ -510,6 +511,39 @@ const AddSurveyScreen = () => {
         setSelectedIncomes(selectedItems);
     }
 
+    const loadPinCode = (name) => {
+        // https://createdinam.com/DICGCA-SURVEY/public/api/get-pincode
+        const FormData = require('form-data');
+        let data = new FormData();
+        data.append('district', name);
+        let config = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: 'https://createdinam.com/DICGCA-SURVEY/public/api/get-pincode',
+            headers: {
+                'Authorization': 'Bearer ' + userSendToken,
+                "Content-Type": "multipart/form-data",
+            },
+            data: data,
+        };
+        console.log('submitSurvey', JSON.stringify(config))
+        Axios.request(config)
+            .then((response) => {
+                console.log('submitSurvey response', JSON.stringify(response.data))
+                if (response.data.status === true) {
+                    const keyValueArray = response?.data?.data?.map((code, index) => ({ key: (index + 1).toString(), value: code }));
+                    setPinCodeData(keyValueArray)
+                } else {
+                    showMessage({
+                        message: "Something went wrong!",
+                        description: "Please select Diffrent District \n No Pincode Found",
+                        type: "danger",
+                    });
+                }
+            });
+    }
+
+
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#F8F8FF' }}>
             {renderCustomHeader()}
@@ -591,13 +625,33 @@ const AddSurveyScreen = () => {
                                 onChange={item => {
                                     console.log('______>', JSON.stringify(item))
                                     setDistrictValue(item?.id);
+                                    loadPinCode(item?.name);
                                     setIs5Focus(false);
                                 }}
                             />
                         </View>
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff', marginTop: 5 }}>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>{t('pin_code')}</Text>
-                            <TextInput keyboardType='numeric' maxLength={6} style={{ backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder={t('enter_pincode')} editable={true} value={PinCode} onChangeText={(text) => setPinCode(text)} />
+                            <Dropdown
+                                style={[styles.dropdown, is6Focus && { borderColor: 'blue' }]}
+                                placeholderStyle={styles.placeholderStyle}
+                                selectedTextStyle={styles.selectedTextStyle}
+                                inputSearchStyle={styles.inputSearchStyle}
+                                data={PinCodeData}
+                                maxHeight={300}
+                                labelField="value"
+                                valueField="value"
+                                placeholder={!is6Focus ? t('pin_code') : PinCode}
+                                value={PinCode}
+                                onFocus={() => setIs6Focus(true)}
+                                onBlur={() => setIs6Focus(false)}
+                                onChange={item => {
+                                    console.log('______>', JSON.stringify(item))
+                                    setPinCode(item?.value);
+                                    setIs6Focus(false);
+                                }}
+                            />
+                            {/* <TextInput keyboardType='numeric' maxLength={6} style={{ backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder={t('enter_pincode')} editable={true} value={PinCode} onChangeText={(text) => setPinCode(text)} /> */}
                         </View>
 
                         <View style={{ padding: 10, }} />
@@ -646,7 +700,7 @@ const AddSurveyScreen = () => {
                             />
                         </View>
                         <View style={{ padding: 10, }} />
-                        <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff',borderWidth:.5 }}>
+                        <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff', borderWidth: .5 }}>
                             <Text style={{ paddingVertical: 20, paddingHorizontal: 5 }}>{t('respondent_certificate')}</Text>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>7. {t('education')}</Text>
                             <Dropdown
@@ -672,7 +726,7 @@ const AddSurveyScreen = () => {
                             />
                         </View>
                         <View style={{ padding: 10, }} />
-                        <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff',borderWidth:.5 }}>
+                        <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff', borderWidth: .5 }}>
                             <Text style={{ paddingVertical: 20, paddingHorizontal: 5 }}>{t('monthly_income')}</Text>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>8. {t('income')}</Text>
                             <Dropdown

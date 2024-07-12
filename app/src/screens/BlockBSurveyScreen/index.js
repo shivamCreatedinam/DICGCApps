@@ -1226,6 +1226,7 @@ const BlockBSurveyScreen = () => {
                                     data={dataOne}
                                     selectedBtn={(e) => setConstitutionDICGC(e)}
                                 />
+                                <Text style={{ marginBottom: 20, fontSize: 16, marginTop: 10 }}>{t('guarantee_corporation')}</Text>
                             </View>
                         </View>
                         <View style={{ padding: 10, }} />
@@ -1251,7 +1252,6 @@ const BlockBSurveyScreen = () => {
                                     setAccountFrequencyFocus(false);
                                 }}
                             />
-                            <Text style={{ marginBottom: 20, fontSize: 16, marginTop: 10 }}>{t('guarantee_corporation')}</Text>
                         </View>
                         <View style={{ padding: 10, }} />
                         <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{t('depositors_financial_institutions')}</Text>
