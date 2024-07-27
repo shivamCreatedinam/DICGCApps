@@ -9,6 +9,7 @@ import RadioButtonRN from 'radio-buttons-react-native';
 import MultiSelect from 'react-native-multiple-select';
 import AudioRecord from 'react-native-audio-record';
 import * as Progress from 'react-native-progress';
+import CountDown from 'react-native-countdown-fixed';
 import { Platform } from 'react-native';
 import Modal from 'react-native-modal';
 import Axios from 'axios';
@@ -46,7 +47,7 @@ const BlockBSurveyScreen = () => {
     const [isAudioUploading, setAudioUploading] = React.useState(false);
     const [isSubmitSurvey, setSubmitSurvey] = React.useState(false);
     const [extraComments, setExtraComments] = React.useState('');
-
+    const [isAudioUpload, setAudioUpload] = React.useState(false);
     // country dropdowns
     const [value, setValue] = React.useState(null);
     const [selectedState, setSelectedState] = React.useState(null);
@@ -469,7 +470,6 @@ const BlockBSurveyScreen = () => {
             avatar: 'https://electricallicenserenewal.com/app-assets/images/user/12.jpg',
             active: true,
         };
-        // this.props?.route?.params?.item?.profile_image,
         return (
             <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 10, alignSelf: 'flex-start', marginTop: StatusBar.currentHeight, paddingHorizontal: 20, backgroundColor: '#fff', elevation: 5, width: '100%' }}>
                 <TouchableOpacity onPress={() => askToCloseApp()} style={{ marginRight: 10, padding: 5 }}>
@@ -483,7 +483,19 @@ const BlockBSurveyScreen = () => {
                     <Text style={{ fontWeight: 'bold' }}>{userName} - {user.name}</Text>
                     {user.active && <Text style={{ color: 'green', fontSize: 12, fontWeight: 'bold' }}>{t('active_survey_token')} - <Text style={{ fontWeight: 'bold', fontSize: 14, color: 'red' }}>{t('Block_B')}</Text> </Text>}
                 </View>
-                {isRecording === true ? <View style={{ height: 10, width: 10, borderRadius: 100, backgroundColor: 'green' }} /> : <View style={{ height: 10, width: 10, borderRadius: 100, backgroundColor: 'red' }} />}
+                <CountDown
+                    size={11}
+                    until={210}
+                    onFinish={() => stopAutoRecording()}
+                    digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#000000' }}
+                    digitTxtStyle={{ color: '#1CC625' }}
+                    timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
+                    separatorStyle={{ color: '#1CC625' }}
+                    timeToShow={['M', 'S']}
+                    timeLabels={{ m: null, s: null }}
+                    showSeparator
+                />
+                {isRecording === true ? <View style={{ height: 10, width: 10, borderRadius: 100, backgroundColor: 'green', marginLeft: 10 }} /> : <View style={{ height: 10, width: 10, borderRadius: 100, backgroundColor: 'red', marginLeft: 10 }} />}
             </View>
         );
     }
@@ -501,13 +513,15 @@ const BlockBSurveyScreen = () => {
     const stopRecording = async () => {
         try {
             // or to get the wav file path
-            console.log('stopRecording');
-            const audioFile = await AudioRecord.stop();
-            console.log(audioFile);
-            setAudioPath(audioFile);
-            const audioResultFile = await Audio.compress(audioFile, { quality: 'low' });
-            uploadAudioFinal(audioResultFile);
-            submitSurveyXml();
+            if (isAudioUpload === true) {
+                submitSurveyXml();
+            } else {
+                const audioFile = await AudioRecord.stop();
+                console.log('stopRecording', audioFile);
+                setAudioPath(audioFile);
+                const audioResultFile = await Audio.compress(audioFile, { quality: 'low' });
+                uploadAudioFinal(audioResultFile);
+            }
         } catch (error) {
             console.log(error);
         }
@@ -947,6 +961,7 @@ const BlockBSurveyScreen = () => {
                         type: "success",
                     });
                     setSubmitSurvey(false);
+                    finishSurvey();
                 } else {
                     showMessage({
                         message: "Something went wrong!",
@@ -974,6 +989,20 @@ const BlockBSurveyScreen = () => {
         );
     };
 
+    // auto recording stop by timer
+    const stopAutoRecording = async () => {
+        try {
+            // or to get the wav file path
+            const audioFile = await AudioRecord.stop();
+            console.log('stopRecording', audioFile);
+            setAudioPath(audioFile);
+            const audioResultFile = await Audio.compress(audioFile, { quality: 'low' });
+            uploadAudioFinal(audioResultFile);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const uploadAudioFinal = async (file) => {
         setAudioUploading(true);
         let API_UPLOAD_MSG_FILE = `https://createdinam.com/DICGCA-SURVEY/public/api/survey-audio-files`;
@@ -998,19 +1027,29 @@ const BlockBSurveyScreen = () => {
                 onUploadProgress: uploadProgress,
             });
             const json = await res.json();
-            setAudioUploading(false);
-            showMessage({
-                message: "Audio Upload",
-                description: "Audio Upload Successfully!",
-                type: "success",
-            });
-            finishSurvey();
+            if (json.status === true) {
+                console.log(`response:- ${JSON.stringify(json)}`)
+                setAudioUploading(false);
+                setAudioUpload(true);
+                showMessage({
+                    message: "Audio Upload",
+                    description: json.message,
+                    type: "success",
+                    duration: 2000,
+                    hideOnPress: true
+                });
+            } else {
+                console.log(`response:-Failed ${JSON.stringify(json)}`)
+                Alert.alert(
+                    'Audio Uploading Failed!',
+                    json.message,
+                    [
+                        json?.message === 'Section B details already submitted!' ? { text: 'Cancel', onPress: () => uploadAudioFinal(file), style: "cancel" } : { text: 'Retry', onPress: () => uploadAudioFinal(file) },
+                    ]
+                )
+            }
+            // finishSurvey();
         } catch (err) {
-            showMessage({
-                message: "Audio Upload",
-                description: "Audio Upload Failed!",
-                type: "error",
-            });
             Alert.alert(
                 'Audio Uploading Failed!',
                 'Audio Uploading Failed! Please Retry',
@@ -1603,6 +1642,7 @@ const BlockBSurveyScreen = () => {
                             <View>
                                 {selectedwhatPurposesQ20 == 6 ?
                                     <TextInput
+                                        placeholderTextColor={'#000000'}
                                         placeholder='Enter reasons/additional comments'
                                         multiline
                                         numberOfLines={5}
@@ -1610,7 +1650,7 @@ const BlockBSurveyScreen = () => {
                                         editable={true}
                                         value={extraComments}
                                         onChangeText={(text) => setExtraComments(text)}
-                                        style={{ borderWidth: 1, borderColor: '#b4b4b4', padding: 5, borderRadius: 5 }} /> : null}
+                                        style={{ color:'#000000',borderWidth: 1, borderColor: '#b4b4b4', padding: 5, borderRadius: 5 }} /> : null}
                             </View>
                         </View>
                         <View style={{ padding: 10, }} />

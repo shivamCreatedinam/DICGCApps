@@ -33,7 +33,7 @@ import data from './package.json';
 console.disableYellowBox = true;
 
 const options = {
-  sampleRate: 16000,  // default 44100
+  sampleRate: 8000,  // default 44100
   channels: 1,        // 1 or 2, default 1
   bitsPerSample: 8,  // 8 or 16, default 16
   audioSource: 6,     // android only (see below)
@@ -41,6 +41,9 @@ const options = {
 };
 
 const App = () => {
+
+  let audioInt16 = [];
+  let listener;
 
   const myLocalFlashMessage = useRef();
   const [isMockLocation, setIsMockLocation] = useState(false);
@@ -54,7 +57,7 @@ const App = () => {
     try {
       AudioRecord.init(options);
     } catch (error) {
-
+      console.log('record_______error_______x_x_x_x_x_x_x_x_', error);
     }
   }, []);
 

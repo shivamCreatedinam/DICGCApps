@@ -14,10 +14,10 @@ import Modal from 'react-native-modal';
 import Axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import { Audio } from 'react-native-compressor';
-// import fs from 'fs';
+import CountDown from 'react-native-countdown-fixed';
 
 const AddSurveyScreen = () => {
-
+ 
     const navigation = useNavigation();
     const [name, setName] = React.useState('');
     const [userName, setUserName] = React.useState('');
@@ -26,6 +26,7 @@ const AddSurveyScreen = () => {
     const [isLoading, setLoading] = React.useState(false);
     const [isSubmitSurvey, setSubmitSurvey] = React.useState(false);
     const [isAudioUploading, setAudioUploading] = React.useState(false);
+    const [isAudioUpload, setAudioUpload] = React.useState(false);
     const [userSendToken, setUserSendToken] = React.useState('');
     const [audioPath, setAudioPath] = React.useState('');
     const [areas, setAreas] = React.useState([{ "id": 1, "area_title": "Rural Area - Population Less Than 10000", "status": 1, "created_date": "2024-01-13 08:48:30" }, { "id": 2, "area_title": "Semi-Urban Area - Population Above 10000 But Less Than 1 Lakh", "status": 1, "created_date": "2024-01-13 08:48:30" }, { "id": 3, "area_title": "Urban Area - Population 1 Lakh And Above But Less Than 10 Lakhs", "status": 1, "created_date": "2024-01-13 08:48:30" }, { "id": 4, "area_title": "Metro Area - Population More Than 10 Lakhs", "status": 1, "created_date": "2024-01-13 08:48:30" }]);
@@ -266,7 +267,7 @@ const AddSurveyScreen = () => {
         // this.props?.route?.params?.item?.profile_image,
         return (
             <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 10, alignSelf: 'flex-start', marginTop: StatusBar.currentHeight, paddingHorizontal: 20, backgroundColor: '#fff', elevation: 5, width: '100%' }}>
-                <TouchableOpacity onPress={() => askToCloseApp()} style={{ marginRight: 10, padding: 5 }}>
+                <TouchableOpacity onPress={() => askToCloseApp()} style={{ marginRight: 5, padding: 5 }}>
                     <Image style={{ width: 20, height: 20, resizeMode: 'contain' }} source={require('../../../assets/backCopy.png')} />
                 </TouchableOpacity>
                 <Image
@@ -275,9 +276,21 @@ const AddSurveyScreen = () => {
                 />
                 <View style={{ marginLeft: 10, flex: 1 }}>
                     <Text style={{ fontWeight: 'bold' }}>{userName} - {user.name}</Text>
-                    {user.active && <Text style={{ color: 'green', fontSize: 12, fontWeight: 'bold' }}>{t('active_survey_token')} - <Text style={{ fontWeight: 'bold', fontSize: 14, color: 'red' }}>{t('Block_A')}</Text> </Text>}
+                    {user.active && <Text style={{ color: 'green', fontSize: 12, fontWeight: 'bold' }}>{t('active_survey_token')} - <Text style={{ fontWeight: 'bold', fontSize: 14, color: 'red' }}>{t('Block_A')}</Text></Text>}
                 </View>
-                {isRecording === true ? <View style={{ height: 10, width: 10, borderRadius: 100, backgroundColor: 'green' }} /> : <View style={{ height: 10, width: 10, borderRadius: 100, backgroundColor: 'red' }} />}
+                <CountDown
+                    size={11}
+                    until={210}
+                    onFinish={() => stopAutoRecording()}
+                    digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#000000' }}
+                    digitTxtStyle={{ color: '#1CC625' }}
+                    timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
+                    separatorStyle={{ color: '#1CC625' }}
+                    timeToShow={['M', 'S']}
+                    timeLabels={{ m: null, s: null }}
+                    showSeparator
+                />
+                {isRecording === true ? <View style={{ height: 10, width: 10, borderRadius: 100, backgroundColor: 'green', marginLeft: 10 }} /> : <View style={{ height: 10, width: 10, borderRadius: 100, backgroundColor: 'red', marginLeft: 10 }} />}
             </View>
         );
     }
@@ -292,7 +305,7 @@ const AddSurveyScreen = () => {
         }
     };
 
-    const stopRecording = async () => {
+    const stopAutoRecording = async () => {
         try {
             // or to get the wav file path
             const audioFile = await AudioRecord.stop();
@@ -300,7 +313,24 @@ const AddSurveyScreen = () => {
             setAudioPath(audioFile);
             const audioResultFile = await Audio.compress(audioFile, { quality: 'low' });
             uploadAudioFinal(audioResultFile);
-            submitSurvey();
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const stopRecording = async () => {
+        try {
+            // or to get the wav file path
+            if (isAudioUpload === true) {
+                submitSurvey();
+            } else {
+                const audioFile = await AudioRecord.stop();
+                console.log('stopRecording', audioFile);
+                setAudioPath(audioFile);
+                const audioResultFile = await Audio.compress(audioFile, { quality: 'low' });
+                uploadAudioFinal(audioResultFile);
+                submitSurvey();
+            }
         } catch (error) {
             console.log(error);
         }
@@ -308,7 +338,8 @@ const AddSurveyScreen = () => {
 
     const validationCheck = () => {
         const pattern = /^[A-Za-z]+(?:\s[A-Za-z]+)*$/
-        const mobileRegex = /^[0]?[789]\d{9}$/;
+        // const mobileRegex = /^[0]?[789]\d{9}$/;
+        const mobileRegex = /^[0-9\b\+\-\(\)]+$/
         let pincode_ = /^(\d{4}|\d{6})$/;
         // if (pattern.test(surveryName)) {
         if (Name === '') {
@@ -419,6 +450,7 @@ const AddSurveyScreen = () => {
                         description: response.data.message,
                         type: "success",
                     });
+                    saveSurveryAndMoveToNext();
                 } else {
                     showMessage({
                         message: "Something went wrong!",
@@ -448,15 +480,61 @@ const AddSurveyScreen = () => {
         );
     };
 
+    const uploadAudioWithRetry = async (fileUri, retries = 3, backoff = 3000) => {
+        let API_UPLOAD_MSG_FILE = `https://createdinam.com/DICGCA-SURVEY/public/api/survey-audio-files`;
+        const formData = new FormData();
+        formData.append('survey_token', name);
+        formData.append('sec_no', 'A');
+        formData.append('audio', {
+            uri: fileUri,
+            type: 'audio/mpeg', // Adjust type if needed
+            name: 'audio.mp3',
+        });
+
+        for (let attempt = 1; attempt <= retries; attempt++) {
+            try {
+                const response = await fetch(API_UPLOAD_MSG_FILE, {
+                    method: 'POST',
+                    body: formData,
+                    onUploadProgress: uploadProgress,
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+
+                if (response.ok) {
+                    let status = await response.json();
+                    console.log(`uploadAudioWithRetry: ${status}`);
+                    setAudioUploading(false);
+                    showMessage({
+                        message: "Audio Upload",
+                        description: "Audio Upload Successfully!",
+                        type: "success",
+                    });
+                    return status;
+                } else {
+                    throw new Error(`Server error: ${response.status}`);
+                }
+            } catch (error) {
+                if (attempt < retries) {
+                    console.warn(`Attempt ${attempt} failed. Retrying in ${backoff}ms...`);
+                    await new Promise(resolve => setTimeout(resolve, backoff));
+                    backoff *= 2; // Exponential backoff
+                } else {
+                    throw new Error(`Failed after ${retries} attempts: ${error.message}`);
+                }
+            }
+        }
+    };
+
     const uploadAudioFinal = async (file) => {
         setAudioUploading(true);
         let API_UPLOAD_MSG_FILE = `https://createdinam.com/DICGCA-SURVEY/public/api/survey-audio-files`;
-        const path = `file://${file}`;
         const formData = new FormData();
         formData.append('survey_token', name);
         formData.append('sec_no', 'A');
         formData.append('audio_file', {
-            uri: path,
+            uri: file,
             name: 'test.wav',
             type: 'audio/wav',
         })
@@ -472,19 +550,28 @@ const AddSurveyScreen = () => {
                 onUploadProgress: uploadProgress,
             });
             const json = await res.json();
-            setAudioUploading(false);
-            showMessage({
-                message: "Audio Upload",
-                description: "Audio Upload Successfully!",
-                type: "success",
-            });
-            saveSurveryAndMoveToNext();
+            if (json.status === true) {
+                console.log(`response:- ${JSON.stringify(json)}`)
+                setAudioUploading(false);
+                setAudioUpload(true);
+                showMessage({
+                    message: "Audio Upload",
+                    description: json.message,
+                    type: "success",
+                    duration: 2000,
+                    hideOnPress: true
+                });
+            } else {
+                console.log(`response:-Failed ${JSON.stringify(json)}`)
+                Alert.alert(
+                    'Audio Uploading Failed!',
+                    'Audio Uploading Failed! Please Retry',
+                    [
+                        { text: 'Retry', onPress: () => uploadAudioFinal(file) },
+                    ]
+                )
+            }
         } catch (err) {
-            showMessage({
-                message: "Audio Upload",
-                description: "Audio Upload Failed!",
-                type: "error",
-            });
             Alert.alert(
                 'Audio Uploading Failed!',
                 'Audio Uploading Failed! Please Retry',
@@ -572,13 +659,13 @@ const AddSurveyScreen = () => {
                     <View style={{ padding: 10 }}>
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>1. {t("name")}:</Text>
-                            <TextInput style={{ backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder={t('Enter_Name')} editable={true} value={Name} onChangeText={(text) => setname(text)} />
+                            <TextInput placeholderTextColor={'#000000'} style={{color:'#000000', backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder={t('Enter_Name')} editable={true} value={Name} onChangeText={(text) => setname(text)} />
                         </View>
 
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>2. {t('address')}:</Text>
-                            <TextInput style={{ backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder={t('enter_address')} editable={true} value={address} onChangeText={(text) => setAddress(text)} />
+                            <TextInput  placeholderTextColor={'#000000'} style={{color:'#000000', backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder={t('enter_address')} editable={true} value={address} onChangeText={(text) => setAddress(text)} />
                         </View>
 
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
@@ -657,7 +744,7 @@ const AddSurveyScreen = () => {
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff', marginTop: 5 }}>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>3. {t('contact_no')}.</Text>
-                            <TextInput maxLength={10} keyboardType='numeric' style={{ backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder={t('enter_contact')} editable={true} value={contact} onChangeText={(text) => setContact(text)} />
+                            <TextInput  placeholderTextColor={'#000000'} maxLength={10} keyboardType='numeric' style={{ color:'#000000',backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder={t('enter_contact')} editable={true} value={contact} onChangeText={(text) => setContact(text)} />
                         </View>
 
                         <View style={{ padding: 10, }} />
@@ -671,7 +758,7 @@ const AddSurveyScreen = () => {
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff', marginTop: 5 }}>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>5. {t('age')}.</Text>
-                            <TextInput keyboardType='numeric' onChangeText={(e) => setAgeNumber(e)} style={{ backgroundColor: '#fff', paddingLeft: 15 }} placeholder='Enter Age' maxLength={2} value={age} />
+                            <TextInput  placeholderTextColor={'#000000'} keyboardType='numeric' onChangeText={(e) => setAgeNumber(e)} style={{ color:'#000000',backgroundColor: '#fff', paddingLeft: 15 }} placeholder='Enter Age' maxLength={2} value={age} />
                         </View>
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
@@ -752,7 +839,7 @@ const AddSurveyScreen = () => {
                         </View>
                         <View style={{ padding: 10, }} />
                         <TouchableOpacity disabled={isSubmitSurvey} onPress={() => {
-                            validationCheck()
+                            validationCheck();
                         }} style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: '#000', borderRadius: 10 }}>
                             {isAudioUploading !== true ? <Text style={{ color: '#fff', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>{t('next_block_B')}</Text> : <ActivityIndicator color={'#fff'} style={{ alignItems: 'center', alignSelf: 'center' }} />}
                         </TouchableOpacity>

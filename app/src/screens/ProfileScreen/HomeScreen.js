@@ -277,7 +277,7 @@ class HomeScreen extends Component {
         {this.renderHeader()}
         {/* <StatusBar backgroundColor={'transparent'} barStyle={'dark-content'} /> */}
         <View style={{ height: 50, width: '90%', marginHorizontal: 20, marginVertical: 10, borderRadius: 15, borderColor: 'grey', borderWidth: 1, elevation: 5, backgroundColor: '#fff' }} >
-          <TextInput placeholder={t('search')} style={{ flex: 1, paddingLeft: 15 }} />
+          <TextInput  placeholderTextColor={'#000000'} placeholder={t('search')} style={{ color:'#000000',flex: 1, paddingLeft: 15 }} />
         </View>
         <View style={{ marginLeft: 20, marginRight: 20 }}>
           <TouchableOpacity onPress={() => this.checkStartSurvey()} style={{ paddingVertical: 14, paddingHorizontal: 20, backgroundColor: '#000000', borderRadius: 5, flexDirection: 'row', alignItems: 'center' }}>

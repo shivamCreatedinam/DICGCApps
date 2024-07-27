@@ -14,7 +14,7 @@ const SerchBox = (props) => {
             <TouchableOpacity>
                 <Image source={require('../../../../res/images/Image/search.png')}/>
             </TouchableOpacity>
-            <TextInput name='search' style={{fontFamily:resources.fonts.regular,fontSize:14,width:'100%',padding:isPlatformIOS ? 14 : 12}} onFocus={() => props.navigateProps.push("SearchScreen",{data:props?.homePageData})} placeholder='What are you looking for?'/>
+            <TextInput  placeholderTextColor={'#000000'} name='search' style={{color:'#000000',fontFamily:resources.fonts.regular,fontSize:14,width:'100%',padding:isPlatformIOS ? 14 : 12}} onFocus={() => props.navigateProps.push("SearchScreen",{data:props?.homePageData})} placeholder='What are you looking for?'/>
         </View>
             : null
         }
