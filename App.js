@@ -37,7 +37,7 @@ const options = {
   channels: 1,        // 1 or 2, default 1
   bitsPerSample: 8,  // 8 or 16, default 16
   audioSource: 6,     // android only (see below)
-  wavFile: 'audio.wav' // default 'audio.wav'
+  wavFile: 'dicgc_survey.mp3' // default 'audio.wav'
 };
 
 const App = () => {

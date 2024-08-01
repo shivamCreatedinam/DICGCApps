@@ -14,10 +14,10 @@ import Modal from 'react-native-modal';
 import Axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import { Audio } from 'react-native-compressor';
-import CountDown from 'react-native-countdown-fixed';
+// var RNFS = require('react-native-fs');
 
 const AddSurveyScreen = () => {
- 
+
     const navigation = useNavigation();
     const [name, setName] = React.useState('');
     const [userName, setUserName] = React.useState('');
@@ -39,6 +39,7 @@ const AddSurveyScreen = () => {
     const [PinCodeData, setPinCodeData] = React.useState([]);
     const [Lattitude, setLattitude] = React.useState('');
     const [Longitude, setLongitude] = React.useState('');
+    const [audio_file_name, setAudioFileName] = React.useState('');
     // country dropdowns
     const [value, setValue] = React.useState(null);
     const [selectedState, setSelectedState] = React.useState(null);
@@ -150,6 +151,17 @@ const AddSurveyScreen = () => {
     const adults = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 
     const childern = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+
+
+    const generateRandomAlphanumericString = (length) => {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        for (let i = 0; i < length; i++) {
+            const randomIndex = Math.floor(Math.random() * characters.length);
+            result += characters[randomIndex];
+        }
+        return result;
+    };
 
     useFocusEffect(
         React.useCallback(() => {
@@ -278,7 +290,7 @@ const AddSurveyScreen = () => {
                     <Text style={{ fontWeight: 'bold' }}>{userName} - {user.name}</Text>
                     {user.active && <Text style={{ color: 'green', fontSize: 12, fontWeight: 'bold' }}>{t('active_survey_token')} - <Text style={{ fontWeight: 'bold', fontSize: 14, color: 'red' }}>{t('Block_A')}</Text></Text>}
                 </View>
-                <CountDown
+                {/* <CountDown
                     size={11}
                     until={210}
                     onFinish={() => stopAutoRecording()}
@@ -289,7 +301,7 @@ const AddSurveyScreen = () => {
                     timeToShow={['M', 'S']}
                     timeLabels={{ m: null, s: null }}
                     showSeparator
-                />
+                /> */}
                 {isRecording === true ? <View style={{ height: 10, width: 10, borderRadius: 100, backgroundColor: 'green', marginLeft: 10 }} /> : <View style={{ height: 10, width: 10, borderRadius: 100, backgroundColor: 'red', marginLeft: 10 }} />}
             </View>
         );
@@ -324,12 +336,12 @@ const AddSurveyScreen = () => {
             if (isAudioUpload === true) {
                 submitSurvey();
             } else {
+                setAudioUploading(true);
                 const audioFile = await AudioRecord.stop();
                 console.log('stopRecording', audioFile);
                 setAudioPath(audioFile);
                 const audioResultFile = await Audio.compress(audioFile, { quality: 'low' });
                 uploadAudioFinal(audioResultFile);
-                submitSurvey();
             }
         } catch (error) {
             console.log(error);
@@ -450,14 +462,34 @@ const AddSurveyScreen = () => {
                         description: response.data.message,
                         type: "success",
                     });
-                    saveSurveryAndMoveToNext();
+                    Alert.alert(
+                        'Block A Complete',
+                        'Move To Block B Survey',
+                        [
+                            { text: 'Okay', onPress: () => saveSurveryAndMoveToNext() },
+                        ]
+                    )
+                    // saveSurveryAndMoveToNext();
                 } else {
-                    showMessage({
-                        message: "Something went wrong!",
-                        description: response.data.message,
-                        type: "danger",
-                    });
-                    setSubmitSurvey(false);
+                    if (response.data.message === 'Demographic details already submitted!') {
+                        setSubmitSurvey(false);
+                        Alert.alert(
+                            'Block A Complete',
+                            'Move To Block B Survey',
+                            [
+                                { text: 'Okay', onPress: () => saveSurveryAndMoveToNext() },
+                            ]
+                        )
+
+                    } else {
+                        setSubmitSurvey(false);
+                        showMessage({
+                            message: response.data.message,
+                            description: response.data.message,
+                            type: "danger",
+                            duration: 6000
+                        });
+                    }
                 }
             });
     }
@@ -535,8 +567,8 @@ const AddSurveyScreen = () => {
         formData.append('sec_no', 'A');
         formData.append('audio_file', {
             uri: file,
-            name: 'test.wav',
-            type: 'audio/wav',
+            name: `${generateRandomAlphanumericString(25)}_a.mp3`,
+            type: 'audio/mp3',
         })
         console.log(JSON.stringify(formData));
         try {
@@ -561,15 +593,34 @@ const AddSurveyScreen = () => {
                     duration: 2000,
                     hideOnPress: true
                 });
+                Alert.alert(
+                    json.message,
+                    json.message,
+                    [
+                        { text: 'Okay', onPress: () => submitSurvey() },
+                    ]
+                );
             } else {
                 console.log(`response:-Failed ${JSON.stringify(json)}`)
-                Alert.alert(
-                    'Audio Uploading Failed!',
-                    'Audio Uploading Failed! Please Retry',
-                    [
-                        { text: 'Retry', onPress: () => uploadAudioFinal(file) },
-                    ]
-                )
+                if (json.message === 'Section A details already submitted!') {
+                    // setAudioUploading(false);
+                    setAudioUpload(true);
+                    showMessage({
+                        message: json.message,
+                        description: json.message,
+                        type: "success",
+                        duration: 2000,
+                        hideOnPress: true
+                    });
+                } else {
+                    Alert.alert(
+                        JSON.stringify(json),
+                        JSON.stringify(json),
+                        [
+                            { text: 'Retry', onPress: () => uploadAudioFinal(file) },
+                        ]
+                    )
+                }
             }
         } catch (err) {
             Alert.alert(
@@ -659,15 +710,13 @@ const AddSurveyScreen = () => {
                     <View style={{ padding: 10 }}>
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>1. {t("name")}:</Text>
-                            <TextInput placeholderTextColor={'#000000'} style={{color:'#000000', backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder={t('Enter_Name')} editable={true} value={Name} onChangeText={(text) => setname(text)} />
+                            <TextInput placeholderTextColor={'#000000'} style={{ color: '#000000', backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder={t('Enter_Name')} editable={true} value={Name} onChangeText={(text) => setname(text)} />
                         </View>
-
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>2. {t('address')}:</Text>
-                            <TextInput  placeholderTextColor={'#000000'} style={{color:'#000000', backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder={t('enter_address')} editable={true} value={address} onChangeText={(text) => setAddress(text)} />
+                            <TextInput placeholderTextColor={'#000000'} style={{ color: '#000000', backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder={t('enter_address')} editable={true} value={address} onChangeText={(text) => setAddress(text)} />
                         </View>
-
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>{t('state')}:</Text>
                             <Dropdown
@@ -744,7 +793,7 @@ const AddSurveyScreen = () => {
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff', marginTop: 5 }}>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>3. {t('contact_no')}.</Text>
-                            <TextInput  placeholderTextColor={'#000000'} maxLength={10} keyboardType='numeric' style={{ color:'#000000',backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder={t('enter_contact')} editable={true} value={contact} onChangeText={(text) => setContact(text)} />
+                            <TextInput placeholderTextColor={'#000000'} maxLength={10} keyboardType='numeric' style={{ color: '#000000', backgroundColor: '#fff', paddingLeft: 15, borderBottomWidth: 0.5, borderBottomColor: "gray" }} placeholder={t('enter_contact')} editable={true} value={contact} onChangeText={(text) => setContact(text)} />
                         </View>
 
                         <View style={{ padding: 10, }} />
@@ -758,7 +807,7 @@ const AddSurveyScreen = () => {
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff', marginTop: 5 }}>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold', paddingLeft: 10, paddingTop: 10 }}>5. {t('age')}.</Text>
-                            <TextInput  placeholderTextColor={'#000000'} keyboardType='numeric' onChangeText={(e) => setAgeNumber(e)} style={{ color:'#000000',backgroundColor: '#fff', paddingLeft: 15 }} placeholder='Enter Age' maxLength={2} value={age} />
+                            <TextInput placeholderTextColor={'#000000'} keyboardType='numeric' onChangeText={(e) => setAgeNumber(e)} style={{ color: '#000000', backgroundColor: '#fff', paddingLeft: 15 }} placeholder='Enter Age' maxLength={2} value={age} />
                         </View>
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>

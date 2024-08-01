@@ -131,7 +131,7 @@ const SigninScreen = props => {
           <Image style={{ height: 180, width: 180, resizeMode: 'contain', alignSelf: "center", marginTop: 80 }} source={require('../../../assets/app_logo.png')} />
           <View style={{ flex: 1, marginTop: 50 }}>
             <Text style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: 10, fontSize: 20, color: '#000000' }}>DICGC Survey</Text>
-            <TextInput  placeholderTextColor={'#000000'} value={updateEmail} onChangeText={(e) => set_updateEmail(e.toLocaleLowerCase())} keyboardType={'email-address'} style={{color:'#000000', backgroundColor: '#fff', elevation: 5, marginBottom: 15, paddingLeft: 15, borderRadius: 5 }} placeholder='Enter Email' />
+            <TextInput  placeholderTextColor={'#000000'} value={updateEmail} onChangeText={(e) => set_updateEmail(e)} keyboardType={'email-address'} style={{color:'#000000', backgroundColor: '#fff', elevation: 5, marginBottom: 15, paddingLeft: 15, borderRadius: 5 }} placeholder='Enter Email' />
             <TextInput placeholderTextColor={'#000000'} value={updatePassword} onChangeText={(e) => set_updatePassword(e)} keyboardType={'default'} secureTextEntry={true} style={{ color:'#000000',backgroundColor: '#fff', elevation: 5, marginBottom: 5, paddingLeft: 15, borderRadius: 5 }} placeholder='Password' />
             <TouchableOpacity onPress={() => validateLogin()} style={{ backgroundColor: 'rgb(36,78,154)', marginTop: 10, paddingVertical: 20, paddingHorizontal: 15, elevation: 5, borderRadius: 5 }}>
               {isLoading === true ? <ActivityIndicator style={{ alignItems: 'center', }} color={'#fff'} /> : <Text style={{ textAlign: 'center', color: '#fff', letterSpacing: 1, textTransform: 'uppercase', fontWeight: 'bold', fontSize: 15 }}>Login</Text>}
